@@ -43,20 +43,15 @@ if __name__ == "__main__":
         print(objects.items())
 
         for (objectID, centroid) in objects.items():
+            print(centroid)
             line_order[objectID] = deque(maxlen=2)
             if objectID not in line_trail.keys():
                 line_trail[objectID] = deque(maxlen=32)
             text = "ID {}".format(objectID)
             cv2.putText(img, text, (centroid[1] - 10, centroid[0] - 10),cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 4)
-            box = boxes[objectID]
-            print("Id %s" %objectID)
-            print("Box 0: %s" % box[0])
-            print("Box 1: %s" %box[1])
-            print("Box 2: %s" % box[2])
-            print("Box 3: %s" % box[3])
-            #cv2.circle(img, (centroid[1], centroid[0]), 4, (0, 255, 0), -1)
-            cv2.line(img, (0, box[0]), (width, box[0]), (255, 0, 0), 2)
-            center = (box[1], box[0])
+            cv2.circle(img, (centroid[1], centroid[0]), 4, (0, 255, 0), -1)
+            cv2.line(img, (0, centroid[2]), (width, centroid[2]), (255, 0, 0), 2)
+            center = (centroid[1], centroid[2])
             line_trail[objectID].appendleft(center)
             try:
                 if line_trail[objectID][0][1] < int(line1) and line_trail[objectID][1][1] > int(line1 ):
