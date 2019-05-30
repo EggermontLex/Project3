@@ -1,10 +1,12 @@
 <template>
   <div id="app">
     <div class="side_bar">
-    <Button text="dit is tekst!!!!"/>
-    <Input label="Gebruikersnaam" text_placeholder="Celine" type="text"/>
-    <Input label="Wachtwoord" text_placeholder="Password" type="password"/>
+      <Button text="dit is tekst!!!!"/>
+      <Input label="Gebruikersnaam" text_placeholder="Celine" type="text"/>
+      <Input label="Wachtwoord" text_placeholder="Password" type="password"/>
     </div>
+
+    <Card/>
 
   </div>
 </template>
@@ -12,12 +14,14 @@
 <script>
 import Button from './components/Button.vue';
 import Input from './components/Input.vue';
+import Card from './components/Card.vue';
 
 export default {
   name: 'app',
   components: {
     Button,
-    Input
+    Input,
+    Card
   }
 }
 
