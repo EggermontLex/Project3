@@ -1,27 +1,27 @@
 <template>
     <div class="container_input">
-        <label for="input" class="label">{{label}}</label>
+        <label for="input" class="label">{{ label }}</label>
         <input :type="type" class="input" name="input" :placeholder="text_placeholder">
     </div>
 </template>
+
 <script>
 export default {
-    name: 'Input',
-    props: {
+  name: 'Input',
+  props: {
     label: String,
-    text_placeholder:String,
-    type:String
-    }
-    
+    text_placeholder: String,
+    type: String
+  }  
 }
 </script>
 
 <style scoped>
-
 .container_input{
   border-bottom: 2px rgb(222,222,222) solid;
   padding: .75rem;
 }
+
 .label{
   color: #ddf1fa;
   font-size: 14px;
@@ -45,8 +45,4 @@ export default {
   color: inherit;
   opacity: 1;
 }
-
-
 </style>
-
-

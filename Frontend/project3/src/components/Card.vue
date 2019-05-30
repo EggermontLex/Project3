@@ -8,19 +8,18 @@
         </div>
     </div>
 </template>
+
 <script>
-export default {
-    
-}
+export default {}
 </script>
 
 <style scoped>
 .card{
   margin: 15px;
-  padding:49px;
-  background-color: #FFF!important;
+  padding: 49px;
+  background-color: #FFF !important;
   border-radius: 8px;
-  box-shadow: 0 2px 0 rgba(0,0,0,.2) ;
+  box-shadow: 0 2px 0 rgba(0,0,0,.2);
 }
 
 .grafiek{
@@ -28,6 +27,7 @@ export default {
   background-color: inherit;
 
 }
+
 h1, h2, p{
   margin-bottom: 16px;
 }
@@ -39,6 +39,7 @@ h1{
   color: #3A3A3A;
   background-color: inherit;
 }
+
 h2{
   font-size: 22px;
   font-weight: 700;
@@ -56,5 +57,4 @@ p{
   display: inline;
   margin-right: 16px;
 }
-
 </style>
