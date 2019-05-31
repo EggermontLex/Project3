@@ -19,7 +19,7 @@ export default {
 <style scoped>
 .container_input{
   border-bottom: 2px rgb(222,222,222) solid;
-  padding: .75rem;
+  padding: .75rem 0;
 }
 
 .label{
@@ -31,6 +31,7 @@ export default {
 }
 
 .input{
+  width: 100%;
   border: none;
   font-size: 18px;
   font-weight: 500;
