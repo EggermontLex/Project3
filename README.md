@@ -4,7 +4,7 @@ MCT Project 3 for ML6
 
 
 ## How to use it?
-Make sure when you set it up that you download the yolo.h5 model [here](https://drive.google.com/file/d/1uvXFacPnrSMw6ldWTyLLjGLETlEsUvcE/view), you will need to add this file to the following folder: ./Project3/MachineLearning/model_data
+Make sure when you set it up that you download the yolo.h5 model [here](https://drive.google.com/file/d/1uvXFacPnrSMw6ldWTyLLjGLETlEsUvcE/view), you will need to add this file to the following folder: ../Project3/MachineLearning/model_data/
 
 
 ## Built With
