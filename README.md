@@ -2,6 +2,12 @@
 
 MCT Project 3 for ML6
 
+
+## How to use it?
+Make sure when you set it up that you download the yolo.h5 model [here](https://drive.google.com/file/d/1uvXFacPnrSMw6ldWTyLLjGLETlEsUvcE/view)
+
+
+
 ## Built With
 
 * [Python](https://www.python.org/) - The on-device code
