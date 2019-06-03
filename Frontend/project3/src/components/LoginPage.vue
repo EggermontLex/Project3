@@ -21,6 +21,7 @@
 <script>
 import Button from './Button.vue';
 import Input from './Input.vue';
+import {myfunctions} from '../main.js';
 
 export default {
     name: 'LoginPage',
@@ -38,11 +39,12 @@ export default {
     methods: {
     clickButton() {
       //alert('in Button'),
-      this.setLayout(this.getLoginData())
+      this.getLoginData()
     },
     getLoginData(){
       //alert('getLoginData')
       //alert(this.username + " " + this.password)
+      myfunctions.getData();
       this.$emit('login',true) // stuurd naar parent true door
     },
   },
