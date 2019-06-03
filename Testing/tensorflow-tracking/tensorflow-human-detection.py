@@ -13,7 +13,6 @@ if __name__ == "__main__":
     model_path = 'ssd_mobilenet_v2_coco/frozen_inference_graph.pb'
     odapi = DetectorAPI(path_to_ckpt=model_path)
     threshold = 0.7
-    hysterese = 10
     width, height = 1280, 720
     line1 = height/2
     ct = CentroidTracker()
