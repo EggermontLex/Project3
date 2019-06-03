@@ -24,7 +24,7 @@ export default {
   methods:{
     setLayout(isLoggedIn){
       //alert('in setLayout')
-      alert(isLoggedIn)
+      //alert(isLoggedIn)
       this.isLoggedIn = isLoggedIn
     }
   }
@@ -80,13 +80,14 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   display: flex;
   height: 100%;
+}
+body{
+  min-height: 100vh;
   background: #F1F5F5;
   background-image: url("assets/background.png");
   background-repeat: repeat;
-  background-size: cover;
-}
-body{
-  height: 100vh;
+  overflow-x: hidden;
+
 }
 * {
   font-family: 'CircularStd', Helvetica, Arial, sans-serif;

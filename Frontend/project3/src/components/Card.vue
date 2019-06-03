@@ -1,36 +1,26 @@
 <template>
-    <div class="page">
 
-    
       <div class="card">
           <h1>Huidige waarden</h1>
           <p>Aantal mensen:</p>
-          <h2>{{ value }}</h2>
+          <h2>{{value}}</h2>
           <div class="grafiek">
-          <img src="../assets/grafiek.png" alt="grafiek">
+            <img src="../assets/grafiek.png" alt="grafiek">
           </div>
       </div>
-    </div>
 </template>
 
 <script>
 export default {
-  data: function() {
+data: function() {
     return {
       value: 2
     }
-  }
-}
+  }}
 </script>
 
 <style scoped>
-.page{
-  display: flex;
-  justify-content:space-around;
-  align-items:center;
-  height: 100vh;
-  width: 100vw;
-}
+
 .card{
   max-height: 450px;
   margin: 15px;

@@ -41,7 +41,7 @@ export default {
       this.setLayout(this.getLoginData())
     },
     getLoginData(){
-      alert('getLoginData')
+      //alert('getLoginData')
       //alert(this.username + " " + this.password)
       this.$emit('login',true) // stuurd naar parent true door
     },
