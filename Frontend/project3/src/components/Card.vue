@@ -1,11 +1,15 @@
 <template>
-    <div class="card">
-        <h1>Huidige waarden</h1>
-        <p>Aantal mensen:</p>
-        <h2>1</h2>
-        <div class="grafiek">
-        <img src="../assets/grafiek.png" alt="grafiek">
-        </div>
+    <div class="page">
+
+    
+      <div class="card">
+          <h1>Huidige waarden</h1>
+          <p>Aantal mensen:</p>
+          <h2>1</h2>
+          <div class="grafiek">
+          <img src="../assets/grafiek.png" alt="grafiek">
+          </div>
+      </div>
     </div>
 </template>
 
@@ -14,7 +18,15 @@ export default {}
 </script>
 
 <style scoped>
+.page{
+  display: flex;
+  justify-content:space-around;
+  align-items:center;
+  height: 100vh;
+  width: 100vw;
+}
 .card{
+  max-height: 450px;
   margin: 15px;
   padding: 49px;
   background-color: #FFF !important;
