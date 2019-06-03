@@ -5,7 +5,7 @@
       <div class="card">
           <h1>Huidige waarden</h1>
           <p>Aantal mensen:</p>
-          <h2>1</h2>
+          <h2>{{ value }}</h2>
           <div class="grafiek">
           <img src="../assets/grafiek.png" alt="grafiek">
           </div>
@@ -14,7 +14,13 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data: function() {
+    return {
+      value: 2
+    }
+  }
+}
 </script>
 
 <style scoped>
