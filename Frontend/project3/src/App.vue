@@ -9,9 +9,9 @@
       </div>
 
       <div class="side_bar_input">
-        <Input label="Gebruikersnaam" text_placeholder="Celine" type="text"/>
-        <Input label="Wachtwoord" text_placeholder="Password" type="password"/>
-        <Button class="button" text="dit is tekst!!!!"/>
+        <Input label="Gebruikersnaam" v-model="username" text_placeholder="Celine" type="text"/>
+        <Input label="Wachtwoord" v-model="password" text_placeholder="Password" type="password"/>
+        <Button class="button" text="dit is tekst!!!!" @click.native="showLogin"/>
       </div>
       
       <div class="side_bar_dots">
@@ -35,6 +35,17 @@ export default {
     Button,
     Input,
     Card
+  },
+  data: function () {
+    return {
+      username: '',
+      password: ''
+    }
+  },
+  methods: {
+    showLogin() {
+      alert(this.username + " " + this.password)
+    }
   }
 }
 

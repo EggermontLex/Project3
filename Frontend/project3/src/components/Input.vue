@@ -1,7 +1,7 @@
 <template>
     <div class="container_input">
         <label for="input" class="label">{{ label }}</label>
-        <input :type="type" class="input" name="input" :placeholder="text_placeholder">
+        <input :value="username" @input="$emit('input', $event.target.value)" :type="type" class="input" name="input" :placeholder="text_placeholder">
     </div>
 </template>
 
@@ -11,7 +11,8 @@ export default {
   props: {
     label: String,
     text_placeholder: String,
-    type: String
+    type: String,
+    username: String
   }  
 }
 </script>
