@@ -1,9 +1,13 @@
 <template>
 
       <div class="card">
-          <h1>Huidige waarden</h1>
+          <div class="topbar">
+            <h1>Huidige waarden</h1>
+            <p class="update">Laatst upgedate: <b class="update_text">10:00:00 03/06/2019</b></p>
+          </div>
           <p>Aantal mensen:</p>
           <h2>{{value}}</h2>
+          
           <div class="grafiek">
             <img src="../assets/grafiek.png" alt="grafiek">
           </div>
@@ -41,11 +45,20 @@ export default {
   border-radius: 8px;
   box-shadow: 0 2px 0 rgba(0,0,0,.2);
 }
+.topbar{
+  display: flex;
+  justify-content: space-between;
+}
+
+.update{
+  text-align: right;
+  font-size: 13px;
+  margin: 0;
+}
 
 .grafiek{
   padding-top: 32px;
   background-color: inherit;
-
 }
 
 h1, h2, p{
@@ -89,6 +102,17 @@ p{
   p {
     font-size: 16px;
   }
+  .update{
+  font-size: 11px;
+}
+
 
 }
+@media (max-width: 576px) {
+  .side_bar {
+    width: 100vw;
+    height: 100vh;
+  }
+}
+
 </style>

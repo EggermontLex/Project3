@@ -8,7 +8,7 @@
       </div>
 
       <div class="side_bar_input">
-        <Input label="Gebruikersnaam" v-model="username" text_placeholder="Celine" type="text"/>
+        <Input label="Gebruikersnaam" v-model="username" text_placeholder="Gebruikersnaam" type="text"/>
         <Input label="Wachtwoord" v-model="password" text_placeholder="Password" type="password"/>
         <Button class="button" text="Login" @click.native="clickButton"/>
       </div>

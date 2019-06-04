@@ -8,10 +8,6 @@
       <div class="cards">
         <Card/>
       </div>
-      <div class="update">
-        <p>Laatst upgedate op: <b class="update_text">10:00:00 03/06/2019</b></p>
-      </div>
-      
     </div>
   </div>
 </template>
