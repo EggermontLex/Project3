@@ -5,6 +5,11 @@ from PIL import ImageDraw
 import numpy as np
 import cv2
 import warnings
+from google.cloud import pubsub_v1
+import os
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "/home/mendel/project3/Project3-ML6-515024366790.json"
+
+
 
 from pyimagesearch.centroidtracker import CentroidTracker
 from collections import deque
@@ -29,6 +34,11 @@ def ReadLabelFile(file_path):
 
 
 def main():
+    #google cloud variables
+    project_id = "Project3-ML6"
+    topic_name = "telemetry-topic"
+    publisher = pubsub_v1.PublisherClient()
+    topic_path = publisher.topic_path(project_id, topic_name)
 
     max_cosine_distance = 0.3
     nn_budget = None
@@ -97,16 +107,22 @@ def main():
                 if objectID not in line_trail.keys():
                     line_trail[objectID] = deque(maxlen=32)
                 text = "ID {}".format(objectID)
-                cv2.putText(img, text, (centroid[1] - 10, centroid[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255),4)
-                cv2.circle(img, (centroid[1], centroid[0]), 4, (0, 255, 0), -1)
+                cv2.putText(img, text, (centroid[0] - 10, centroid[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255),4)
+                cv2.circle(img, (centroid[0], centroid[1]), 4, (0, 255, 0), -1)
                 cv2.line(img, (0, centroid[2]), (width, centroid[2]), (255, 0, 0), 2)
                 center = (centroid[1], centroid[2])
                 line_trail[objectID].appendleft(center)
                 try:
                     if line_trail[objectID][0][1] < int(line1) and line_trail[objectID][1][1] > int(line1):
                         persons_in -= 1
+                        data = "-1"
+                        data = data.encode('utf-8')
+                        publisher.publish(topic_path, data=data)
                     elif line_trail[objectID][1][1] < int(line1) and line_trail[objectID][0][1] > int(line1):
                         persons_in += 1
+                        data = "+1"
+                        data = data.encode('utf-8')
+                        publisher.publish(topic_path, data=data)
                 except Exception as Ex:
                     pass
             fps = (fps + (1. / (time.time() - t1))) / 2
