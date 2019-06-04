@@ -48,8 +48,19 @@ def main():
     #centroid tracker
     ct = CentroidTracker()
 
-    # Open video
+
     cap = cv2.VideoCapture(1)
+
+    writeVideo_flag = True
+    if writeVideo_flag:
+    # Define the codec and create VideoWriter object
+        w = int(cap.get(3))
+        h = int(cap.get(4))
+        fourcc = cv2.VideoWriter_fourcc(*'MJPG')
+        out = cv2.VideoWriter('output.avi', fourcc, 15, (w, h))
+        list_file = open('detection.txt', 'w')
+        frame_index = -1
+    # Open video
 
     while True:
         ret, frame = cap.read()
@@ -68,8 +79,12 @@ def main():
             # Display result.
             if ans:
                 for obj in ans:
+                    #if labels: print(labels[obj.label_id])
                     box = obj.bounding_box.flatten().tolist()
+                    # Draw a rectangle.
                     draw.rectangle(box, outline='red')
+                    #draw.text((box[0], box[1]), labels[obj.label_id])
+                    #draw.text((box[0], box[1] + 10), str(obj.score))
                     boxs.append(box)
 
             objects = ct.update(boxs)
@@ -94,9 +109,16 @@ def main():
                         persons_in += 1
                 except Exception as Ex:
                     pass
-
             fps = (fps + (1. / (time.time() - t1))) / 2
-            print(persons_in)
+            cv2.putText(img, "Binnen: " + str(persons_in), (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255),
+                        lineType=cv2.LINE_AA)
+            cv2.putText(img, "fps: " + str(int(fps)), (260, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255),
+                        lineType=cv2.LINE_AA)
+
+            if writeVideo_flag:
+                # save a frame
+                out.write(img)
+
 
             cv2.imshow('preview', img)
             if cv2.waitKey(1) & 0xFF == ord('q'):
