@@ -25,13 +25,12 @@ export default {
   },
   created: function() {
       let documentReference = myFunctions.getDocumentReference('realtime', 'IC_70')
-      console.log(documentReference)
-      documentReference.onSnapshot(function(doc) {
-        console.log("Current data: ", doc.data());
+      //console.log(documentReference)
+      documentReference.onSnapshot((doc) =>{
+        //console.log("Current data: ", doc.data());
+        this.value = doc.data().current_value
       });
-    },
-  methods: {
-  }
+    }
 }
 </script>
 
