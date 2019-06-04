@@ -2,3 +2,5 @@
 __pycache__/
 yolo.h5
 detection.txt
+.mp4
+.avi
