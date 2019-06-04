@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 var firebase = require("firebase");
+require("firebase/auth");
 require("firebase/firestore");
 
 Vue.config.productionTip = false
@@ -17,15 +18,35 @@ var config = {
 };
 firebase.initializeApp(config);
 
-var db = firebase.firestore();
+export var db = firebase.firestore();
+
+firebase.auth().signOut().then(function() {
+  // Sign-out successful.
+}).catch(function(error) {
+  // An error happened.
+});
+
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+    var displayName = user.displayName;
+    var email = user.email;
+    var emailVerified = user.emailVerified;
+    var photoURL = user.photoURL;
+    var isAnonymous = user.isAnonymous;
+    var uid = user.uid;
+    var providerData = user.providerData;
+    console.log('Logged in')
+  } else {
+    console.log('Signed out')
+  }
+});
 
 export const myfunctions = {
   getData: function (collection) {
-    db.collection(collection).get().then((docs) => {
-      docs.forEach((doc) => {
-        console.log(doc.id)
-        return doc.id;
-      })
+    return db.collection(collection).get().then((docs) => {
+      console.log(docs)
+      return docs
     })
   } 
 }

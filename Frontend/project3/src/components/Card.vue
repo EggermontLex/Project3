@@ -11,12 +11,16 @@
 </template>
 
 <script>
+import {db} from '../main.js'
+
+
 export default {
-data: function() {
+  data: function() {
     return {
       value: 2
     }
-  }}
+  }
+}
 </script>
 
 <style scoped>

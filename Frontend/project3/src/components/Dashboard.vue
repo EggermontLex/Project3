@@ -15,9 +15,11 @@
     </div>
   </div>
 </template>
+
 <script>
 import Card from './Card.vue';
 import Button from './Button.vue';
+import {myfunctions} from '../main.js';
 
 export default {
   name: 'Dashboard',
@@ -36,6 +38,7 @@ export default {
   }
 }
 </script>
+
 <style scoped>
 .page{
   display: flex;

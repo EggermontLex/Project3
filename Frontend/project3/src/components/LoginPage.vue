@@ -18,10 +18,13 @@
       </div>
     </aside>
 </template>
+
 <script>
+import {myfunctions} from '../main.js'
 import Button from './Button.vue';
 import Input from './Input.vue';
-import {myfunctions} from '../main.js';
+var firebase = require("firebase");
+require("firebase/auth");
 
 export default {
     name: 'LoginPage',
@@ -44,14 +47,21 @@ export default {
     getLoginData: async function (){
       //alert('getLoginData')
       //alert(this.username + " " + this.password)
-      let data = await myfunctions.getData('users');
-      alert(data)
-      this.$emit('login',true) // stuurd naar parent true door
+      // let data = await myfunctions.getData('users')
+      // console.log('Data', data.docs[0].data())
+      firebase.auth().signInWithEmailAndPassword(this.username, this.password).then(
+        (user) => {
+          this.$emit('login', true)
+        },
+        (error) => {
+          this.$emit('login', false)
+        }
+      )
     },
-  },
-    
+  },  
 }
 </script>
+
 <style scoped>
 .side_bar_logo{
     width: 350px;
