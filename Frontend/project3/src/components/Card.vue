@@ -66,4 +66,17 @@ p{
   margin-right: 16px;
   color: var(--color-neutral-xxxx-dark)
 }
+
+@media (max-width: 992px) {
+  .grafiek img{
+    width: 90%;
+  }
+  h1, h2{
+    font-size: 18px;
+  }
+  p {
+    font-size: 16px;
+  }
+
+}
 </style>

@@ -120,4 +120,15 @@ body{
   box-sizing: border-box;
 }
 
+@media (max-width: 992px) {
+
+  h1, h2{
+    font-size: 18px;
+  }
+  p {
+    font-size: 16px;
+  }
+
+}
+
 </style>

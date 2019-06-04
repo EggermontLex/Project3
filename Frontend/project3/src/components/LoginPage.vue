@@ -87,4 +87,11 @@ export default {
 .button{
   margin-top: 13%;
 }
+
+@media (max-width: 576px) {
+  .side_bar {
+    width: 100vw;
+    height: 100vh;
+  }
+}
 </style>
