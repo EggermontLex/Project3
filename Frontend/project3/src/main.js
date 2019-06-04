@@ -18,7 +18,7 @@ var config = {
 };
 firebase.initializeApp(config);
 
-export var db = firebase.firestore();
+var db = firebase.firestore();
 
 firebase.auth().signOut().then(function() {
   // Sign-out successful.
@@ -42,11 +42,15 @@ firebase.auth().onAuthStateChanged(function(user) {
   }
 });
 
-export const myfunctions = {
+export const myFunctions = {
+  getDocumentReference: function (collection, document) {
+    return db.collection(collection).doc(document)
+  },
   getData: function (collection) {
     return db.collection(collection).get().then((docs) => {
       console.log(docs)
       return docs
     })
-  } 
+  }
+  
 }

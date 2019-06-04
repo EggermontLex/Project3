@@ -11,14 +11,22 @@
 </template>
 
 <script>
-import {db} from '../main.js'
-
+import {myFunctions} from '../main.js';
 
 export default {
   data: function() {
     return {
       value: 2
     }
+  },
+  created: function() {
+      let documentReference = myFunctions.getDocumentReference('realtime', 'IC_70')
+      console.log(documentReference)
+      documentReference.onSnapshot(function(doc) {
+        console.log("Current data: ", doc.data());
+      });
+    },
+  methods: {
   }
 }
 </script>

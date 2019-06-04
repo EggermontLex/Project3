@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import {myfunctions} from '../main.js'
+import {myFunctions} from '../main.js'
 import Button from './Button.vue';
 import Input from './Input.vue';
 var firebase = require("firebase");
@@ -47,7 +47,7 @@ export default {
     getLoginData: async function (){
       //alert('getLoginData')
       //alert(this.username + " " + this.password)
-      // let data = await myfunctions.getData('users')
+      // let data = await myFunctions.getData('users')
       // console.log('Data', data.docs[0].data())
       firebase.auth().signInWithEmailAndPassword(this.username, this.password).then(
         (user) => {

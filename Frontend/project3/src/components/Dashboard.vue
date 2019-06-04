@@ -19,7 +19,6 @@
 <script>
 import Card from './Card.vue';
 import Button from './Button.vue';
-import {myfunctions} from '../main.js';
 
 export default {
   name: 'Dashboard',
