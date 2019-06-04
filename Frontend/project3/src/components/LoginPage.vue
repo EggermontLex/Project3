@@ -60,7 +60,7 @@ export default {
   padding: 12px;
   width: 350px;
   height: 100vh;
-  background-color:#006AB3;
+  background-color:var(--color-primary);
   display: flex;
   flex-direction:column;
   justify-content: space-between;
@@ -80,7 +80,7 @@ export default {
 }
 
 .logo{
-  fill: #FFFFFF;
+  fill: var(--color-neutral-xxxx-light);
   width: 65px;
   height: 60px;
 }

@@ -25,7 +25,7 @@ data: function() {
   max-height: 450px;
   margin: 15px;
   padding: 49px;
-  background-color: #FFF !important;
+  background-color: var(--color-neutral-xxxx-light);
   border-radius: 8px;
   box-shadow: 0 2px 0 rgba(0,0,0,.2);
 }
@@ -44,7 +44,7 @@ h1{
   font-size: 22px;
   font-weight: 700;
   line-height: 30px;
-  color: #3A3A3A;
+  color: var(--color-neutral-xxxx-dark);
   background-color: inherit;
 }
 
@@ -52,7 +52,7 @@ h2{
   font-size: 22px;
   font-weight: 700;
   line-height: 30px;
-  color: #006AB3;
+  color: var(--color-primary);
   background-color: inherit;
   display: inline;
 }
@@ -64,5 +64,6 @@ p{
   line-height: 30px;
   display: inline;
   margin-right: 16px;
+  color: var(--color-neutral-xxxx-dark)
 }
 </style>

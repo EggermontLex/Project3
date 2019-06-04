@@ -24,7 +24,7 @@ export default {
 }
 
 .label{
-  color: #ddf1fa;
+  color: var(--color-primary-x-light);
   font-size: 14px;
   font-weight: 500;
   width: 100%;
@@ -38,7 +38,7 @@ export default {
   font-weight: 500;
   height: 30px;
   line-height: 18px;
-  color: #ddf1fa;
+  color: var(--color-primary-x-light);
   display:block;
   background: inherit;
 }

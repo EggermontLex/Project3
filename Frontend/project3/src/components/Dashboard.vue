@@ -55,16 +55,16 @@ export default {
 }
 .button{
   margin:12px; 
-  background-color: #006AB3;
-  color: #FFF;
+  background-color: var(--color-primary);
+  color: var(--color-neutral-xxxx-light);
   width: 150px;
   position: absolute;
   right: 0;
 }
 .button:hover, .button:active{
   box-shadow: 0 2px 0 rgba(0,0,0,.2);
-  color: #FFF;
-  background-color: rgb(0, 117, 196);
+  color: var(--color-neutral-xxxx-light);
+  background-color: var(--color-primary-x-dark);
 }
 .container{
   height: 100vh;
