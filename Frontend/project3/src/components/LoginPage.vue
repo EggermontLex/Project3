@@ -8,7 +8,7 @@
       </div>
 
       <div class="side_bar_input">
-        <Input label="Gebruikersnaam" v-model="username" text_placeholder="Celine" type="text"/>
+        <Input label="Gebruikersnaam" v-model="username" text_placeholder="Gebruikersnaam" type="text"/>
         <Input label="Wachtwoord" v-model="password" text_placeholder="Password" type="password"/>
         <Button class="button" text="Login" @click.native="clickButton"/>
       </div>
@@ -18,10 +18,13 @@
       </div>
     </aside>
 </template>
+
 <script>
+import {myFunctions} from '../main.js'
 import Button from './Button.vue';
 import Input from './Input.vue';
-import {myfunctions} from '../main.js';
+var firebase = require("firebase");
+require("firebase/auth");
 
 export default {
     name: 'LoginPage',
@@ -44,14 +47,21 @@ export default {
     getLoginData: async function (){
       //alert('getLoginData')
       //alert(this.username + " " + this.password)
-      let data = await myfunctions.getData('users');
-      alert(data)
-      this.$emit('login',true) // stuurd naar parent true door
+      // let data = await myFunctions.getData('users')
+      // console.log('Data', data.docs[0].data())
+      firebase.auth().signInWithEmailAndPassword(this.username, this.password).then(
+        (user) => {
+          this.$emit('login', true)
+        },
+        (error) => {
+          this.$emit('login', false)
+        }
+      )
     },
-  },
-    
+  },  
 }
 </script>
+
 <style scoped>
 .side_bar_logo{
     width: 350px;
