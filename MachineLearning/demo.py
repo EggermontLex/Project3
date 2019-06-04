@@ -10,7 +10,7 @@ import sys
 import cv2
 import numpy as np
 from PIL import Image
-from yolo import YOLO
+#from yolo import YOLO
 
 from collections import deque
 from deep_sort import preprocessing
@@ -31,7 +31,7 @@ def start(model_name):
    # Definition of the parameters
     max_cosine_distance = 0.3
     nn_budget = None
-    nms_max_overlap = 10.0
+    nms_max_overlap = 1.0
     
    # deep_sort 
     model_filename = 'model_data/mars-small128.pb'
@@ -42,7 +42,7 @@ def start(model_name):
 
     writeVideo_flag = True 
     
-    video_capture = cv2.VideoCapture(0)
+    video_capture = cv2.VideoCapture(1)
 
     if writeVideo_flag:
     # Define the codec and create VideoWriter object
@@ -54,7 +54,7 @@ def start(model_name):
         frame_index = -1
 
 
-    model_yolo = YOLO()
+    #model_yolo = YOLO()
     model_path = 'ssd_mobilenet_v2_coco/frozen_inference_graph.pb'
     model_coco = DetectorAPI(path_to_ckpt=model_path)
 
@@ -71,16 +71,16 @@ def start(model_name):
         t1 = time.time()
         cv2.line(frame, (0, line1), (width, line1), (255, 0, 0), 5)
 
-        if model_name == "Yolo":
-            image = Image.fromarray(frame)
-            image = Image.fromarray(frame[..., ::-1])  # bgr to rgb
-            boxs = model_yolo.detect_image(image)
-        else:
-            boxs = []
-            boxes, scores, classes, num = model_coco.process_frame(frame)
-            for box in boxes:
-                if not box == (0,0,0,0):
-                    boxs.append((box[1],box[0],int(box[3]),int(box[2])))
+        #if model_name == "Yolo":
+        #    image = Image.fromarray(frame)
+        #    image = Image.fromarray(frame[..., ::-1])  # bgr to rgb
+        #    boxs = model_yolo.detect_image(image)
+        #else:
+        boxs = []
+        boxes, scores, classes, num = model_coco.process_frame(frame)
+        for box in boxes:
+            if not box == (0,0,0,0):
+                boxs.append((box[1],box[0],int(box[3]),int(box[2])))
 
         print(boxs)
         features = encoder(frame,boxs)
