@@ -23,4 +23,8 @@ export default {
   font-weight: 700;
   width: 100%;
 }
+.button:hover, .button:active{
+  box-shadow: 0 2px 0 rgba(0,0,0,.9);
+  color: #1b3b6e;
+}
 </style>

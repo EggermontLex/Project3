@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <LoginPage v-on:login="setLayout" v-if="!isLoggedIn"/>
-    <Dashboard v-if="isLoggedIn"/>
+    <Dashboard v-on:login="setLayout" v-if="isLoggedIn"/>
   </div>
 </template>
 

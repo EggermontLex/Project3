@@ -41,10 +41,11 @@ export default {
       //alert('in Button'),
       this.getLoginData()
     },
-    getLoginData(){
+    getLoginData: async function (){
       //alert('getLoginData')
       //alert(this.username + " " + this.password)
-      myfunctions.getData();
+      let data = await myfunctions.getData('users');
+      alert(data)
       this.$emit('login',true) // stuurd naar parent true door
     },
   },

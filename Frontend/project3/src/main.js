@@ -23,7 +23,8 @@ export const myfunctions = {
   getData: function (collection) {
     db.collection(collection).get().then((docs) => {
       docs.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data()}`);
+        console.log(doc.id)
+        return doc.id;
       })
     })
   } 

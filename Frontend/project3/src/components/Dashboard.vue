@@ -3,7 +3,7 @@
     <div class="logo">
       <img src="../assets/logo_nmbs.png" alt="logo nmbs" class="logo_img"/>
     </div>
-    <Button class="button" text="Logout"/>
+    <Button class="button" text="Logout" @click.native="clickButton"/>
     <div class="container">
       <div class="cards">
         <Card/>
@@ -24,6 +24,15 @@ export default {
   components: {
     Card,
     Button
+  },
+  methods:{
+    clickButton() {
+      //alert('in Button'),
+      this.Logout()
+    },
+    Logout(){
+      this.$emit('login',false) 
+    }
   }
 }
 </script>
@@ -51,6 +60,11 @@ export default {
   width: 150px;
   position: absolute;
   right: 0;
+}
+.button:hover, .button:active{
+  box-shadow: 0 2px 0 rgba(0,0,0,.2);
+  color: #FFF;
+  background-color: rgb(0, 117, 196);
 }
 .container{
   height: 100vh;
