@@ -81,8 +81,8 @@ export default {
     --color-primary-light: #4F95FF;
     --color-primary: #006AB3;
     --color-primary-dark: #2E77E6;
-    --color-primary-x-dark: #0075c4;
-    --color-primary-xx-dark: #1b3b6e;
+    --color-primary-x-dark: #0075C4;
+    --color-primary-xx-dark: #1B3B6E;
     
     --color-neutral-xxxx-light: #FFFFFF;
     --color-neutral-xxx-light: #E2E3E7;
