@@ -3,7 +3,7 @@
       <div class="card">
           <div class="topbar">
             <h1>Huidige waarden</h1>
-            <p class="update">Laatst upgedate: <b class="update_text">10:00:00 03/06/2019</b></p>
+            <p class="update">Laatst geüpdate: <b class="update_text">{{ time }}</b></p>
           </div>
           <p>Aantal mensen:</p>
           <h2>{{value}}</h2>
@@ -20,17 +20,32 @@ import {myFunctions} from '../main.js';
 export default {
   data: function() {
     return {
-      value: 2
+      value: 2,
+      time : "10 : 00: 00"
     }
   },
-  created: function() {
-      let documentReference = myFunctions.getDocumentReference('realtime', 'IC_70')
-      //console.log(documentReference)
+  props: {
+    trainId:String
+  },
+  created: async function() {
+      let documentReference = myFunctions.getDocumentReference('realtime', this.$props.trainId)
+      console.log(this.trainId)
       documentReference.onSnapshot((doc) =>{
-        //console.log("Current data: ", doc.data());
-        this.value = doc.data().current_value
+        console.log("Current data: ", doc.data());
+        this.value = doc.data().current_value;
+        let d = doc.data().last_updated.toDate();
+        this.time = this.zeros(d.getHours(),2) + ":" + this.zeros(d.getMinutes(),2) + " " + d.getDate() + "/" + this.zeros( d.getMonth(), 2) + "/" + d.getFullYear()
       });
+     
+    },
+
+  methods:{
+    zeros(num, size){
+      var s = num+"";
+      while (s.length < size) s = "0" + s;
+      return s;
     }
+  }
 }
 </script>
 

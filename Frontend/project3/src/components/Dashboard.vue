@@ -3,10 +3,10 @@
     <div class="logo">
       <img src="../assets/logo_nmbs.png" alt="logo nmbs" class="logo_img"/>
     </div>
-    <Button class="button" text="Logout" @click.native="clickButton"/>
+    <Button class="button" text="Logout" @click.native="Logout"/>
     <div class="container">
       <div class="cards">
-        <Card/>
+        <Card v-for="trainid in trainIds" v-bind:key="trainid" :trainId="trainid"/>
       </div>
     </div>
   </div>
@@ -15,6 +15,9 @@
 <script>
 import Card from './Card.vue';
 import Button from './Button.vue';
+import {myFunctions} from '../main.js';
+const firebase = require("firebase/app");
+require("firebase/auth");
 
 export default {
   name: 'Dashboard',
@@ -22,13 +25,27 @@ export default {
     Card,
     Button
   },
+  created: async function(){
+     let data = await myFunctions.getCollectionDocs('realtime')
+     for (let i = 0; i < data.docs.length; i++){
+      //console.log('Data',)
+      this.trainIds.push( data.docs[i].id)
+     }
+     //console.log(this.trainIds)
+        
+  },
+  data:function(){
+    return{
+      trainIds: []
+    }
+  },
   methods:{
-    clickButton() {
-      //alert('in Button'),
-      this.Logout()
-    },
     Logout(){
-      this.$emit('login',false) 
+      firebase.auth().signOut().then(() => {
+        this.$emit('login',false) 
+      }).catch(function(error) {
+        console.log(error)
+      });
     }
   }
 }
