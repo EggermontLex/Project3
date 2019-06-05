@@ -3,7 +3,7 @@
     <div class="logo">
       <img src="../assets/logo_nmbs.png" alt="logo nmbs" class="logo_img"/>
     </div>
-    <Button class="button" text="Logout" @click.native="clickButton"/>
+    <Button class="button" text="Logout" @click.native="Logout"/>
     <div class="container">
       <div class="cards">
         <Card/>
@@ -15,6 +15,8 @@
 <script>
 import Card from './Card.vue';
 import Button from './Button.vue';
+const firebase = require("firebase/app");
+require("firebase/auth");
 
 export default {
   name: 'Dashboard',
@@ -23,12 +25,12 @@ export default {
     Button
   },
   methods:{
-    clickButton() {
-      //alert('in Button'),
-      this.Logout()
-    },
     Logout(){
-      this.$emit('login',false) 
+      firebase.auth().signOut().then(() => {
+        this.$emit('login',false) 
+      }).catch(function(error) {
+        console.log(error)
+      });
     }
   }
 }

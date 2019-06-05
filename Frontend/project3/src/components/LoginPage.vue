@@ -10,7 +10,7 @@
       <div class="side_bar_input">
         <Input label="Gebruikersnaam" v-model="username" text_placeholder="Gebruikersnaam" type="text"/>
         <Input label="Wachtwoord" v-model="password" text_placeholder="Password" type="password"/>
-        <Button class="button" text="Login" @click.native="clickButton"/>
+        <Button class="button" text="Login" @click.native="getLoginData"/>
       </div>
       
       <div class="side_bar_dots">
@@ -23,7 +23,7 @@
 import {myFunctions} from '../main.js'
 import Button from './Button.vue';
 import Input from './Input.vue';
-var firebase = require("firebase");
+const firebase = require("firebase/app");
 require("firebase/auth");
 
 export default {
@@ -38,26 +38,19 @@ export default {
         password: ''
       }
     },
-
     methods: {
-    clickButton() {
-      //alert('in Button'),
-      this.getLoginData()
-    },
-    getLoginData: async function (){
-      //alert('getLoginData')
-      //alert(this.username + " " + this.password)
-      // let data = await myFunctions.getData('users')
-      // console.log('Data', data.docs[0].data())
-      firebase.auth().signInWithEmailAndPassword(this.username, this.password).then(
-        (user) => {
-          this.$emit('login', true)
-        },
-        (error) => {
-          this.$emit('login', false)
-        }
-      )
-    },
+      getLoginData: async function (){
+        //alert('getLoginData')
+        //alert(this.username + " " + this.password)
+        // let data = await myFunctions.getData('users')
+        // console.log('Data', data.docs[0].data())
+        firebase.auth().signInWithEmailAndPassword(this.username, this.password).then(
+          (user) => {
+          },
+          (error) => {
+          }
+        )
+      },
   },  
 }
 </script>

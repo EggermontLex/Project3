@@ -1,13 +1,15 @@
 <template>
   <div id="app">
-    <LoginPage v-on:login="setLayout" v-if="!isLoggedIn"/>
-    <Dashboard v-on:login="setLayout" v-if="isLoggedIn"/>
+    <LoginPage v-if="!isLoggedIn"/>
+    <Dashboard v-else/>
   </div>
 </template>
 
 <script>
 import LoginPage from './components/LoginPage.vue';
 import Dashboard from './components/Dashboard.vue';
+const firebase = require("firebase/app");
+require("firebase/auth");
 
 export default {
   name: 'app',
@@ -15,21 +17,23 @@ export default {
     LoginPage,
     Dashboard
   },
-  data:function(){
-    return{
+  data: function () {
+    return {
       isLoggedIn: false
     }
   },
-
-  methods:{
-    setLayout(isLoggedIn){
-      //alert('in setLayout')
-      //alert(isLoggedIn)
-      this.isLoggedIn = isLoggedIn
-    }
+  created: function () {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        console.log('Logged in')
+        this.isLoggedIn = true
+      } else {
+        console.log('Signed out')
+        this.isLoggedIn = false
+      }
+    });
   }
 }
-
 </script>
 
 <style>
