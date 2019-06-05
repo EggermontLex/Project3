@@ -122,10 +122,10 @@ def main():
                 try:
                     if line_trail[objectID][0][1] < int(line1) and line_trail[objectID][1][1] > int(line1):
                         if invert:
-                            persons_in -= 1
+                            persons_in += 1
                             binnen()
                         else:
-                            persons_in += 1
+                            persons_in -= 1
                             buiten()
                     elif line_trail[objectID][1][1] < int(line1) and line_trail[objectID][0][1] > int(line1):
                         if invert:
