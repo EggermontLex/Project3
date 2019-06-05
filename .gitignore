@@ -1,4 +1,5 @@
 .idea/
+.firebase/
 __pycache__/
 yolo.h5
 detection.txt
