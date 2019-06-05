@@ -1,10 +1,13 @@
 import Vue from 'vue'
 import App from './App.vue'
+import VueApexCharts from 'vue-apexcharts';
 const firebase = require("firebase/app");
 require("firebase/auth");
 require("firebase/firestore");
 
 Vue.config.productionTip = false
+
+Vue.component('apexchart', VueApexCharts)
 
 var config = {
   apiKey: "AIzaSyCOr-NLa8btkEMh2yv__33OJ9CrgpvP9ts",
@@ -22,6 +25,11 @@ export const myFunctions = {
   },
   getCollectionDocs: function (collection) {
     return db.collection(collection).get().then((docs) => {
+      return docs
+    })
+  },
+  getTrainHistory: function(collection, trainId){
+    return db.collection(collection).where("train", "==", trainId).get().then((docs) => {
       return docs
     })
   }  

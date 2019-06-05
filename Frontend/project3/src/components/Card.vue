@@ -2,14 +2,15 @@
 
       <div class="card">
           <div class="topbar">
-            <h1>Huidige waarden</h1>
+            <h1>{{trainId}}</h1>
             <p class="update">Laatst geüpdate: <b class="update_text">{{ time }}</b></p>
           </div>
-          <p>Aantal mensen:</p>
+          <p>Aantal mensen binnen:</p>
           <h2>{{value}}</h2>
           
           <div class="grafiek">
-            <img src="../assets/grafiek.png" alt="grafiek">
+            <!--<img src="../assets/grafiek.png" alt="grafiek">-->
+            <apexchart type=area height=350 :options="chartOptions" :series="series" />
           </div>
       </div>
 </template>
@@ -21,7 +22,32 @@ export default {
   data: function() {
     return {
       value: 2,
-      time : "10 : 00: 00"
+      time : "10 : 00: 00",
+      series: [],
+        chartOptions: {
+          chart: {
+                height: 350,
+                zoom: {
+                    enabled: false
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                curve: 'straight'
+            },
+            
+            grid: {
+                row: {
+                    colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                    opacity: 0.5
+                },
+            },
+            xaxis: {
+                categories: [],
+            }
+        }
     }
   },
   props: {
@@ -29,16 +55,25 @@ export default {
   },
   created: async function() {
       let documentReference = myFunctions.getDocumentReference('realtime', this.$props.trainId)
-      console.log(this.trainId)
       documentReference.onSnapshot((doc) =>{
-        console.log("Current data: ", doc.data());
+        //console.log("Current data: ", doc.data());
         this.value = doc.data().current_value;
         let d = doc.data().last_updated.toDate();
         this.time = this.zeros(d.getHours(),2) + ":" + this.zeros(d.getMinutes(),2) + " " + d.getDate() + "/" + this.zeros( d.getMonth(), 2) + "/" + d.getFullYear()
       });
-     
-    },
 
+      let result = [{
+            name: "Desktops",
+            data: []
+        }];
+      let data = await myFunctions.getTrainHistory("history", this.$props.trainId)
+      //console.log(data.docs[0].data().value)
+      for(let i= 0; i< data.docs.length; i++){
+        result[0].data.push(data.docs[i].data().value)
+      }
+      this.series = result
+      
+    },
   methods:{
     zeros(num, size){
       var s = num+"";
@@ -52,8 +87,8 @@ export default {
 <style scoped>
 
 .card{
-  max-height: 450px;
   margin: 15px;
+  width: 70%;
   padding: 49px;
   background-color: var(--color-neutral-xxxx-light);
   border-radius: 8px;
@@ -102,7 +137,7 @@ p{
   font-weight: 400;
   line-height: 30px;
   display: inline;
-  margin-right: 16px;
+  margin-right: 8px;
   color: var(--color-neutral-xxxx-dark)
 }
 
