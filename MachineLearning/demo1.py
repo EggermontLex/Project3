@@ -7,6 +7,7 @@ import cv2
 import warnings
 from google.cloud import pubsub_v1
 import os
+import datetime
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "/home/mendel/project3/Project3-ML6-515024366790.json"
 
 
@@ -22,6 +23,12 @@ from deep_sort.detection import Detection as ddet
 warnings.filterwarnings('ignore')
 
 
+project_id = "Project3-ML6"
+topic_name = "telemetry-topic"
+publisher = pubsub_v1.PublisherClient()
+topic_path = publisher.topic_path(project_id, topic_name)
+
+
 # Function to read labels from text files.
 def ReadLabelFile(file_path):
     with open(file_path, 'r', encoding="utf-8") as f:
@@ -35,10 +42,6 @@ def ReadLabelFile(file_path):
 
 def main():
     #google cloud variables
-    project_id = "Project3-ML6"
-    topic_name = "telemetry-topic"
-    publisher = pubsub_v1.PublisherClient()
-    topic_path = publisher.topic_path(project_id, topic_name)
 
     max_cosine_distance = 0.3
     nn_budget = None
@@ -72,7 +75,11 @@ def main():
         frame_index = -1
     # Open video
 
+
+    invert = True
+
     while True:
+        data = ""
         ret, frame = cap.read()
         t1 = time.time()
         if ret:
@@ -80,7 +87,7 @@ def main():
             cv2_im = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             img = Image.fromarray(cv2_im)
             width, height = img.size
-            line1 = height/2
+            line1 = height/2 - 100
             draw = ImageDraw.Draw(img)
 
             # Run inference.
@@ -99,7 +106,7 @@ def main():
 
             objects = ct.update(boxs)
 
-            draw.line((0, height / 2, width, height / 2), fill=10, width=5)
+            draw.line((0, line1, width, line1), fill=10, width=5)
             img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
 
             for (objectID, centroid) in objects.items():
@@ -114,17 +121,22 @@ def main():
                 line_trail[objectID].appendleft(center)
                 try:
                     if line_trail[objectID][0][1] < int(line1) and line_trail[objectID][1][1] > int(line1):
-                        persons_in -= 1
-                        data = "-1"
-                        data = data.encode('utf-8')
-                        publisher.publish(topic_path, data=data)
+                        if invert:
+                            persons_in -= 1
+                            binnen()
+                        else:
+                            persons_in += 1
+                            buiten()
                     elif line_trail[objectID][1][1] < int(line1) and line_trail[objectID][0][1] > int(line1):
-                        persons_in += 1
-                        data = "+1"
-                        data = data.encode('utf-8')
-                        publisher.publish(topic_path, data=data)
+                        if invert:
+                            buiten()
+                            persons_in -= 1
+                        else:
+                            binnen()
+                            persons_in += 1
                 except Exception as Ex:
                     pass
+
             fps = (fps + (1. / (time.time() - t1))) / 2
             cv2.putText(img, "Binnen: " + str(persons_in), (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255),
                         lineType=cv2.LINE_AA)
@@ -142,6 +154,18 @@ def main():
     # When everything done, release the capture
     cap.release()
     cv2.destroyAllWindows()
+
+
+def binnen():
+    data = ("+1,%s" % datetime.datetime.now())
+    data = data.encode('utf-8')
+    publisher.publish(topic_path, data=data)
+    print("in")
+def buiten():
+    data = ("-1,%s" % datetime.datetime.now())
+    data = data.encode('utf-8')
+    publisher.publish(topic_path, data=data)
+    print("out")
 
 
 if __name__ == '__main__':
