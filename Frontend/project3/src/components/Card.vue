@@ -24,16 +24,21 @@ export default {
       time : "10 : 00: 00"
     }
   },
-  created: function() {
-      let documentReference = myFunctions.getDocumentReference('realtime', 'IC_70')
-      //console.log(documentReference)
+  props: {
+    trainId:String
+  },
+  created: async function() {
+      let documentReference = myFunctions.getDocumentReference('realtime', this.$props.trainId)
+      console.log(this.trainId)
       documentReference.onSnapshot((doc) =>{
-        //console.log("Current data: ", doc.data());
+        console.log("Current data: ", doc.data());
         this.value = doc.data().current_value;
         let d = doc.data().last_updated.toDate();
         this.time = this.zeros(d.getHours(),2) + ":" + this.zeros(d.getMinutes(),2) + " " + d.getDate() + "/" + this.zeros( d.getMonth(), 2) + "/" + d.getFullYear()
       });
+     
     },
+
   methods:{
     zeros(num, size){
       var s = num+"";

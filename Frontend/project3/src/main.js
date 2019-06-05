@@ -20,9 +20,8 @@ export const myFunctions = {
   getDocumentReference: function (collection, document) {
     return db.collection(collection).doc(document)
   },
-  getData: function (collection) {
+  getCollectionDocs: function (collection) {
     return db.collection(collection).get().then((docs) => {
-      console.log(docs)
       return docs
     })
   }  

@@ -6,7 +6,7 @@
     <Button class="button" text="Logout" @click.native="Logout"/>
     <div class="container">
       <div class="cards">
-        <Card/>
+        <Card v-for="trainid in trainIds" v-bind:key="trainid" :trainId="trainid"/>
       </div>
     </div>
   </div>
@@ -15,6 +15,7 @@
 <script>
 import Card from './Card.vue';
 import Button from './Button.vue';
+import {myFunctions} from '../main.js';
 const firebase = require("firebase/app");
 require("firebase/auth");
 
@@ -23,6 +24,20 @@ export default {
   components: {
     Card,
     Button
+  },
+  created: async function(){
+     let data = await myFunctions.getCollectionDocs('realtime')
+     for (let i = 0; i < data.docs.length; i++){
+      //console.log('Data',)
+      this.trainIds.push( data.docs[i].id)
+     }
+     //console.log(this.trainIds)
+        
+  },
+  data:function(){
+    return{
+      trainIds: []
+    }
   },
   methods:{
     Logout(){
