@@ -29,7 +29,9 @@ export const myFunctions = {
     })
   },
   getTrainHistory: function(collection, trainId){
-    return db.collection(collection).where("train", "==", trainId).get().then((docs) => {
+    let d = new Date()
+    d = new Date(d.setHours(d.getHours() - 20))
+    return db.collection(collection).where("train", "==", trainId).where("timestamp", ">", d).get().then((docs) => {
       return docs
     })
   }  
