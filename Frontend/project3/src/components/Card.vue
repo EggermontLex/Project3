@@ -63,7 +63,7 @@ export default {
       });
 
       let result = [{
-            name: "Desktops",
+            name: "People",
             data: []
         }];
       let data = await myFunctions.getTrainHistory("history", this.$props.trainId)
