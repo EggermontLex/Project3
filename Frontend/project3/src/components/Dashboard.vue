@@ -102,5 +102,11 @@ export default {
   justify-content:flex-end;
   padding: 12px;
 }
+@media (max-width: 768px) {
+  .card {
+    padding: 0;
+    width: 100%;
+  }
+}
 
 </style>

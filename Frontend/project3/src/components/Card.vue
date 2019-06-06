@@ -1,12 +1,14 @@
 <template>
 
       <div class="card">
-          <div class="topbar">
-            <h1>{{trainId}}</h1>
-            <p class="update">Laatst geüpdate: <b class="update_text">{{ time }}</b></p>
+          <div class="textarea">
+            <div class="topbar">
+              <h1>{{trainId}}</h1>
+              <p class="update">Laatst geüpdate: <b class="update_text">{{ time }}</b></p>
+            </div>
+            <p>Aantal mensen binnen:</p>
+            <h2>{{value}}</h2>
           </div>
-          <p>Aantal mensen binnen:</p>
-          <h2>{{value}}</h2>
           
           <div class="grafiek">
             <!--<img src="../assets/grafiek.png" alt="grafiek">-->
@@ -154,9 +156,14 @@ p{
   .update{
   font-size: 11px;
 }
-
-
 }
+
+@media (max-width: 768px) {
+  .textarea{
+    margin:24px 24px 0px;
+  }
+}
+
 @media (max-width: 576px) {
   .side_bar {
     width: 100vw;
