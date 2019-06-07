@@ -21,6 +21,7 @@ export default {
 .container_input{
   border-bottom: 2px rgb(222,222,222) solid;
   padding: .75rem 0;
+  margin-top: 8px;
 }
 
 .label{

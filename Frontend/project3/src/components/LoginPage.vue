@@ -8,8 +8,11 @@
       </div>
 
       <div class="side_bar_input">
-        <Input label="Gebruikersnaam" v-model="username" text_placeholder="Gebruikersnaam" type="text"/>
-        <Input label="Wachtwoord" v-model="password" text_placeholder="Password" type="password"/>
+        <div class="error_message" v-if="isError">
+          <p class="error_message_text">Oeps! Er is iets verkeerd gegaan.</p>
+        </div>
+        <Input label="Gebruikersnaam" v-model="username" text_placeholder="Gebruikersnaam" type="text" v-bind:class="{border_color : isError}"/>
+        <Input label="Wachtwoord" v-model="password" text_placeholder="Password" type="password" v-bind:class="{border_color : isError}"/>
         <Button class="button" text="Login" @click.native="getLoginData"/>
       </div>
       
@@ -35,7 +38,8 @@ export default {
     data: function () {
       return {
         username: '',
-        password: ''
+        password: '',
+        isError:false
       }
     },
     methods: {
@@ -46,8 +50,11 @@ export default {
         // console.log('Data', data.docs[0].data())
         firebase.auth().signInWithEmailAndPassword(this.username, this.password).then(
           (user) => {
+            this.isError=false
           },
           (error) => {
+            this.isError=true
+
           }
         )
       },
@@ -56,6 +63,7 @@ export default {
 </script>
 
 <style scoped>
+
 .side_bar_logo{
     width: 350px;
 }
@@ -71,6 +79,20 @@ export default {
 
 .side_bar_input{
   margin: 1em;
+}
+
+.error_message{
+  background-color: var(--color-neutral-xxxx-light);
+  padding: 8px;
+  margin-bottom: 16px;
+  box-shadow: var(box-shadow);
+  text-align: center;
+}
+.error_message_text{
+  color: var(--color-error-message);
+}
+.border_color{
+  border-color: var(--color-error-message);
 }
 
 .dots{

@@ -99,6 +99,7 @@ export default {
     --color-neutral-xx-dark: #4B4C60;
     --color-neutral-xxx-dark: #35374D;
     --color-neutral-xxxx-dark: #3A3A3A;
+    --color-error-message: #EA6022;
 
     --box-shadow: 0 2px 0 rgba(0,0,0,.2);
     --box-shadow_hover: 0 2px 0 rgba(0,0,0,.9);
