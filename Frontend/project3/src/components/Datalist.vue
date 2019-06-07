@@ -1,22 +1,25 @@
 <template>
     <div class="container_input">
         <label for="input" class="label">{{ label }}</label>
-        <input :value="text_input" @input="$emit('input', $event.target.value)" :type="type" class="input" name="input" :placeholder="text_placeholder">
+        <input name="input" list="browsers" class="input">
+        <datalist id="browsers">
+            <option value="Internet Explorer"/>
+            <option value="Firefox"/>
+            <option value="Chrome"/>
+            <option value="Opera"/>
+            <option value="Safari"/>
+        </datalist>
     </div>
+    
 </template>
-
 <script>
 export default {
-  name: 'Input',
-  props: {
-    label: String,
-    text_placeholder: String,
-    type: String,
-    text_input: String
-  }  
+    name: 'Datalist',
+    props:{
+        label:String,
+    }
 }
 </script>
-
 <style scoped>
 .container_input{
   border-bottom: 2px rgb(222,222,222) solid;

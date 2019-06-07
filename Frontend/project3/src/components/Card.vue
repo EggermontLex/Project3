@@ -37,12 +37,12 @@ export default {
                 enabled: false
             },
             stroke: {
-                curve: 'smooth'
+                curve: 'smooth',
             },
-            
+            colors: ['#006AB3'],
             grid: {
                 row: {
-                    colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                    colors: ['#F1F5F5', 'transparent'], // takes an array which will be repeated on columns
                     opacity: 0.5
                 },
             },

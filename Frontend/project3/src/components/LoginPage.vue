@@ -26,6 +26,7 @@
 import {myFunctions} from '../main.js'
 import Button from './Button.vue';
 import Input from './Input.vue';
+
 const firebase = require("firebase/app");
 require("firebase/auth");
 
