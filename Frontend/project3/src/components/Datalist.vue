@@ -3,11 +3,7 @@
         <label for="input" class="label">{{ label }}</label>
         <input name="input" list="browsers" class="input">
         <datalist id="browsers">
-            <option value="Internet Explorer"/>
-            <option value="Firefox"/>
-            <option value="Chrome"/>
-            <option value="Opera"/>
-            <option value="Safari"/>
+            <option v-for="id in Ids" :value="id" v-bind:key="id"/>
         </datalist>
     </div>
     
@@ -17,6 +13,7 @@ export default {
     name: 'Datalist',
     props:{
         label:String,
+        Ids :[]
     }
 }
 </script>
