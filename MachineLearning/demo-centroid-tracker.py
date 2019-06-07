@@ -24,7 +24,7 @@ warnings.filterwarnings('ignore')
 
 
 project_id = "Project3-ML6"
-topic_name = "telemetry-topic"
+topic_name = "data_register"
 publisher = pubsub_v1.PublisherClient()
 topic_path = publisher.topic_path(project_id, topic_name)
 

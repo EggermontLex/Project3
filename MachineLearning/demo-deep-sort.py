@@ -1,4 +1,6 @@
 from edgetpu.detection.engine import DetectionEngine
+import edgetpu
+
 from PIL import Image
 from timeit import time
 from PIL import ImageDraw
@@ -24,7 +26,7 @@ warnings.filterwarnings('ignore')
 
 
 project_id = "Project3-ML6"
-topic_name = "telemetry-topic"
+topic_name = "data_register"
 publisher = pubsub_v1.PublisherClient()
 topic_path = publisher.topic_path(project_id, topic_name)
 
@@ -58,12 +60,13 @@ def main():
     model_filename = 'model_data/mars-small128.pb'
     encoder = gdet.create_box_encoder(model_filename,batch_size=1)
 
+
     metric = nn_matching.NearestNeighborDistanceMetric("cosine", max_cosine_distance, nn_budget)
     tracker = Tracker(metric)
 
     cap = cv2.VideoCapture(1)
 
-    writeVideo_flag = False
+    writeVideo_flag = True
     if writeVideo_flag:
     # Define the codec and create VideoWriter object
         w = int(cap.get(3))
@@ -103,38 +106,55 @@ def main():
                     #draw.text((box[0], box[1] + 10), str(obj.score))
                     boxs.append(box)
 
-            objects = ct.update(boxs)
-
             draw.line((0, line1, width, line1), fill=10, width=5)
             img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
+            features = encoder(frame, boxs)
 
-            for (objectID, centroid) in objects.items():
-                #line_order[objectID] = deque(maxlen=2)
-                if objectID not in line_trail.keys():
-                    line_trail[objectID] = deque(maxlen=32)
-                text = "ID {}".format(objectID)
-                cv2.putText(img, text, (centroid[0] - 10, centroid[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255),4)
-                cv2.circle(img, (centroid[0], centroid[1]), 4, (0, 255, 0), -1)
-                cv2.line(img, (0, centroid[2]), (width, centroid[2]), (255, 0, 0), 2)
-                center = (centroid[1], centroid[2])
-                line_trail[objectID].appendleft(center)
+
+
+            # score to 1.0 here).
+            detections = [Detection(bbox, 1.0, feature) for bbox, feature in zip(boxs, features)]
+
+            # Run non-maxima suppression.
+            boxes = np.array([d.tlwh for d in detections])
+            scores = np.array([d.confidence for d in detections])
+            indices = preprocessing.non_max_suppression(boxes, nms_max_overlap, scores)
+            detections = [detections[i] for i in indices]
+
+            # Call the tracker
+            tracker.predict()
+            tracker.update(detections)
+
+            for track in tracker.tracks:
+                if not track.is_confirmed() or track.time_since_update > 1:
+                    continue
+                if track.track_id not in line_trail.keys():
+                    line_trail[track.track_id] = deque(maxlen=32)
+                bbox = track.to_tlbr()
+                cv2.rectangle(frame, (int(bbox[0]), int(bbox[1])), (int(bbox[2]), int(bbox[3])), (255, 255, 255), 2)
+                cv2.putText(frame, str(track.track_id), (int(bbox[0]), int(bbox[1])), 0, 5e-3 * 200, (0, 255, 0), 2)
+                cv2.line(frame, (0, int(bbox[1])), (width, int(bbox[1])), (255, 0, 0), 2)
+
+                line_trail[track.track_id].appendleft(bbox[1])
                 try:
-                    if line_trail[objectID][0][1] < int(line1) and line_trail[objectID][1][1] > int(line1):
+                    if line_trail[track.track_id][0] < int(line1) and line_trail[track.track_id][1] > int(line1):
                         if invert:
                             persons_in += 1
-                            #binnen()
+                            binnen()
                         else:
                             persons_in -= 1
-                            #buiten()
-                    elif line_trail[objectID][1][1] < int(line1) and line_trail[objectID][0][1] > int(line1):
+                            buiten()
+                    elif line_trail[track.track_id][1] < int(line1) and line_trail[track.track_id][0] > int(line1):
                         if invert:
-                            #buiten()
+                            buiten()
                             persons_in -= 1
                         else:
-                            #binnen()
+                            binnen()
                             persons_in += 1
                 except Exception as Ex:
                     pass
+
+
 
             fps = (fps + (1. / (time.time() - t1))) / 2
             cv2.putText(img, "Binnen: " + str(persons_in), (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255),
