@@ -64,7 +64,7 @@ def main():
 
     cap = cv2.VideoCapture(1)
 
-    writeVideo_flag = True
+    writeVideo_flag = False
     if writeVideo_flag:
     # Define the codec and create VideoWriter object
         w = int(cap.get(3))
@@ -87,7 +87,7 @@ def main():
             cv2_im = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             img = Image.fromarray(cv2_im)
             width, height = img.size
-            line1 = height/2 - 100
+            line1 = height/2 - 50
             draw = ImageDraw.Draw(img)
 
             # Run inference.
@@ -112,7 +112,7 @@ def main():
             for (objectID, centroid) in objects.items():
                 #line_order[objectID] = deque(maxlen=2)
                 if objectID not in line_trail.keys():
-                    line_trail[objectID] = deque(maxlen=32)
+                    line_trail[objectID] = deque(maxlen=2)
                 text = "ID {}".format(objectID)
                 cv2.putText(img, text, (centroid[0] - 10, centroid[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255),4)
                 cv2.circle(img, (centroid[0], centroid[1]), 4, (0, 255, 0), -1)
@@ -120,28 +120,29 @@ def main():
                 center = (centroid[1], centroid[2])
                 line_trail[objectID].appendleft(center)
                 try:
-                    if line_trail[objectID][0][1] < int(line1) and line_trail[objectID][1][1] > int(line1):
-                        if invert:
-                            persons_in += 1
-                            binnen()
-                        else:
-                            persons_in -= 1
-                            buiten()
-                    elif line_trail[objectID][1][1] < int(line1) and line_trail[objectID][0][1] > int(line1):
-                        if invert:
-                            buiten()
-                            persons_in -= 1
-                        else:
-                            binnen()
-                            persons_in += 1
+                    diff = abs(line_trail[objectID][0][0] - line_trail[objectID][1][0])
+                    print(diff)
+                    if diff < 250:
+                        if line_trail[objectID][0][1] < int(line1) and line_trail[objectID][1][1] > int(line1):
+                            if invert:
+                                persons_in += 1
+                                binnen()
+                            else:
+                                persons_in -= 1
+                                buiten()
+                        elif line_trail[objectID][1][1] < int(line1) and line_trail[objectID][0][1] > int(line1):
+                            if invert:
+                                buiten()
+                                persons_in -= 1
+                            else:
+                                binnen()
+                                persons_in += 1
                 except Exception as Ex:
                     pass
 
             fps = (fps + (1. / (time.time() - t1))) / 2
-            cv2.putText(img, "Binnen: " + str(persons_in), (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255),
-                        lineType=cv2.LINE_AA)
-            cv2.putText(img, "fps: " + str(int(fps)), (260, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255),
-                        lineType=cv2.LINE_AA)
+            cv2.putText(img, "Binnen: " + str(persons_in), (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255),lineType=cv2.LINE_AA)
+            cv2.putText(img, "fps: " + str(int(fps)), (260, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255),lineType=cv2.LINE_AA)
 
             if writeVideo_flag:
                 # save a frame

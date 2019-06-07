@@ -17,4 +17,4 @@ Make sure when you set it up that you download the yolo.h5 model [here](https://
 * **Céline Bogaerts** - [BogaertsCeline](https://github.com/BogaertsCeline)
 * **Jarne Demeulemeester** - [DemeulemeesterJarne](https://github.com/DemeulemeesterJarne)
 * **Ruben Delaet** - [DelaetRuben](https://github.com/DelaetRuben2)
-* **Eggermont Lex** - [EggermontLex](https://github.com/EggermontLex)
+* **Lex Eggermont** - [EggermontLex](https://github.com/EggermontLex)

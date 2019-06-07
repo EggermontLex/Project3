@@ -137,6 +137,7 @@ def main():
 
                 line_trail[track.track_id].appendleft(bbox[1])
                 try:
+
                     if line_trail[track.track_id][0] < int(line1) and line_trail[track.track_id][1] > int(line1):
                         if invert:
                             persons_in += 1
