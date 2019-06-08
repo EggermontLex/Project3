@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-    <LoginPage v-if="!isLoggedIn"/>
-    <Dashboard v-else/>
+    <LoginPage v-if="!isLoggedIn" />
+    <Dashboard v-else />
   </div>
 </template>
 
 <script>
-import LoginPage from './components/LoginPage.vue';
-import Dashboard from './components/Dashboard.vue';
-const firebase = require("firebase/app");
-require("firebase/auth");
+import LoginPage from './components/LoginPage.vue'
+import Dashboard from './components/Dashboard.vue'
+const firebase = require('firebase/app')
+require('firebase/auth')
 
 export default {
   name: 'app',
@@ -17,13 +17,13 @@ export default {
     LoginPage,
     Dashboard
   },
-  data: function () {
+  data: function() {
     return {
       isLoggedIn: false
     }
   },
-  created: function () {
-    firebase.auth().onAuthStateChanged((user) => {
+  created: function() {
+    firebase.auth().onAuthStateChanged(user => {
       if (user) {
         console.log('Logged in')
         this.isLoggedIn = true
@@ -31,13 +31,12 @@ export default {
         console.log('Signed out')
         this.isLoggedIn = false
       }
-    });
+    })
   }
 }
 </script>
 
 <style>
-
 @font-face {
   font-family: 'CircularStd';
   src: url(assets/fonts/CircularStd-Black.woff2);
@@ -80,29 +79,29 @@ export default {
   font-style: italic;
 }
 :root {
-    --color-primary-xx-light: #F1F5F5;
-    --color-primary-x-light: #DDF1FA;
-    --color-primary-light: #4F95FF;
-    --color-primary: #006AB3;
-    --color-primary-dark: #2E77E6;
-    --color-primary-x-dark: #0075C4;
-    --color-primary-xx-dark: #1B3B6E;
-    
-    --color-neutral-xxxx-light: #FFFFFF;
-    --color-neutral-xxx-light: #E2E3E7;
-    --color-neutral-xx-light: #CACCD4;
-    --color-neutral-x-light: #B5B6C0;
-    --color-neutral-light: #A0A1AD;
-    --color-neutral: #8B8C9A;
-    --color-neutral-dark: #757787;
-    --color-neutral-x-dark: #606274;
-    --color-neutral-xx-dark: #4B4C60;
-    --color-neutral-xxx-dark: #35374D;
-    --color-neutral-xxxx-dark: #3A3A3A;
-    --color-error-message: #EA6022;
+  --color-primary-xx-light: #f1f5f5;
+  --color-primary-x-light: #ddf1fa;
+  --color-primary-light: #4f95ff;
+  --color-primary: #006ab3;
+  --color-primary-dark: #2e77e6;
+  --color-primary-x-dark: #0075c4;
+  --color-primary-xx-dark: #1b3b6e;
 
-    --box-shadow: 0 2px 0 rgba(0,0,0,.2);
-    --box-shadow_hover: 0 2px 0 rgba(0,0,0,.9);
+  --color-neutral-xxxx-light: #ffffff;
+  --color-neutral-xxx-light: #e2e3e7;
+  --color-neutral-xx-light: #caccd4;
+  --color-neutral-x-light: #b5b6c0;
+  --color-neutral-light: #a0a1ad;
+  --color-neutral: #8b8c9a;
+  --color-neutral-dark: #757787;
+  --color-neutral-x-dark: #606274;
+  --color-neutral-xx-dark: #4b4c60;
+  --color-neutral-xxx-dark: #35374d;
+  --color-neutral-xxxx-dark: #3a3a3a;
+  --color-error-message: #ea6022;
+
+  --box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
+  --box-shadow_hover: 0 2px 0 rgba(0, 0, 0, 0.9);
 }
 #app {
   -webkit-font-smoothing: antialiased;
@@ -110,13 +109,12 @@ export default {
   display: flex;
   height: 100%;
 }
-body{
+body {
   min-height: 100vh;
   background: var(--color-primary-xx-light);
-  background-image: url("assets/background.png");
+  background-image: url('assets/background.png');
   background-repeat: repeat;
   overflow-x: hidden;
-
 }
 * {
   font-family: 'CircularStd', Helvetica, Arial, sans-serif;
@@ -126,14 +124,12 @@ body{
 }
 
 @media (max-width: 992px) {
-
-  h1, h2{
+  h1,
+  h2 {
     font-size: 18px;
   }
   p {
     font-size: 16px;
   }
-
 }
-
 </style>
