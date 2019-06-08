@@ -66,11 +66,11 @@ export default {
 <style scoped>
 
 .side_bar_logo{
-    width: 350px;
+    width: 420px;
 }
 .side_bar{
-  padding: 12px;
-  width: 350px;
+  padding: 35px;
+  width: 420px;
   height: 100vh;
   background-color:var(--color-primary);
   display: flex;

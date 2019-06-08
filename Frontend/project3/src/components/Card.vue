@@ -19,6 +19,8 @@
 
 <script>
 import {myFunctions} from '../main.js';
+var _ = require('lodash');
+var moment = require('moment');
 
 export default {
   data: function() {
@@ -26,7 +28,7 @@ export default {
       value: 2,
       time : "10 : 00: 00",
       series: [],
-        chartOptions: {
+      chartOptions: {
           chart: {
                 height: 350,
                 zoom: {
@@ -47,7 +49,7 @@ export default {
                 },
             },
             xaxis: {
-                categories: [],
+              type: 'datetime'
             }
         }
     }
@@ -61,7 +63,7 @@ export default {
         //console.log("Current data: ", doc.data());
         this.value = doc.data().current_value;
         let d = doc.data().last_updated.toDate();
-        this.time = this.zeros(d.getHours(),2) + ":" + this.zeros(d.getMinutes(),2) + " " + d.getDate() + "/" + this.zeros( d.getMonth(), 2) + "/" + d.getFullYear()
+        this.time = this.displayTime(d)
       });
 
       let result = [{
@@ -69,18 +71,19 @@ export default {
             data: []
         }];
       let data = await myFunctions.getTrainHistory("history", this.$props.trainId)
-      //console.log(data.docs[0].data().value)
-      for(let i= 0; i< data.docs.length; i++){
-        result[0].data.push(data.docs[i].data().value)
-      }
+      let groupedResults = _.groupBy(data.docs, (result) => moment.unix(result.data().timestamp.seconds).startOf('hour'));
+      _.forEach(groupedResults, (n, key) => result[0].data.push({x: key, y: Math.round(_.meanBy(n, (k) => k.data().value))}))
       this.series = result
-      
     },
   methods:{
     zeros(num, size){
       var s = num+"";
       while (s.length < size) s = "0" + s;
       return s;
+    },
+    displayTime(d){
+      return this.zeros(d.getHours(),2) + ":" + this.zeros(d.getMinutes(),2) + " " + d.getDate() + "/" + this.zeros( d.getMonth(), 2) + "/" + d.getFullYear()
+
     }
   }
 }
