@@ -12,8 +12,8 @@
 export default {
     name: 'Datalist',
     props:{
-        label:String,
-        Ids :[]
+        label: String,
+        Ids: Array
     }
 }
 </script>

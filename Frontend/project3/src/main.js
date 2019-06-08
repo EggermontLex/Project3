@@ -28,10 +28,10 @@ export const myFunctions = {
       return docs
     })
   },
-  getTrainHistory: function(collection, trainId){
+  getTrainHistory: function(trainId, hours){
     let d = new Date()
-    d = new Date(d.setHours(d.getHours() - 20))
-    return db.collection(collection).where("train", "==", trainId).where("timestamp", ">", d).get().then((docs) => {
+    d = new Date(d.setHours(d.getHours() - hours))
+    return db.collection('history').where("train", "==", trainId).where("timestamp", ">", d).get().then((docs) => {
       return docs
     })
   }  

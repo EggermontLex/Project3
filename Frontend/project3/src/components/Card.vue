@@ -32,7 +32,10 @@ export default {
           chart: {
                 height: 350,
                 zoom: {
-                    enabled: false
+                  enabled: false
+                },
+                toolbar: {
+                  show: false
                 }
             },
             dataLabels: {
@@ -70,7 +73,7 @@ export default {
             name: "People",
             data: []
         }];
-      let data = await myFunctions.getTrainHistory("history", this.$props.trainId)
+      let data = await myFunctions.getTrainHistory(this.$props.trainId, 168)
       let groupedResults = _.groupBy(data.docs, (result) => moment.unix(result.data().timestamp.seconds).startOf('hour'));
       _.forEach(groupedResults, (n, key) => result[0].data.push({x: key, y: Math.round(_.meanBy(n, (k) => k.data().value))}))
       this.series = result
