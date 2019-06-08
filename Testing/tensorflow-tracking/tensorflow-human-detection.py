@@ -6,7 +6,7 @@ from collections import deque
 from pyimagesearch.centroidtracker import CentroidTracker
 import numpy as np
 import cv2
-from detectorapi import DetectorAPI
+from ssd_mobilenet_v2_coco.detectorapi import DetectorAPI
 
 
 if __name__ == "__main__":
