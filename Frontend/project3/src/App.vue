@@ -8,8 +8,7 @@
 <script>
 import LoginPage from './components/LoginPage.vue'
 import Dashboard from './components/Dashboard.vue'
-const firebase = require('firebase/app')
-require('firebase/auth')
+import { mapState } from 'vuex'
 
 export default {
   name: 'App',
@@ -17,21 +16,13 @@ export default {
     LoginPage,
     Dashboard
   },
-  data: function() {
-    return {
-      isLoggedIn: false
-    }
-  },
-  created: function() {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        console.log('Logged in')
-        this.isLoggedIn = true
-      } else {
-        console.log('Signed out')
-        this.isLoggedIn = false
-      }
+  computed: {
+    ...mapState({
+      isLoggedIn: state => state.authentication.isLoggedIn
     })
+  },
+  beforeCreate: function() {
+    this.$store.dispatch('authentication/fetchCreds')
   }
 }
 </script>

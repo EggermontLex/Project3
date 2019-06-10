@@ -10,10 +10,12 @@ export const actions = {
         user => {
           console.log(user)
           context.commit('setLoginState', true)
+          context.commit('setErrorMsg', '')
         },
         error => {
           console.log(error)
           context.commit('setLoginState', false)
+          context.commit('setErrorMsg', error.message)
         }
       )
   },
@@ -27,5 +29,16 @@ export const actions = {
       .catch(error => {
         console.log(error)
       })
+  },
+  fetchCreds(context) {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        console.log('Logged in')
+        context.commit('setLoginState', true)
+      } else {
+        console.log('Signed out')
+        context.commit('setLoginState', false)
+      }
+    })
   }
 }

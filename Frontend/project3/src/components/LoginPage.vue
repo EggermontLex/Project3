@@ -14,22 +14,22 @@
     </div>
 
     <div class="side_bar_input">
-      <div v-if="isError" class="error_message">
-        <p class="error_message_text">Oeps! Er is iets verkeerd gegaan.</p>
+      <div v-if="errorMsg" class="error_message">
+        <p class="error_message_text">{{ errorMsg }}</p>
       </div>
       <Input
         v-model="username"
         label="E-mailadres"
         text-placeholder="E-mailadres"
         type="email"
-        :class="{ border_color: isError }"
+        :class="{ border_color: errorMsg }"
       />
       <Input
         v-model="password"
         label="Wachtwoord"
         text-placeholder="Password"
         type="password"
-        :class="{ border_color: isError }"
+        :class="{ border_color: errorMsg }"
       />
       <Button class="button" text="Login" @click.native="getLoginData" />
     </div>
@@ -43,6 +43,7 @@
 <script>
 import Button from './Button.vue'
 import Input from './Input.vue'
+import { mapState } from 'vuex'
 
 export default {
   name: 'LoginPage',
@@ -53,9 +54,13 @@ export default {
   data: function() {
     return {
       username: '',
-      password: '',
-      isError: false
+      password: ''
     }
+  },
+  computed: {
+    ...mapState({
+      errorMsg: state => state.authentication.errorMsg
+    })
   },
   methods: {
     getLoginData: async function() {

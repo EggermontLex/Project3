@@ -3,7 +3,8 @@ import { actions } from './actions'
 import { mutations } from './mutations'
 
 const state = {
-  isLoggedIn: false
+  isLoggedIn: false,
+  errorMsg: ''
 }
 
 const namespaced = true
