@@ -1,125 +1,156 @@
 <template>
-
-      <div class="card">
-          <div class="textarea">
-            <div class="topbar">
-              <h1>{{trainId}}</h1>
-              <p class="update">Laatst geüpdate: <b class="update_text">{{ time }}</b></p>
-            </div>
-            <p>Aantal mensen binnen:</p>
-            <h2>{{value}}</h2>
-          </div>
-          
-          <div class="grafiek">
-            <!--<img src="../assets/grafiek.png" alt="grafiek">-->
-            <apexchart type=area height=350 :options="chartOptions" :series="series" />
-          </div>
+  <div class="card">
+    <div class="textarea">
+      <div class="topbar">
+        <h1>{{ trainId }}</h1>
+        <p class="update">
+          Laatst geüpdate:
+          <b class="update_text">{{ time }}</b>
+        </p>
       </div>
+      <p>Aantal mensen binnen:</p>
+      <h2>{{ value }}</h2>
+    </div>
+
+    <div class="grafiek">
+      <apexchart
+        type="area"
+        height="350"
+        :options="chartOptions"
+        :series="series"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
-import {myFunctions} from '../main.js';
-var _ = require('lodash');
-var moment = require('moment');
+import { myFunctions } from '../main.js'
+var _ = require('lodash')
+var moment = require('moment')
 
 export default {
   data: function() {
     return {
       value: 2,
-      time : "10 : 00: 00",
+      time: '10 : 00: 00',
       series: [],
       chartOptions: {
-          chart: {
-                height: 350,
-                zoom: {
-                    enabled: false
-                }
-            },
-            dataLabels: {
-                enabled: false
-            },
-            stroke: {
-                curve: 'smooth',
-            },
-            colors: ['#006AB3'],
-            grid: {
-                row: {
-                    colors: ['#F1F5F5', 'transparent'], // takes an array which will be repeated on columns
-                    opacity: 0.5
-                },
-            },
-            xaxis: {
-              type: 'datetime'
-            }
+        chart: {
+          height: 350,
+          zoom: {
+            enabled: false
+          },
+          toolbar: {
+            show: false
+          }
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          curve: 'smooth'
+        },
+        colors: ['#006AB3'],
+        grid: {
+          row: {
+            colors: ['#F1F5F5', 'transparent'], // takes an array which will be repeated on columns
+            opacity: 0.5
+          }
+        },
+        xaxis: {
+          type: 'datetime'
         }
+      }
     }
   },
   props: {
-    trainId:String
+    trainId: String
   },
   created: async function() {
-      let documentReference = myFunctions.getDocumentReference('realtime', this.$props.trainId)
-      documentReference.onSnapshot((doc) =>{
-        //console.log("Current data: ", doc.data());
-        this.value = doc.data().current_value;
-        let d = doc.data().last_updated.toDate();
-        this.time = this.displayTime(d)
-      });
+    let documentReference = myFunctions.getDocumentReference(
+      'realtime',
+      this.$props.trainId
+    )
+    documentReference.onSnapshot(doc => {
+      //console.log("Current data: ", doc.data());
+      this.value = doc.data().current_value
+      let d = doc.data().last_updated.toDate()
+      this.time = this.displayTime(d)
+    })
 
-      let result = [{
-            name: "People",
-            data: []
-        }];
-      let data = await myFunctions.getTrainHistory("history", this.$props.trainId)
-      let groupedResults = _.groupBy(data.docs, (result) => moment.unix(result.data().timestamp.seconds).startOf('hour'));
-      _.forEach(groupedResults, (n, key) => result[0].data.push({x: key, y: Math.round(_.meanBy(n, (k) => k.data().value))}))
-      this.series = result
+    let result = [
+      {
+        name: 'People',
+        data: []
+      }
+    ]
+    let data = await myFunctions.getTrainHistory(this.$props.trainId, 168)
+    let groupedResults = _.groupBy(data.docs, result =>
+      moment.unix(result.data().timestamp.seconds).startOf('hour')
+    )
+    _.forEach(groupedResults, (n, key) =>
+      result[0].data.push({
+        x: key,
+        y: Math.round(_.meanBy(n, k => k.data().value))
+      })
+    )
+    this.series = result
+  },
+  methods: {
+    zeros(num, size) {
+      var s = num + ''
+      while (s.length < size) s = '0' + s
+      return s
     },
-  methods:{
-    zeros(num, size){
-      var s = num+"";
-      while (s.length < size) s = "0" + s;
-      return s;
-    },
-    displayTime(d){
-      return this.zeros(d.getHours(),2) + ":" + this.zeros(d.getMinutes(),2) + " " + d.getDate() + "/" + this.zeros( d.getMonth(), 2) + "/" + d.getFullYear()
-
+    displayTime(d) {
+      return (
+        this.zeros(d.getHours(), 2) +
+        ':' +
+        this.zeros(d.getMinutes(), 2) +
+        ' ' +
+        d.getDate() +
+        '/' +
+        this.zeros(d.getMonth(), 2) +
+        '/' +
+        d.getFullYear()
+      )
     }
   }
 }
 </script>
 
 <style scoped>
-
-.card{
+.card {
   margin: 15px;
   width: 70%;
   padding: 49px;
   background-color: var(--color-neutral-xxxx-light);
   border-radius: 8px;
-  box-shadow: 0 2px 0 rgba(0,0,0,.2);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
 }
-.topbar{
+.topbar {
   display: flex;
   justify-content: space-between;
 }
 
-.update{
+.update {
   text-align: right;
   font-size: 13px;
   margin: 0;
 }
 
-.grafiek{
+.grafiek {
   padding-top: 32px;
   background-color: inherit;
 }
 
-h1, h2, p{
+h1,
+h2,
+p {
   margin-bottom: 16px;
 }
 
-h1{
+h1 {
   font-size: 22px;
   font-weight: 700;
   line-height: 30px;
@@ -127,7 +158,7 @@ h1{
   background-color: inherit;
 }
 
-h2{
+h2 {
   font-size: 22px;
   font-weight: 700;
   line-height: 30px;
@@ -136,34 +167,35 @@ h2{
   display: inline;
 }
 
-p{
+p {
   background-color: inherit;
   font-size: 18px;
   font-weight: 400;
   line-height: 30px;
   display: inline;
   margin-right: 8px;
-  color: var(--color-neutral-xxxx-dark)
+  color: var(--color-neutral-xxxx-dark);
 }
 
 @media (max-width: 992px) {
-  .grafiek img{
+  .grafiek img {
     width: 90%;
   }
-  h1, h2{
+  h1,
+  h2 {
     font-size: 18px;
   }
   p {
     font-size: 16px;
   }
-  .update{
-  font-size: 11px;
-}
+  .update {
+    font-size: 11px;
+  }
 }
 
 @media (max-width: 768px) {
-  .textarea{
-    margin:24px 24px 0px;
+  .textarea {
+    margin: 24px 24px 0px;
   }
 }
 
@@ -173,5 +205,4 @@ p{
     height: 100vh;
   }
 }
-
 </style>

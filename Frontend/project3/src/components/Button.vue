@@ -1,5 +1,5 @@
 <template>
-    <button type="button" name="button" class="button">{{ text }}</button>
+  <button type="button" name="button" class="button">{{ text }}</button>
 </template>
 
 <script>
@@ -7,12 +7,12 @@ export default {
   name: 'Button',
   props: {
     text: String
-  }   
+  }
 }
 </script>
 
 <style scoped>
-.button{
+.button {
   background-color: var(--color-neutral-xxxx-light);
   padding: 14px 0;
   border-radius: 5px;
@@ -23,7 +23,8 @@ export default {
   font-weight: 700;
   width: 100%;
 }
-.button:hover, .button:active{
+.button:hover,
+.button:active {
   box-shadow: var(--box-shadow_hover);
   color: var(--color-primary-xx-dark);
 }
