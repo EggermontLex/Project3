@@ -9,7 +9,7 @@ from google.cloud import pubsub_v1
 import os
 import datetime
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "/home/mendel/project3/Project3-ML6-515024366790.json"
-
+data = ""
 
 
 from pyimagesearch.centroidtracker import CentroidTracker
@@ -156,17 +156,26 @@ def main():
     cap.release()
     cv2.destroyAllWindows()
 
+def callback(message_future):
+    # When timeout is unspecified, the exception method waits indefinitely.
+    if message_future.exception(timeout=30):
+        print('Publishing message on {} threw an Exception {}.'.format(
+            topic_name, message_future.exception()))
+    else:
+        print(message_future.result())
 
 def binnen():
     data = ("+1,%s" % datetime.datetime.now())
     data = data.encode('utf-8')
-    publisher.publish(topic_path, data=data)
+    message_future = publisher.publish(topic_path, data=data)
+    message_future.add_done_callback(callback)
     print("in")
 
 def buiten():
     data = ("-1,%s" % datetime.datetime.now())
     data = data.encode('utf-8')
-    publisher.publish(topic_path, data=data)
+    message_future = publisher.publish(topic_path, data=data)
+    message_future.add_done_callback(callback)
     print("out")
 
 
