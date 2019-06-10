@@ -9,23 +9,18 @@ export const actions = {
       .then(
         user => {
           console.log(user)
-          context.commit('setLoginState', true)
           context.commit('setErrorMsg', '')
         },
         error => {
           console.log(error)
-          context.commit('setLoginState', false)
           context.commit('setErrorMsg', error.message)
         }
       )
   },
-  logout(context) {
+  logout() {
     firebase
       .auth()
       .signOut()
-      .then(() => {
-        context.commit('setLoginState', false)
-      })
       .catch(error => {
         console.log(error)
       })
