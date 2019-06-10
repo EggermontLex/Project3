@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueApexCharts from 'vue-apexcharts'
+import store from './store'
 const firebase = require('firebase/app')
-require('firebase/auth')
 require('firebase/firestore')
 
 Vue.config.productionTip = false
@@ -46,5 +46,6 @@ export const myFunctions = {
 }
 
 new Vue({
+  store,
   render: h => h(App)
 }).$mount('#app')
