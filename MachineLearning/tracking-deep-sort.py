@@ -58,13 +58,13 @@ def main():
 
     #deep sort
     model_filename = 'model_data/mars-small128.pb'
-    encoder = gdet.create_box_encoder(model_filename,batch_size=1)
+    encoder = gdet.create_box_encoder(model_filename,batch_size=1) #tensorflow nodig!
 
 
     metric = nn_matching.NearestNeighborDistanceMetric("cosine", max_cosine_distance, nn_budget)
     tracker = Tracker(metric)
 
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(1)
 
     writeVideo_flag = True
     if writeVideo_flag:
@@ -122,6 +122,7 @@ def main():
 
             # Call the tracker
             tracker.predict()
+            print(detections)
             tracker.update(detections)
 
             for track in tracker.tracks:

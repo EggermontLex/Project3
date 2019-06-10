@@ -98,40 +98,41 @@ def main():
                     #draw.text((box[0], box[1] + 10), str(obj.score))
                     boxs.append(box)
 
-            objects = ct.update(boxs)
 
             draw.line((0, line1, width, line1), fill=10, width=5)
             img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
 
-            for (objectID, centroid) in objects.items():
-                #line_order[objectID] = deque(maxlen=2)
-                if objectID not in line_trail.keys():
-                    line_trail[objectID] = deque(maxlen=2)
-                text = "ID {}".format(objectID)
-                cv2.putText(img, text, (centroid[0] - 10, centroid[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255),4)
-                cv2.circle(img, (centroid[0], centroid[1]), 4, (0, 255, 0), -1)
-                cv2.line(img, (0, centroid[2]), (width, centroid[2]), (255, 0, 0), 2)
-                center = (centroid[1], centroid[2])
-                line_trail[objectID].appendleft(center)
+            # Call the tracker
+            tracker.predict()
+            tracker.update(boxs)
+
+            for track in tracker.tracks:
+                if not track.is_confirmed() or track.time_since_update > 1:
+                    continue
+                if track.track_id not in line_trail.keys():
+                    line_trail[track.track_id] = deque(maxlen=32)
+                bbox = track.to_tlbr()
+                cv2.rectangle(frame, (int(bbox[0]), int(bbox[1])), (int(bbox[2]), int(bbox[3])), (255, 255, 255), 2)
+                cv2.putText(frame, str(track.track_id), (int(bbox[0]), int(bbox[1])), 0, 5e-3 * 200, (0, 255, 0), 2)
+                cv2.line(frame, (0, int(bbox[1])), (width, int(bbox[1])), (255, 0, 0), 2)
+
+                line_trail[track.track_id].appendleft(bbox[1])
                 try:
-                    diff = abs(line_trail[objectID][0][0] - line_trail[objectID][1][0])
-                    print(diff)
-                    if diff < 250:
-                        if line_trail[objectID][0][1] < int(line1) and line_trail[objectID][1][1] > int(line1):
-                            #binnen() if invert else buiten()
-                            if invert:
-                                persons_in += 1
-                                binnen()
-                            else:
-                                persons_in -= 1
-                                buiten()
-                        elif line_trail[objectID][1][1] < int(line1) and line_trail[objectID][0][1] > int(line1):
-                            if invert:
-                                buiten()
-                                persons_in -= 1
-                            else:
-                                binnen()
-                                persons_in += 1
+
+                    if line_trail[track.track_id][0] < int(line1) and line_trail[track.track_id][1] > int(line1):
+                        if invert:
+                            persons_in += 1
+                            binnen()
+                        else:
+                            persons_in -= 1
+                            buiten()
+                    elif line_trail[track.track_id][1] < int(line1) and line_trail[track.track_id][0] > int(line1):
+                        if invert:
+                            buiten()
+                            persons_in -= 1
+                        else:
+                            binnen()
+                            persons_in += 1
                 except Exception as Ex:
                     pass
 

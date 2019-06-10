@@ -89,7 +89,10 @@ def start(model_name):
         boxes = np.array([d.tlwh for d in detections])
         scores = np.array([d.confidence for d in detections])
         indices = preprocessing.non_max_suppression(boxes, nms_max_overlap, scores)
-        detections = [detections[i] for i in indices]
+        detections = [detections[i] for i in [preprocessing.non_max_suppression(boxes, nms_max_overlap, scores)]]
+
+        #or this fancy oneliner :)
+        #detections = [detections[i] for i in [preprocessing.non_max_suppression([np.array([d.tlwh for d in [Detection(bbox, 1.0, feature) for bbox, feature in zip(boxs, features)]])], nms_max_overlap, [np.array([d.confidence for d in [Detection(bbox, 1.0, feature) for bbox, feature in zip(boxs, features)]])])]]
         
         # Call the tracker
         tracker.predict()
@@ -99,7 +102,7 @@ def start(model_name):
             if not track.is_confirmed() or track.time_since_update > 1:
                 continue
             if track.track_id not in line_trail.keys():
-                line_trail[track.track_id] = deque(maxlen=32)
+                line_trail[track.track_id] = deque(maxlen=2)
             bbox = track.to_tlbr()
             cv2.rectangle(frame, (int(bbox[0]), int(bbox[1])), (int(bbox[2]), int(bbox[3])),(255,255,255), 2)
             cv2.putText(frame, str(track.track_id),(int(bbox[0]), int(bbox[1])),0, 5e-3 * 200, (0,255,0),2)
