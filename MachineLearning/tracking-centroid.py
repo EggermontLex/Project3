@@ -10,6 +10,7 @@ import os
 import datetime
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "/home/mendel/project3/Project3-ML6-515024366790.json"
 data = ""
+f= open("cache.txt","w+")
 
 
 from pyimagesearch.centroidtracker import CentroidTracker
@@ -161,8 +162,15 @@ def callback(message_future):
     if message_future.exception(timeout=30):
         print('Publishing message on {} threw an Exception {}.'.format(
             topic_name, message_future.exception()))
+        f.write(data + ",")
     else:
-        print(message_future.result())
+        print("Confirmation: " + message_future.result())
+        lines = [send_message(line) for line in [line.rstrip(',') for line in open('cache.txt')]]
+
+def send_message(data):
+    message_future = publisher.publish(topic_path, data=data)
+    message_future.add_done_callback(callback)
+
 
 def binnen():
     data = ("+1,%s" % datetime.datetime.now())
