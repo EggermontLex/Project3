@@ -15,10 +15,10 @@
       </div>
 
       <div class="side_bar_input">
-        <div class="error_message" v-if="isError">
+        <div v-if="isError" class="error_message">
           <p class="error_message_text">Oeps! Er is iets verkeerd gegaan.</p>
         </div>
-        <Datalist label="Trein" :Ids="trainIds" />
+        <Datalist label="Trein" :ids="trainIds" />
         <div>
           <p class="subtitle">Van</p>
           <div class="date_time">
@@ -52,8 +52,8 @@
         <div class="cards">
           <Card
             v-for="trainid in trainIds"
-            v-bind:key="trainid"
-            :trainId="trainid"
+            :key="trainid"
+            :train-id="trainid"
           />
         </div>
       </div>
@@ -68,8 +68,6 @@ import Input from './Input.vue'
 import Datalist from './Datalist.vue'
 
 import { myFunctions } from '../main.js'
-const firebase = require('firebase/app')
-require('firebase/auth')
 
 export default {
   name: 'Dashboard',
@@ -79,6 +77,12 @@ export default {
     Input,
     Datalist
   },
+  data: function() {
+    return {
+      trainIds: [],
+      isError: false
+    }
+  },
   created: async function() {
     let data = await myFunctions.getCollectionDocs('realtime')
     for (let i = 0; i < data.docs.length; i++) {
@@ -87,23 +91,9 @@ export default {
     }
     //console.log(this.trainIds)
   },
-  data: function() {
-    return {
-      trainIds: [],
-      isError: false
-    }
-  },
   methods: {
     Logout() {
-      firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          this.$emit('login', false)
-        })
-        .catch(function(error) {
-          console.log(error)
-        })
+      this.$store.dispatch('authentication/logout')
     }
   }
 }

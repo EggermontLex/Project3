@@ -12,7 +12,7 @@ const firebase = require('firebase/app')
 require('firebase/auth')
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
     LoginPage,
     Dashboard

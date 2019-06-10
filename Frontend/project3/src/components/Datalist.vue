@@ -3,7 +3,7 @@
     <label for="input" class="label">{{ label }}</label>
     <input name="input" list="browsers" class="input" />
     <datalist id="browsers">
-      <option v-for="id in Ids" :value="id" v-bind:key="id" />
+      <option v-for="id in ids" :key="id" :value="id" />
     </datalist>
   </div>
 </template>
@@ -12,7 +12,7 @@ export default {
   name: 'Datalist',
   props: {
     label: String,
-    Ids: Array
+    ids: Array
   }
 }
 </script>

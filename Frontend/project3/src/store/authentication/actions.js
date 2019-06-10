@@ -2,11 +2,10 @@ const firebase = require('firebase/app')
 require('firebase/auth')
 
 export const actions = {
-  login(context, email, password) {
-    console.log(email)
+  login(context, credentials) {
     firebase
       .auth()
-      .signInWithEmailAndPassword(email, password)
+      .signInWithEmailAndPassword(credentials.email, credentials.password)
       .then(
         user => {
           console.log(user)

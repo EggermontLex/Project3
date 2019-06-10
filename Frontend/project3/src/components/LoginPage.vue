@@ -14,22 +14,22 @@
     </div>
 
     <div class="side_bar_input">
-      <div class="error_message" v-if="isError">
+      <div v-if="isError" class="error_message">
         <p class="error_message_text">Oeps! Er is iets verkeerd gegaan.</p>
       </div>
       <Input
-        label="Gebruikersnaam"
         v-model="username"
-        text_placeholder="Gebruikersnaam"
-        type="text"
-        v-bind:class="{ border_color: isError }"
+        label="E-mailadres"
+        text-placeholder="E-mailadres"
+        type="email"
+        :class="{ border_color: isError }"
       />
       <Input
-        label="Wachtwoord"
         v-model="password"
-        text_placeholder="Password"
+        label="Wachtwoord"
+        text-placeholder="Password"
         type="password"
-        v-bind:class="{ border_color: isError }"
+        :class="{ border_color: isError }"
       />
       <Button class="button" text="Login" @click.native="getLoginData" />
     </div>
@@ -43,9 +43,6 @@
 <script>
 import Button from './Button.vue'
 import Input from './Input.vue'
-
-const firebase = require('firebase/app')
-require('firebase/auth')
 
 export default {
   name: 'LoginPage',
@@ -62,23 +59,10 @@ export default {
   },
   methods: {
     getLoginData: async function() {
-      //alert('getLoginData')
-      //alert(this.username + " " + this.password)
-      // let data = await myFunctions.getData('users')
-      // console.log('Data', data.docs[0].data())
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.username, this.password)
-        .then(
-          user => {
-            console.log(user)
-            this.isError = false
-          },
-          error => {
-            console.log(error)
-            this.isError = true
-          }
-        )
+      this.$store.dispatch('authentication/login', {
+        email: this.username,
+        password: this.password
+      })
     }
   }
 }

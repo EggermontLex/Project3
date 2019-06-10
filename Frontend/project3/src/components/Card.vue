@@ -29,6 +29,9 @@ var _ = require('lodash')
 var moment = require('moment')
 
 export default {
+  props: {
+    trainId: String
+  },
   data: function() {
     return {
       value: 2,
@@ -62,9 +65,6 @@ export default {
         }
       }
     }
-  },
-  props: {
-    trainId: String
   },
   created: async function() {
     let documentReference = myFunctions.getDocumentReference(
