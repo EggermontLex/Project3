@@ -30,7 +30,10 @@ var moment = require('moment')
 
 export default {
   props: {
-    trainId: String
+    trainId: {
+      type: String,
+      default: ''
+    }
   },
   data: function() {
     return {

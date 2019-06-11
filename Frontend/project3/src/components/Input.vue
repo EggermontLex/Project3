@@ -15,9 +15,18 @@
 export default {
   name: 'Input',
   props: {
-    label: String,
-    textPlaceholder: String,
-    type: String
+    label: {
+      type: String,
+      default: 'Input'
+    },
+    textPlaceholder: {
+      type: String,
+      default: 'Input placeholder'
+    },
+    type: {
+      type: String,
+      default: 'text'
+    }
   }
 }
 </script>

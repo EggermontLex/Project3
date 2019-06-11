@@ -11,8 +11,14 @@
 export default {
   name: 'Datalist',
   props: {
-    label: String,
-    ids: Array
+    label: {
+      type: String,
+      default: 'Datalist'
+    },
+    ids: {
+      type: Array,
+      default: () => []
+    }
   }
 }
 </script>
