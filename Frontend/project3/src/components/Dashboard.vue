@@ -177,15 +177,22 @@ export default {
   flex-direction: column;
   justify-content: space-between;
 }
-@media (max-width: 576px) {
+@media (max-width: 768px) {
   .side_bar {
     width: 100vw;
-    height: 100vh;
+    height: calc(100vh - 50px);
+    position: static;
+    padding: 50px;
   }
 }
 
+@media (max-width: 576px) {
+  .side_bar {
+    padding: 35px;
+  }
+}
 .side_bar_input {
-  margin: 1em;
+  margin: 1em 0;
 }
 
 .error_message {
@@ -212,9 +219,32 @@ export default {
 .date_time_item {
   width: calc(50% - 8px);
 }
-
 .date_time .date_time_item {
   margin: 0;
+}
+
+@media (max-width: 768px) {
+  .date_time {
+    justify-content: flex-start;
+  }
+  .date_time_item {
+    width: 25%;
+  }
+  .date_time .date_time_item {
+    margin-right: 16px;
+  }
+}
+@media (max-width: 576px) {
+  .date_time {
+    display: flex;
+    justify-content: space-between;
+  }
+  .date_time_item {
+    width: calc(50% - 8px);
+  }
+  .date_time .date_time_item {
+    margin: 0;
+  }
 }
 
 .dots {
@@ -223,9 +253,12 @@ export default {
   background-repeat: no-repeat;
   background-position: 100% 0;
   background-size: auto 27px;
-  margin-bottom: 10%;
 }
-
+@media (max-width: px) {
+  .dots {
+    margin-bottom: 0;
+  }
+}
 .logo {
   fill: var(--color-neutral-xxxx-light);
   width: 65px;
@@ -234,11 +267,23 @@ export default {
 .button {
   margin-top: 13%;
 }
+@media (max-width: 768px) {
+  .button {
+    width: calc(50% + 16px);
+  }
+}
 
 .main {
   width: calc(100% - 420px);
   margin-left: 420px;
 }
+@media (max-width: 768px) {
+  .main {
+    width: 100vw;
+    margin: 0%;
+  }
+}
+
 .top-bar {
   padding: 12px;
 }
@@ -250,6 +295,7 @@ export default {
   width: 150px;
   position: absolute;
   right: 0;
+  top: 0;
 }
 .main .button:hover,
 .main .button:active {
@@ -257,6 +303,24 @@ export default {
   color: var(--color-neutral-xxxx-light);
   background-color: var(--color-primary-x-dark);
 }
+@media (max-width: 768px) {
+  .main .button {
+    margin: 50px;
+    background-color: var(--color-neutral-xxxx-light);
+    color: var(--color-primary);
+  }
+  .main .button:hover,
+  .main.button:active {
+    box-shadow: var(--box-shadow_hover);
+    color: var(--color-primary-xx-dark);
+  }
+}
+@media (max-width: 576px) {
+  .main .button {
+    margin: 35px;
+  }
+}
+
 .container {
   height: 100vh;
   padding-top: 60px;
@@ -264,6 +328,13 @@ export default {
   justify-content: space-between;
   flex-direction: column;
 }
+
+@media (max-width: 768px) {
+  .container {
+    padding-top: 0px;
+  }
+}
+
 .cards {
   display: flex;
   flex-direction: column;
@@ -286,6 +357,7 @@ export default {
 @media (max-width: 1200px) {
   .card {
     padding: 30px;
+    width: calc(100% - 50px);
   }
 }
 </style>
