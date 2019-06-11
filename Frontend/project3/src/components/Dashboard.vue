@@ -123,7 +123,7 @@ export default {
     time = String(h - 1) + ':' + m //+ ':' + s
     this.timeFrom = time
     console.info(time)
-    µ
+
     let data = await this.$store.dispatch(
       'firestore/getCollectionDocs',
       'realtime'
