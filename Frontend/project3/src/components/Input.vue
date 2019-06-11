@@ -5,6 +5,7 @@
       :type="type"
       class="input"
       name="input"
+      :value="textValue"
       :placeholder="textPlaceholder"
       @input="$emit('input', $event.target.value)"
     />
@@ -26,6 +27,10 @@ export default {
     type: {
       type: String,
       default: 'text'
+    },
+    textValue: {
+      type: String,
+      default: ''
     }
   }
 }

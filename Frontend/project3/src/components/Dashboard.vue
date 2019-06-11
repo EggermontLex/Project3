@@ -22,22 +22,43 @@
         <div>
           <p class="subtitle">Van</p>
           <div class="date_time">
-            <Input class="date_time_item" label="Datum:" type="date" />
+            <Input
+              class="date_time_item"
+              label="Datum:"
+              type="date"
+              :text-value="datum"
+            />
             <!--v-model="fromDatum"-->
-            <Input class="date_time_item" label="Tijd:" type="time" />
-            <!--v-model="fromTijd"-->
+            <!-- jjjj-mm-dd -->
+            <Input
+              class="date_time_item"
+              label="Tijd:"
+              type="time"
+              :text-value="timeFrom"
+            />
+            <!--v-model="fromTijd"--><!-- uu:mm:ss -->
           </div>
         </div>
         <div>
           <p class="subtitle">Tot</p>
           <div class="date_time">
-            <Input class="date_time_item" label="Datum:" type="date" />
+            <Input
+              class="date_time_item"
+              label="Datum:"
+              type="date"
+              :text-value="datum"
+            />
             <!--v-model="intilDatum" -->
-            <Input class="date_time_item" label="Tijd:" type="time" />
+            <Input
+              class="date_time_item"
+              label="Tijd:"
+              type="time"
+              :text-value="timeIntil"
+            />
             <!--v-model="intilTijd" -->
           </div>
         </div>
-        <Button class="button" text="Zoek" />
+        <Button class="button" text="Zoek" @click.native="search" />
         <!--@click.native="getLoginData"/>-->
       </div>
 
@@ -80,10 +101,31 @@ export default {
   data: function() {
     return {
       trainIds: [],
-      isError: false
+      isError: false,
+      datum: '',
+      timeFrom: '',
+      timeIntil: ''
     }
   },
   created: async function() {
+    let today = new Date()
+    let dd = String(today.getDate()).padStart(2, '0')
+    let mm = String(today.getMonth() + 1).padStart(2, '0') //January is 0!
+    let yyyy = today.getFullYear()
+    let datum = yyyy + '-' + mm + '-' + dd
+    this.datum = datum
+
+    let h = this.zeros(today.getHours(), 2)
+    let m = this.zeros(today.getMinutes(), 2)
+    let s = this.zeros(today.getSeconds(), 2)
+
+    let time = h + ':' + m //+ ':' + s
+    this.timeIntil = time
+
+    time = String(h - 1) + ':' + m //+ ':' + s
+    this.timeFrom = time
+    console.info(time)
+
     let data = await myFunctions.getCollectionDocs('realtime')
     for (let i = 0; i < data.docs.length; i++) {
       //console.log('Data',)
@@ -92,8 +134,16 @@ export default {
     //console.log(this.trainIds)
   },
   methods: {
+    zeros(num, size) {
+      var s = num + ''
+      while (s.length < size) s = '0' + s
+      return s
+    },
     Logout() {
       this.$store.dispatch('authentication/logout')
+    },
+    search: function() {
+      console.log('in functie')
     }
   }
 }

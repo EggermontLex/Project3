@@ -1,7 +1,12 @@
 <template>
   <div class="container_input">
     <label for="input" class="label">{{ label }}</label>
-    <input name="input" list="browsers" class="input" />
+    <input
+      name="input"
+      list="browsers"
+      class="input"
+      placeholder="Alle treinen"
+    />
     <datalist id="browsers">
       <option v-for="id in ids" :key="id" :value="id" />
     </datalist>
