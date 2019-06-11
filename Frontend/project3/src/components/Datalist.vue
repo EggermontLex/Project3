@@ -6,6 +6,7 @@
       list="browsers"
       class="input"
       placeholder="Alle treinen"
+      @input="$emit('input', $event.target.value)"
     />
     <datalist id="browsers">
       <option v-for="id in ids" :key="id" :value="id" />

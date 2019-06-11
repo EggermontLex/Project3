@@ -18,44 +18,44 @@
         <div v-if="isError" class="error_message">
           <p class="error_message_text">Oeps! Er is iets verkeerd gegaan.</p>
         </div>
-        <Datalist label="Trein" :ids="trainIds" />
+        <Datalist v-model="datalist" label="Trein" :ids="trainIds" />
         <div>
           <p class="subtitle">Van</p>
           <div class="date_time">
             <Input
+              v-model="fromDatum"
               class="date_time_item"
               label="Datum:"
               type="date"
-              :text-value="datum"
+              :text-value="fromDatum"
             />
-            <!--v-model="fromDatum"-->
-            <!-- jjjj-mm-dd -->
             <Input
+              v-model="fromTijd"
               class="date_time_item"
               label="Tijd:"
               type="time"
-              :text-value="timeFrom"
+              :text-value="fromTijd"
             />
-            <!--v-model="fromTijd"--><!-- uu:mm:ss -->
           </div>
         </div>
         <div>
           <p class="subtitle">Tot</p>
           <div class="date_time">
             <Input
+              v-model="intilDatum"
               class="date_time_item"
               label="Datum:"
               type="date"
-              :text-value="datum"
+              :text-value="intilDatum"
             />
-            <!--v-model="intilDatum" -->
+
             <Input
+              v-model="intilTijd"
               class="date_time_item"
               label="Tijd:"
               type="time"
-              :text-value="timeIntil"
+              :text-value="intilTijd"
             />
-            <!--v-model="intilTijd" -->
           </div>
         </div>
         <Button class="button" text="Zoek" @click.native="search" />
@@ -100,9 +100,11 @@ export default {
     return {
       trainIds: [],
       isError: false,
-      datum: '',
-      timeFrom: '',
-      timeIntil: ''
+      fromDatum: '',
+      fromTijd: '',
+      intilDatum: '',
+      intilTijd: '',
+      datalist: ''
     }
   },
   created: async function() {
@@ -111,18 +113,19 @@ export default {
     let mm = String(today.getMonth() + 1).padStart(2, '0') //January is 0!
     let yyyy = today.getFullYear()
     let datum = yyyy + '-' + mm + '-' + dd
-    this.datum = datum
+    this.fromDatum = datum
+    this.intilDatum = datum
 
     let h = this.zeros(today.getHours(), 2)
     let m = this.zeros(today.getMinutes(), 2)
-    let s = this.zeros(today.getSeconds(), 2)
+    //let s = this.zeros(today.getSeconds(), 2)
 
     let time = h + ':' + m //+ ':' + s
-    this.timeIntil = time
+    this.intilTijd = time
 
     time = String(h - 1) + ':' + m //+ ':' + s
-    this.timeFrom = time
-    console.info(time)
+    this.fromTijd = time
+    //console.info(time)
 
     let data = await this.$store.dispatch(
       'firestore/getCollectionDocs',
@@ -144,7 +147,13 @@ export default {
       this.$store.dispatch('authentication/logout')
     },
     search: function() {
-      console.log('in functie')
+      console.log('fromDatum:', this.fromDatum)
+      console.log('fromTijd:', this.fromTijd)
+
+      console.log('intilDatum:', this.intilDatum)
+      console.log('intilTijd:', this.intilTijd)
+
+      console.log('datalist:', this.datalist)
     }
   }
 }
@@ -167,6 +176,12 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+@media (max-width: 576px) {
+  .side_bar {
+    width: 100vw;
+    height: 100vh;
+  }
 }
 
 .side_bar_input {
@@ -220,13 +235,6 @@ export default {
   margin-top: 13%;
 }
 
-@media (max-width: 576px) {
-  .side_bar {
-    width: 100vw;
-    height: 100vh;
-  }
-}
-
 .main {
   width: calc(100% - 420px);
   margin-left: 420px;
@@ -273,6 +281,11 @@ export default {
   .card {
     padding: 0;
     width: 100%;
+  }
+}
+@media (max-width: 1200px) {
+  .card {
+    padding: 30px;
   }
 }
 </style>
