@@ -104,7 +104,7 @@ def main():
 
             # Call the tracker
             tracker.predict()
-            tracker.update(boxs)
+            tracker.update([boxs])
 
             for track in tracker.tracks:
                 if not track.is_confirmed() or track.time_since_update > 1:

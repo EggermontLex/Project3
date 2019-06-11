@@ -1,8 +1,6 @@
 from edgetpu.detection.engine import DetectionEngine
 from PIL import Image
-from timeit import time
 from PIL import ImageDraw
-import numpy as np
 import cv2
 import warnings
 from google.cloud import pubsub_v1
@@ -15,12 +13,6 @@ f= open("cache.txt","w+")
 
 from pyimagesearch.centroidtracker import CentroidTracker
 from collections import deque
-from deep_sort import preprocessing
-from deep_sort import nn_matching
-from deep_sort.detection import Detection
-from deep_sort.tracker import Tracker
-#from tools import generate_detections as gdet
-from deep_sort.detection import Detection as ddet
 warnings.filterwarnings('ignore')
 
 
@@ -42,25 +34,16 @@ def ReadLabelFile(file_path):
 
 
 def main():
-    #google cloud variables
-
-    max_cosine_distance = 0.3
-    nn_budget = None
-    nms_max_overlap = 1.0
-    fps = 0.0
-    persons_in = 0
     line_trail = dict()
 
     # Initialize engine.
     engine = DetectionEngine('model_tflite/mobilenet_ssd_v2_coco_quant_postprocess_edgetpu.tflite')
     labels = ReadLabelFile('model_tflite/coco_labels.txt')
 
-    #deep sort
-    metric = nn_matching.NearestNeighborDistanceMetric("cosine", max_cosine_distance, nn_budget)
-    tracker = Tracker(metric)
-
     #centroid tracker
     ct = CentroidTracker()
+
+
     cap = cv2.VideoCapture(1)
     invert = True
 
@@ -76,7 +59,7 @@ def main():
             draw = ImageDraw.Draw(img)
 
             # Run inference.
-            ans = engine.DetectWithImage(img, threshold=0.5, keep_aspect_ratio=True, relative_coord=False, top_k=10)
+            ans = engine.DetectWithImage(img, threshold=0.7, keep_aspect_ratio=True, relative_coord=False, top_k=10)
             boxs =[]
             # Display result.
 
@@ -84,8 +67,7 @@ def main():
             [boxs.append(obj.bounding_box.flatten().tolist()) for obj in ans] if ans else None
             objects = ct.update(boxs)
 
-            img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
-
+            # centroid tracker afhandeling
             for (objectID, centroid) in objects.items():
                 if objectID not in line_trail.keys(): line_trail[objectID] = deque(maxlen=2)
                 text = "ID {}".format(objectID)
@@ -93,13 +75,11 @@ def main():
                 line_trail[objectID].appendleft(center)
                 try:
                     diff = abs(line_trail[objectID][0][0] - line_trail[objectID][1][0])
-                    print(diff)
-                    if diff < 250:
+                    if diff < 60:
                         if line_trail[objectID][0][1] < int(line1) and line_trail[objectID][1][1] > int(line1):
                             binnen() if invert else buiten()
                         elif line_trail[objectID][1][1] < int(line1) and line_trail[objectID][0][1] > int(line1):
                             buiten() if invert else binnen()
-
                 except Exception as Ex:
                     pass
 
