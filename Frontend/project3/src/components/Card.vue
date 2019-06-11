@@ -24,7 +24,6 @@
 </template>
 
 <script>
-import { myFunctions } from '../main.js'
 var _ = require('lodash')
 var moment = require('moment')
 
@@ -70,9 +69,9 @@ export default {
     }
   },
   created: async function() {
-    let documentReference = myFunctions.getDocumentReference(
-      'realtime',
-      this.$props.trainId
+    let documentReference = await this.$store.dispatch(
+      'firestore/getDocumentReference',
+      { collection: 'realtime', document: this.$props.trainId }
     )
     documentReference.onSnapshot(doc => {
       //console.log("Current data: ", doc.data());
@@ -87,7 +86,10 @@ export default {
         data: []
       }
     ]
-    let data = await myFunctions.getTrainHistory(this.$props.trainId, 168)
+    let data = await this.$store.dispatch('firestore/getTrainHistory', {
+      trainId: this.$props.trainId,
+      hours: 168
+    })
     let groupedResults = _.groupBy(data.docs, result =>
       moment.unix(result.data().timestamp.seconds).startOf('hour')
     )

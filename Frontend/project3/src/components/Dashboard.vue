@@ -88,8 +88,6 @@ import Button from './Button.vue'
 import Input from './Input.vue'
 import Datalist from './Datalist.vue'
 
-import { myFunctions } from '../main.js'
-
 export default {
   name: 'Dashboard',
   components: {
@@ -125,8 +123,11 @@ export default {
     time = String(h - 1) + ':' + m //+ ':' + s
     this.timeFrom = time
     console.info(time)
-
-    let data = await myFunctions.getCollectionDocs('realtime')
+    µ
+    let data = await this.$store.dispatch(
+      'firestore/getCollectionDocs',
+      'realtime'
+    )
     for (let i = 0; i < data.docs.length; i++) {
       //console.log('Data',)
       this.trainIds.push(data.docs[i].id)
