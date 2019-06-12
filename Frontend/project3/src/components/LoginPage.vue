@@ -74,9 +74,6 @@ export default {
 </script>
 
 <style scoped>
-.side_bar_logo {
-  width: 420px;
-}
 .side_bar {
   padding: 35px;
   width: 420px;
