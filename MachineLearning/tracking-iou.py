@@ -16,12 +16,6 @@ f= open("cache.txt","w+")
 
 from pyimagesearch.centroidtracker import CentroidTracker
 from collections import deque
-from deep_sort import preprocessing
-from deep_sort import nn_matching
-from deep_sort.detection import Detection
-from deep_sort.tracker import Tracker
-#from tools import generate_detections as gdet
-from deep_sort.detection import Detection as ddet
 warnings.filterwarnings('ignore')
 
 
@@ -58,9 +52,6 @@ def main():
     engine = DetectionEngine('model_tflite/mobilenet_ssd_v2_coco_quant_postprocess_edgetpu.tflite')
     labels = ReadLabelFile('model_tflite/coco_labels.txt')
 
-    # Deep sort
-    metric = nn_matching.NearestNeighborDistanceMetric("cosine", max_cosine_distance, nn_budget)
-    tracker = Tracker(metric)
     #centroid tracker
     ct = CentroidTracker()
     cap = cv2.VideoCapture(1)
@@ -81,8 +72,9 @@ def main():
 
     model_filename = 'model_data/mars-small128.pb'
     encoder = gdet.create_box_encoder(model_filename, batch_size=1)  # tensorflow nodig!
-
+    teller = 0
     while True:
+        teller +=1
         data = ""
         ret, frame = cap.read()
         t1 = time.time()
@@ -97,23 +89,29 @@ def main():
             # Run inference.
             ans = engine.DetectWithImage(img, threshold=0.6, keep_aspect_ratio=True, relative_coord=False, top_k=10)
             boxs =[]
+            boxs1 = []
             # Display result.
             if ans:
                 for obj in ans:
+                    print(str(obj))
                     #if labels: print(labels[obj.label_id])
                     box = obj.bounding_box.flatten().tolist()
+
                     # Draw a rectangle.
                     draw.rectangle(box, outline='red')
                     #draw.text((box[0], box[1]), labels[obj.label_id])
                     #draw.text((box[0], box[1] + 10), str(obj.score))
-                    boxs.append(box)
-
-            features = encoder(frame, boxs)
-
-            # score to 1.0 here).
-            detections = [Detection(bbox, 1.0, feature) for bbox, feature in zip(boxs, features)]
+                    boxs1.append(box)
+                    #field =  np.ndarray((,), buffer=np.array([frame,obj.label_id,box[0],box[1],width,height,obj.score]))
+                    #inframe = frame.array.reshape(1, -1)
+                    field = np.array([teller,obj.label_id,box[0],box[1],width,height,obj.score])
+                    boxs.append(field)
+            #['frame', 'id', 'x', 'y','w', 'h', 'score']).
+            boxs = np.array(boxs)
+            detections = load_mot(boxs)
             print(track_iou(detections,0.5,0.9,0.6,5))
-            objects = ct.update(boxs)
+
+            objects = ct.update(boxs1)
 
             draw.line((0, line1, width, line1), fill=10, width=5)
             img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)

@@ -153,8 +153,7 @@ def main():
 def callback(message_future):
     # When timeout is unspecified, the exception method waits indefinitely.
     if message_future.exception(timeout=1):
-        print('Publishing message on {} threw an Exception {}.'.format(
-            topic_name, message_future.exception()))
+        print('Publishing message on {} threw an Exception {}.'.format(topic_name, message_future.exception()))
         f.write(data + ",")
     else:
         print("---------------------------------------")
