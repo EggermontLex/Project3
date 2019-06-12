@@ -41,9 +41,6 @@ def ReadLabelFile(file_path):
 
 
 def main():
-    max_cosine_distance = 1
-    nn_budget = None
-    nms_max_overlap = 1.0
     fps = 0.0
     persons_in = 0
     line_trail = dict()
