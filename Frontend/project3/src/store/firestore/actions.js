@@ -10,13 +10,12 @@ export const actions = {
         return docs
       })
   },
-  getTrainHistory: function(context, { trainId, hours }) {
-    let d = new Date()
-    d = new Date(d.setHours(d.getHours() - hours))
+  getTrainHistory: function(context, { trainId, startTime, endTime }) {
     return context.state.db
       .collection('history')
       .where('train', '==', trainId)
-      .where('timestamp', '>', d)
+      .where('timestamp', '>', startTime)
+      .where('timestamp', '<', endTime)
       .get()
       .then(docs => {
         return docs

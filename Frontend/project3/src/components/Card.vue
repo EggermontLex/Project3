@@ -11,7 +11,6 @@
       <p>Aantal mensen binnen:</p>
       <h2>{{ value }}</h2>
     </div>
-
     <div class="grafiek">
       <apexchart
         type="area"
@@ -32,12 +31,28 @@ export default {
     trainId: {
       type: String,
       default: ''
+    },
+    dStart: {
+      type: Date,
+      default: () => {
+        let d = new Date()
+        d.setHours(d.getHours() - 1)
+        return d
+      }
+    },
+    dEnd: {
+      type: Date,
+      default: () => new Date()
+    },
+    randomId: {
+      type: Number,
+      default: 0
     }
   },
   data: function() {
     return {
-      value: 2,
-      time: '10 : 00: 00',
+      value: 0,
+      time: '00:00:00',
       series: [],
       chartOptions: {
         chart: {
@@ -63,9 +78,43 @@ export default {
           }
         },
         xaxis: {
-          type: 'datetime'
+          type: 'datetime',
+          labels: {
+            format: 'hh:mm:ss'
+          }
+        },
+        tooltip: {
+          x: {
+            format: 'hh:mm:ss'
+          }
         }
       }
+    }
+  },
+  watch: {
+    async randomId() {
+      let result = [
+        {
+          name: 'People',
+          data: []
+        }
+      ]
+      let data = await this.$store.dispatch('firestore/getTrainHistory', {
+        trainId: this.$props.trainId,
+        startTime: this.dStart,
+        endTime: this.dEnd
+      })
+      let groupedResults = _.groupBy(data.docs, result =>
+        moment.unix(result.data().timestamp.seconds).startOf('minute')
+      )
+      console.log(groupedResults)
+      _.forEach(groupedResults, (n, key) =>
+        result[0].data.push({
+          x: key,
+          y: Math.round(_.meanBy(n, k => k.data().value))
+        })
+      )
+      this.series = result
     }
   },
   created: async function() {
@@ -79,7 +128,6 @@ export default {
       let d = doc.data().last_updated.toDate()
       this.time = this.displayTime(d)
     })
-
     let result = [
       {
         name: 'People',
@@ -88,17 +136,26 @@ export default {
     ]
     let data = await this.$store.dispatch('firestore/getTrainHistory', {
       trainId: this.$props.trainId,
-      hours: 168
+      startTime: this.dStart,
+      endTime: this.dEnd
     })
     let groupedResults = _.groupBy(data.docs, result =>
-      moment.unix(result.data().timestamp.seconds).startOf('hour')
+      moment.unix(result.data().timestamp.seconds).startOf('minute')
     )
+    console.log(groupedResults)
     _.forEach(groupedResults, (n, key) =>
       result[0].data.push({
         x: key,
         y: Math.round(_.meanBy(n, k => k.data().value))
       })
     )
+    /* _.forEach(data.docs, (n, key) => {
+      console.log(n)
+      result[0].data.push({
+        x: moment.unix(n.data().timestamp.seconds),
+        y: n.data().value
+      })
+      }) */
     this.series = result
   },
   methods: {

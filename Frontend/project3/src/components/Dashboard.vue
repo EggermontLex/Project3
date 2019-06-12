@@ -18,7 +18,7 @@
         <div v-if="isError" class="error_message">
           <p class="error_message_text">Oeps! Er is iets verkeerd gegaan.</p>
         </div>
-        <Datalist v-model="datalist" label="Trein" :ids="trainIds" />
+        <Datalist v-model="datalist" label="Trein" :ids="allTrainIds" />
         <div>
           <p class="subtitle">Van</p>
           <div class="date_time">
@@ -75,6 +75,9 @@
             v-for="trainid in trainIds"
             :key="trainid"
             :train-id="trainid"
+            :random-id="randomId"
+            :d-start="dStart"
+            :d-end="dEnd"
           />
         </div>
       </div>
@@ -97,8 +100,14 @@ export default {
     Datalist
   },
   data: function() {
+    let d = new Date()
+    d.setHours(d.getHours() - 1)
     return {
+      allTrainIds: [],
       trainIds: [],
+      randomId: 0,
+      dStart: d,
+      dEnd: new Date(),
       isError: false,
       fromDatum: '',
       fromTijd: '',
@@ -121,7 +130,6 @@ export default {
 
     time = h - 1
     if (time < 0) {
-      console.log('in if-functie')
       time = '23'
       //console.log(today.setDate(today.getDate() - 1))
       let yesterday = today
@@ -140,7 +148,8 @@ export default {
     )
     for (let i = 0; i < data.docs.length; i++) {
       //console.log('Data',)
-      this.trainIds.push(data.docs[i].id)
+      this.allTrainIds.push(data.docs[i].id)
+      this.trainIds = this.allTrainIds
     }
     //console.log(this.trainIds)
   },
@@ -160,13 +169,14 @@ export default {
       this.$store.dispatch('authentication/logout')
     },
     search: function() {
-      console.log('fromDatum:', this.fromDatum)
-      console.log('fromTijd:', this.fromTijd)
-
-      console.log('intilDatum:', this.intilDatum)
-      console.log('intilTijd:', this.intilTijd)
-
-      console.log('datalist:', this.datalist)
+      this.randomId = this.randomId + 1
+      this.dStart = new Date(this.fromDatum + ' ' + this.fromTijd)
+      this.dEnd = new Date(this.intilDatum + ' ' + this.intilTijd)
+      if (this.datalist != '') {
+        this.trainIds = [this.datalist]
+      } else {
+        this.trainIds = this.allTrainIds
+      }
     }
   }
 }
