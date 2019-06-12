@@ -109,23 +109,30 @@ export default {
   },
   created: async function() {
     let today = new Date()
-    let dd = String(today.getDate()).padStart(2, '0')
-    let mm = String(today.getMonth() + 1).padStart(2, '0') //January is 0!
-    let yyyy = today.getFullYear()
-    let datum = yyyy + '-' + mm + '-' + dd
-    this.fromDatum = datum
-    this.intilDatum = datum
-
     let h = this.zeros(today.getHours(), 2)
     let m = this.zeros(today.getMinutes(), 2)
     //let s = this.zeros(today.getSeconds(), 2)
 
+    this.intilDatum = this.formatDate(today)
+    this.fromDatum = this.formatDate(today)
+
     let time = h + ':' + m //+ ':' + s
     this.intilTijd = time
 
-    time = String(h - 1) + ':' + m //+ ':' + s
+    time = h - 1
+    if (time < 0) {
+      console.log('in if-functie')
+      time = '23'
+      //console.log(today.setDate(today.getDate() - 1))
+      let yesterday = today
+      yesterday.setDate(yesterday.getDate() - 1)
+      this.fromDatum = this.formatDate(yesterday)
+      console.log(this.fromDatum)
+    }
+    time = this.zeros(time, 2)
+    time += ':' + m //+ ':' + s
+    console.log(time)
     this.fromTijd = time
-    //console.info(time)
 
     let data = await this.$store.dispatch(
       'firestore/getCollectionDocs',
@@ -142,6 +149,12 @@ export default {
       var s = num + ''
       while (s.length < size) s = '0' + s
       return s
+    },
+    formatDate(datum) {
+      let dd = String(datum.getDate()).padStart(2, '0')
+      let mm = String(datum.getMonth() + 1).padStart(2, '0') //January is 0!
+      let yyyy = datum.getFullYear()
+      return yyyy + '-' + mm + '-' + dd
     },
     Logout() {
       this.$store.dispatch('authentication/logout')
@@ -164,9 +177,7 @@ export default {
   width: 100vw;
   height: 100vh;
 }
-.side_bar_logo {
-  width: 420px;
-}
+
 .side_bar {
   position: fixed;
   padding: 35px;
@@ -348,16 +359,17 @@ export default {
   justify-content: flex-end;
   padding: 12px;
 }
-@media (max-width: 768px) {
-  .card {
-    padding: 0;
-    width: 100%;
-  }
-}
+
 @media (max-width: 1200px) {
   .card {
     padding: 30px;
     width: calc(100% - 50px);
+  }
+}
+@media (max-width: 768px) {
+  .card {
+    padding: 0;
+    width: 100%;
   }
 }
 </style>
