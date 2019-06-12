@@ -78,14 +78,11 @@ export default {
           }
         },
         xaxis: {
-          type: 'datetime',
-          labels: {
-            format: 'hh:mm:ss'
-          }
+          type: 'datetime'
         },
         tooltip: {
           x: {
-            format: 'hh:mm:ss'
+            format: 'dd/MM/yyyy hh:mm:ss'
           }
         }
       }
@@ -105,7 +102,9 @@ export default {
         endTime: this.dEnd
       })
       let groupedResults = _.groupBy(data.docs, result =>
-        moment.unix(result.data().timestamp.seconds).startOf('minute')
+        moment
+          .unix(result.data().timestamp.seconds)
+          .startOf(this.getGroupParameters(this.dStart, this.dEnd))
       )
       console.log(groupedResults)
       _.forEach(groupedResults, (n, key) =>
@@ -159,6 +158,34 @@ export default {
     this.series = result
   },
   methods: {
+    getGroupParameters(dStart, dEnd) {
+      let start = moment(dStart)
+      let end = moment(dEnd)
+      let years = end.diff(start, 'years')
+      let months = end.diff(start, 'months')
+      let weeks = end.diff(start, 'weeks')
+      let days = end.diff(start, 'days')
+      let hours = end.diff(start, 'hours')
+      let minutes = end.diff(start, 'minutes')
+      let seconds = end.diff(start, 'seconds')
+      console.log(years, months, weeks, days, hours, minutes, seconds)
+      if (years < 1) {
+        if (months < 1) {
+          if (weeks < 1) {
+            if (days < 1) {
+              if (minutes < 30) {
+                return 'second'
+              }
+              return 'minute'
+            }
+            return 'hour'
+          }
+          return 'day'
+        }
+        return 'day'
+      }
+      return 'month'
+    },
     zeros(num, size) {
       var s = num + ''
       while (s.length < size) s = '0' + s
