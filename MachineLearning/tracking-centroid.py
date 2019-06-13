@@ -7,7 +7,6 @@ import cv2
 import warnings
 import os
 import datetime
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "/home/mendel/project3/Project3-ML6-515024366790.json"
 
 
 
@@ -62,7 +61,7 @@ def main():
         w = int(cap.get(3))
         h = int(cap.get(4))
         fourcc = cv2.VideoWriter_fourcc(*'MJPG')
-        out = cv2.VideoWriter('output.avi', fourcc, 15, (w, h))
+        video = cv2.VideoWriter('output.avi', fourcc, 15, (w, h))
         list_file = open('detection.txt', 'w')
         frame_index = -1
 
@@ -132,7 +131,7 @@ def main():
                 cv2.putText(img, "fps: " + str(int(fps)), (260, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255),lineType=cv2.LINE_AA)
 
             if flag_video:
-                out.write(img)
+                video.write(img)
                 cv2.imshow('preview', img)
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
