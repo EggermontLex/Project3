@@ -59,6 +59,7 @@ def main():
     #centroid tracker
     ct = CentroidTracker()
     cap = cv2.VideoCapture(1)
+    
     writeVideo_flag = True
     if writeVideo_flag:
         w = int(cap.get(3))

@@ -1,0 +1,167 @@
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:google.auth.compute_engine._metadata:Compute Engine Metadata server unavailable onattempt 1 of 3
+INFO:google.auth.compute_engine._metadata:Compute Engine Metadata server unavailable onattempt 2 of 3
+INFO:google.auth.compute_engine._metadata:Compute Engine Metadata server unavailable onattempt 3 of 3
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:google.auth.compute_engine._metadata:Compute Engine Metadata server unavailable onattempt 1 of 3
+INFO:google.auth.compute_engine._metadata:Compute Engine Metadata server unavailable onattempt 2 of 3
+INFO:google.auth.compute_engine._metadata:Compute Engine Metadata server unavailable onattempt 3 of 3
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:google.auth.compute_engine._metadata:Compute Engine Metadata server unavailable onattempt 1 of 3
+INFO:google.auth.compute_engine._metadata:Compute Engine Metadata server unavailable onattempt 2 of 3
+INFO:google.auth.compute_engine._metadata:Compute Engine Metadata server unavailable onattempt 3 of 3
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: -1,2019-06-13 10:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 586612292772474
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: -1,2019-06-13 10:07:05.604307
+INFO:root:No internet connectivity
+INFO:root:Localy caching the following message: -1,2019-06-13 10:07:05.604307
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: -20,2019-06-13 13:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 586643767272126
+INFO:root:Retriieved all local data: ['-1,2019-06-13 10:07:05.604307']
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: -1,2019-06-13 10:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +40,2019-06-13 13:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 586644445823055
+INFO:root:Retriieved all local data: ['-1,2019-06-13 10:07:05.604307']
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: -1,2019-06-13 10:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +40,2019-06-13 13:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 586652463244494
+INFO:root:Retrieved all local data: ['-1,2019-06-13 10:07:05.604307']
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: -1,2019-06-13 10:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: -50,2019-06-13 13:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 586646663320494
+INFO:root:Retrieved all local data: ['-1,2019-06-13 14:07:05.604307', '-1,2019-06-13 14:07:05.604307', '-1,2019-06-13 14:07:05.604307', '-1,2019-06-13 14:07:05.604307']
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: -1,2019-06-13 14:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: -20,2019-06-13 13:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 586659045685890
+INFO:root:Retrieved all local data: ['-1,2019-06-13 14:07:05.604307', '-1,2019-06-13 14:07:05.604307', '-1,2019-06-13 14:07:05.604307', '-1,2019-06-13 14:07:05.604307']
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: -1,2019-06-13 14:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 586657225792405
+INFO:root:Retrieved all local data: []
+INFO:root:No local cache
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: -20,2019-06-13 13:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: -20,2019-06-13 13:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 586660752585416
+INFO:root:Retrieved all local data: []
+INFO:root:No local cache
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: -20,2019-06-13 13:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 586659095143132
+INFO:root:Retrieved all local data: ['-1,2019-06-13 14:07:05.604307', '-1,2019-06-13 14:07:05.604307', '-1,2019-06-13 14:07:05.604307', '-1,2019-06-13 14:07:05.604307']
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: -1,2019-06-13 14:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: -20,2019-06-13 13:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 586659280542935
+INFO:root:Retrieved all local data: []
+INFO:root:No local cache
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: -20,2019-06-13 13:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 586663107921910
+INFO:root:Retrieved all local data: ['-1,2019-06-13 14:07:05.604307', '-1,2019-06-13 14:07:05.604307', '-1,2019-06-13 14:07:05.604307', '-1,2019-06-13 14:07:05.604307']
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: -1,2019-06-13 14:07:05.604307
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +20,2019-06-13 13:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 586661373441937
+INFO:root:Retrieved all local data: ['-1,2019-06-13 14:07:05.604307', '-1,2019-06-13 14:07:05.604307', '-1,2019-06-13 14:07:05.604307', '-1,2019-06-13 14:07:05.604307']
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: -1,2019-06-13 14:07:05.604307
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +20,2019-06-13 13:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 586664797775852
+INFO:root:Retrieved all local data: []
+INFO:root:No local cache
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +1,2019-06-13 13:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 586663555366258
+INFO:root:Retrieved all local data: ['-1,2019-06-13 14:07:05.604307', '-1,2019-06-13 14:07:05.604307', '-1,2019-06-13 14:07:05.604307', '-1,2019-06-13 14:07:05.604307']
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: -1,2019-06-13 14:07:05.604307
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +1,2019-06-13 13:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 586668551437077
+INFO:root:Retrieved all local data: []
+INFO:root:No local cache
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +1,2019-06-13 13:07:05.604307
+INFO:root:No internet connectivity
+INFO:root:Localy caching the following message: +1,2019-06-13 13:07:05.604307
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +1,2019-06-13 13:07:05.604307
+INFO:root:No internet connectivity
+INFO:root:Localy caching the following message: +1,2019-06-13 13:07:05.604307
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +1,2019-06-13 13:07:05.604307
+INFO:root:No internet connectivity
+INFO:root:Localy caching the following message: +1,2019-06-13 13:07:05.604307
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +1,2019-06-13 13:07:05.604307
+INFO:root:No internet connectivity
+INFO:root:Localy caching the following message: +1,2019-06-13 13:07:05.604307
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +1,2019-06-13 13:07:05.604307
+INFO:root:No internet connectivity
+INFO:root:Localy caching the following message: +1,2019-06-13 13:07:05.604307
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +1,2019-06-13 13:07:05.604307
+INFO:root:No internet connectivity
+INFO:root:Localy caching the following message: +1,2019-06-13 13:07:05.604307
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +1,2019-06-13 13:07:05.604307
+INFO:root:No internet connectivity
+INFO:root:Localy caching the following message: +1,2019-06-13 13:07:05.604307
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +1,2019-06-13 13:07:05.604307
+INFO:root:No internet connectivity
+INFO:root:Localy caching the following message: +1,2019-06-13 13:07:05.604307
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +1,2019-06-13 13:07:05.604307
+INFO:root:No internet connectivity
+INFO:root:Localy caching the following message: +1,2019-06-13 13:07:05.604307
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +1,2019-06-13 13:07:05.604307
+INFO:root:No internet connectivity
+INFO:root:Localy caching the following message: +1,2019-06-13 13:07:05.604307
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +1,2019-06-13 13:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 586672203132133
+INFO:root:Retrieved all local data: ['+1,2019-06-13 13:07:05.604307 ', '+1,2019-06-13 13:07:05.604307 ', '+1,2019-06-13 13:07:05.604307 ', '+1,2019-06-13 13:07:05.604307 ', '+1,2019-06-13 13:07:05.604307 ', '+1,2019-06-13 13:07:05.604307 ', '+1,2019-06-13 13:07:05.604307 ', '+1,2019-06-13 13:07:05.604307 ', '+1,2019-06-13 13:07:05.604307 ', '+1,2019-06-13 13:07:05.604307 ']
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: +1,2019-06-13 13:07:05.604307 
