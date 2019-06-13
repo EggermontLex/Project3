@@ -169,6 +169,7 @@ export default {
       this.$store.dispatch('authentication/logout')
     },
     search: function() {
+      this.$store.dispatch('firestore/setFilteredState', true)
       this.randomId = this.randomId + 1
       this.dStart = new Date(this.fromDatum + ' ' + this.fromTijd)
       this.dEnd = new Date(this.intilDatum + ' ' + this.intilTijd)

@@ -13,6 +13,7 @@
     </div>
     <div class="grafiek">
       <apexchart
+        ref="realtimeChart"
         type="area"
         height="350"
         :options="chartOptions"
@@ -25,6 +26,7 @@
 <script>
 var _ = require('lodash')
 var moment = require('moment')
+import { mapState } from 'vuex'
 
 export default {
   props: {
@@ -51,9 +53,14 @@ export default {
   },
   data: function() {
     return {
+      data: [],
       value: 0,
       time: '00:00:00',
-      series: [],
+      series: [
+        {
+          name: 'People'
+        }
+      ],
       chartOptions: {
         chart: {
           height: 350,
@@ -87,6 +94,11 @@ export default {
         }
       }
     }
+  },
+  computed: {
+    ...mapState({
+      isFiltered: state => state.firestore.isFiltered
+    })
   },
   watch: {
     async randomId() {
@@ -126,6 +138,18 @@ export default {
       this.value = doc.data().current_value
       let d = doc.data().last_updated.toDate()
       this.time = this.displayTime(d)
+      if (!this.isFiltered) {
+        this.data.push({
+          x: moment.unix(doc.data().last_updated.seconds).toString(),
+          y: this.value
+        })
+        this.$refs.realtimeChart.updateSeries([
+          {
+            data: this.data
+          }
+        ])
+        console.log(this.data)
+      }
     })
     let result = [
       {
@@ -148,14 +172,19 @@ export default {
         y: Math.round(_.meanBy(n, k => k.data().value))
       })
     )
-    /* _.forEach(data.docs, (n, key) => {
+    /*_.forEach(data.docs, (n, key) => {
       console.log(n)
       result[0].data.push({
         x: moment.unix(n.data().timestamp.seconds),
         y: n.data().value
       })
-      }) */
-    this.series = result
+    })*/
+    this.data = result[0].data
+    this.$refs.realtimeChart.updateSeries([
+      {
+        data: this.data
+      }
+    ])
   },
   methods: {
     getGroupParameters(dStart, dEnd) {

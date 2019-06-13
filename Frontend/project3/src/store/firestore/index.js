@@ -13,7 +13,8 @@ var config = {
 firebase.initializeApp(config)
 
 const state = {
-  db: firebase.firestore()
+  db: firebase.firestore(),
+  isFiltered: false
 }
 
 const namespaced = true

@@ -1,4 +1,7 @@
 export const actions = {
+  setFilteredState: function(context, isFiltered) {
+    context.commit('setFilteredState', isFiltered)
+  },
   getDocumentReference: function(context, { collection, document }) {
     return context.state.db.collection(collection).doc(document)
   },
