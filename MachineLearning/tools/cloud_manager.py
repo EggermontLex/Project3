@@ -10,7 +10,7 @@ logging.basicConfig(filename='CloudManager.log',level=logging.INFO)
 class CloudManager():
     def __init__(self, project_id, topic_name):
         logging.info("Initialized cloud manager with project-id: %s and topic-name: %s"% (project_id,topic_name))
-        self.cache_file = "publish-message.cache"
+        self.cache_file = "tools/publish-message.cache"
         self.publisher = pubsub_v1.PublisherClient()
         self.topic_path = self.publisher.topic_path(project_id, topic_name)
 

@@ -12,6 +12,8 @@ os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "/home/mendel/project3/Project3-M
 data = ""
 f= open("cache.txt","a")
 
+from tools.cloud_manager import CloudManager
+
 
 from pyimagesearch.centroidtracker import CentroidTracker
 from collections import deque
@@ -26,8 +28,7 @@ warnings.filterwarnings('ignore')
 
 project_id = "Project3-ML6"
 topic_name = "data_register"
-publisher = pubsub_v1.PublisherClient()
-topic_path = publisher.topic_path(project_id, topic_name)
+publisher = CloudManager(project_id,topic_name)
 
 
 # Function to read labels from text files.
@@ -119,16 +120,16 @@ def main():
                             #binnen() if invert else buiten()
                             if invert:
                                 persons_in += 1
-                                binnen()
+                                publisher.publish_to_topic_new(data = ("+1,%s" % datetime.datetime.now()))
                             else:
                                 persons_in -= 1
-                                buiten()
+                                publisher.publish_to_topic_new(data = ("-1,%s" % datetime.datetime.now()))
                         elif line_trail[objectID][1][1] < int(line1) and line_trail[objectID][0][1] > int(line1):
                             if invert:
-                                buiten()
+                                publisher.publish_to_topic_new(data = ("-1,%s" % datetime.datetime.now()))
                                 persons_in -= 1
                             else:
-                                binnen()
+                                publisher.publish_to_topic_new(data = ("+1,%s" % datetime.datetime.now()))
                                 persons_in += 1
                 except Exception as Ex:
                     pass
@@ -145,40 +146,10 @@ def main():
             cv2.imshow('preview', img)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
+            print(persons_in)
     # When everything done, release the capture
     cap.release()
     cv2.destroyAllWindows()
-
-def callback(message_future):
-    # When timeout is unspecified, the exception method waits indefinitely.
-    if message_future.exception(timeout=1):
-        print('Publishing message on {} threw an Exception {}.'.format(topic_name, message_future.exception()))
-        f.write(str(data) + ",")
-    else:
-        print("---------------------------------------")
-        print("Confirmation: " + message_future.result())
-        f.write(str(data) + ",")
-        #lines = [send_message(line) for line in [line.rstrip(',') for line in open('cache.txt')]]
-
-def send_message(data):
-    message_future = publisher.publish(topic_path, data=data)
-    message_future.add_done_callback(callback)
-
-
-def binnen():
-    data = ("+1,%s" % datetime.datetime.now())
-    data = data.encode('utf-8')
-    message_future = publisher.publish(topic_path, data=data)
-    message_future.add_done_callback(callback)
-    print("in")
-
-def buiten():
-    data = ("-1,%s" % datetime.datetime.now())
-    data = data.encode('utf-8')
-    message_future = publisher.publish(topic_path, data=data)
-    message_future.add_done_callback(callback)
-    print("out")
-
 
 if __name__ == '__main__':
     main()
