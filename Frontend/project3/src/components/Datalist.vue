@@ -3,12 +3,12 @@
     <label for="input" class="label">{{ label }}</label>
     <input
       name="input"
-      list="browsers"
+      list="datalist"
       class="input"
       placeholder="Alle treinen"
       @input="$emit('input', $event.target.value)"
     />
-    <datalist id="browsers">
+    <datalist id="datalist">
       <option v-for="id in ids" :key="id" :value="id" />
     </datalist>
   </div>

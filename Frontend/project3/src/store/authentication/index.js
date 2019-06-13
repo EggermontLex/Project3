@@ -4,7 +4,8 @@ import { mutations } from './mutations'
 
 const state = {
   isLoggedIn: false,
-  errorMsg: ''
+  errorMsg: '',
+  isAdmin: false
 }
 
 const namespaced = true

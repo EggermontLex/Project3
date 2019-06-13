@@ -18,67 +18,20 @@
         <div v-if="isError" class="error_message">
           <p class="error_message_text">Oeps! Er is iets verkeerd gegaan.</p>
         </div>
-        <Datalist v-model="datalist" label="Trein" :ids="allTrainIds" />
-        <div>
-          <p class="subtitle">Van</p>
-          <div class="date_time">
-            <Input
-              v-model="fromDatum"
-              class="date_time_item"
-              label="Datum:"
-              type="date"
-              :text-value="fromDatum"
-            />
-            <Input
-              v-model="fromTijd"
-              class="date_time_item"
-              label="Tijd:"
-              type="time"
-              :text-value="fromTijd"
-            />
-          </div>
-        </div>
-        <div>
-          <p class="subtitle">Tot</p>
-          <div class="date_time">
-            <Input
-              v-model="intilDatum"
-              class="date_time_item"
-              label="Datum:"
-              type="date"
-              :text-value="intilDatum"
-            />
-
-            <Input
-              v-model="intilTijd"
-              class="date_time_item"
-              label="Tijd:"
-              type="time"
-              :text-value="intilTijd"
-            />
-          </div>
-        </div>
-        <Button class="button" text="Zoek" @click.native="search" />
-        <!--@click.native="getLoginData"/>-->
+        <Datalist label="Trein" :ids="allTrainIds" />
+        <Button class="button" text="Zoek" />
       </div>
 
+      <!--@click.native="getLoginData"/>-->
       <div class="side_bar_dots">
         <div class="dots"></div>
       </div>
     </div>
-
     <div class="main">
       <Button class="button" text="Logout" @click.native="Logout" />
       <div class="container">
         <div class="cards">
-          <Card
-            v-for="trainid in trainIds"
-            :key="trainid"
-            :train-id="trainid"
-            :random-id="randomId"
-            :d-start="dStart"
-            :d-end="dEnd"
-          />
+          <CardAdmin />
         </div>
       </div>
     </div>
@@ -86,98 +39,20 @@
 </template>
 
 <script>
-import Card from './Card.vue'
 import Button from './Button.vue'
-import Input from './Input.vue'
 import Datalist from './Datalist.vue'
-
+import CardAdmin from './CardAdmin.vue'
 export default {
-  name: 'Dashboard',
+  name: 'AdminPage',
   components: {
-    Card,
     Button,
-    Input,
-    Datalist
+    Datalist,
+    CardAdmin
   },
   data: function() {
-    let d = new Date()
-    d.setHours(d.getHours() - 1)
     return {
       allTrainIds: [],
-      trainIds: [],
-      randomId: 0,
-      dStart: d,
-      dEnd: new Date(),
-      isError: false,
-      fromDatum: '',
-      fromTijd: '',
-      intilDatum: '',
-      intilTijd: '',
-      datalist: ''
-    }
-  },
-  created: async function() {
-    let today = new Date()
-    let h = this.zeros(today.getHours(), 2)
-    let m = this.zeros(today.getMinutes(), 2)
-    //let s = this.zeros(today.getSeconds(), 2)
-
-    this.intilDatum = this.formatDate(today)
-    this.fromDatum = this.formatDate(today)
-
-    let time = h + ':' + m //+ ':' + s
-    this.intilTijd = time
-
-    time = h - 1
-    if (time < 0) {
-      time = '23'
-      //console.log(today.setDate(today.getDate() - 1))
-      let yesterday = today
-      yesterday.setDate(yesterday.getDate() - 1)
-      this.fromDatum = this.formatDate(yesterday)
-      console.log(this.fromDatum)
-    }
-    time = this.zeros(time, 2)
-    time += ':' + m //+ ':' + s
-    console.log(time)
-    this.fromTijd = time
-
-    let data = await this.$store.dispatch(
-      'firestore/getCollectionDocs',
-      'realtime'
-    )
-    for (let i = 0; i < data.docs.length; i++) {
-      //console.log('Data',)
-      this.allTrainIds.push(data.docs[i].id)
-      this.trainIds = this.allTrainIds
-    }
-    //console.log(this.trainIds)
-  },
-  methods: {
-    zeros(num, size) {
-      var s = num + ''
-      while (s.length < size) s = '0' + s
-      return s
-    },
-    formatDate(datum) {
-      let dd = String(datum.getDate()).padStart(2, '0')
-      let mm = String(datum.getMonth() + 1).padStart(2, '0') //January is 0!
-      let yyyy = datum.getFullYear()
-      return yyyy + '-' + mm + '-' + dd
-    },
-    Logout() {
-      this.$store.dispatch('authentication/logout')
-    },
-    search: function() {
-      this.$store.dispatch('firestore/setFilteredState', true)
-      this.randomId = this.randomId + 1
-      this.dStart = new Date(this.fromDatum + ' ' + this.fromTijd)
-      this.dEnd = new Date(this.intilDatum + ' ' + this.intilTijd)
-      if (this.datalist != '') {
-        this.trainIds = [this.datalist]
-      } else {
-        this.trainIds = this.allTrainIds
-      }
+      isError: false
     }
   }
 }
@@ -188,7 +63,6 @@ export default {
   width: 100vw;
   height: 100vh;
 }
-
 .side_bar {
   position: fixed;
   padding: 35px;
@@ -227,48 +101,14 @@ export default {
 .error_message_text {
   color: var(--color-error-message);
 }
-.border_color {
-  border-color: var(--color-error-message);
+.logo {
+  fill: var(--color-neutral-xxxx-light);
+  width: 65px;
+  height: 60px;
 }
-.subtitle {
-  color: var(--color-primary-x-light);
-  margin-top: 23px;
+.button {
+  margin-top: 13%;
 }
-.date_time {
-  display: flex;
-  justify-content: space-between;
-}
-.date_time_item {
-  width: calc(50% - 8px);
-}
-.date_time .date_time_item {
-  margin: 0;
-}
-
-@media (max-width: 768px) {
-  .date_time {
-    justify-content: flex-start;
-  }
-  .date_time_item {
-    width: 25%;
-  }
-  .date_time .date_time_item {
-    margin-right: 16px;
-  }
-}
-@media (max-width: 576px) {
-  .date_time {
-    display: flex;
-    justify-content: space-between;
-  }
-  .date_time_item {
-    width: calc(50% - 8px);
-  }
-  .date_time .date_time_item {
-    margin: 0;
-  }
-}
-
 .dots {
   background-image: url('data:image/svg+xml;utf8,<svg version="1.1" id="Layer_1" focusable="false" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1345.9 27" style="enable-background:new 0 0 1345.9 27;" xml:space="preserve"><circle fill="%23fff" cx="1042.9" cy="3" r="3"/><circle fill="%23fff" cx="1062.9" cy="3" r="3"/><circle fill="%23fff" cx="1082.9" cy="3" r="3"/><circle fill="%23fff" cx="1102.9" cy="3" r="3"/><circle fill="%23fff" cx="1122.9" cy="3" r="3"/><circle fill="%23fff" cx="1142.9" cy="3" r="3"/><circle fill="%23fff" cx="1162.9" cy="3" r="3"/><circle fill="%23fff" cx="1182.9" cy="3" r="3"/><circle fill="%23fff" cx="1202.9" cy="3" r="3"/><circle fill="%23fff" cx="1222.9" cy="3" r="3"/><circle fill="%23fff" cx="1242.9" cy="3" r="3"/><circle fill="%23fff" cx="1262.9" cy="3" r="3"/><circle fill="%23fff" cx="1282.9" cy="3" r="3"/><circle fill="%23fff" cx="1302.9" cy="3" r="3"/><circle fill="%23fff" cx="1322.9" cy="3" r="3"/><circle fill="%23fff" cx="1342.9" cy="3" r="3"/><circle fill="%23fff" cx="742.9" cy="3" r="3"/><circle fill="%23fff" cx="762.9" cy="3" r="3"/><circle fill="%23fff" cx="782.9" cy="3" r="3"/><circle fill="%23fff" cx="802.9" cy="3" r="3"/><circle fill="%23fff" cx="822.9" cy="3" r="3"/><circle fill="%23fff" cx="842.9" cy="3" r="3"/><circle fill="%23fff" cx="862.9" cy="3" r="3"/><circle fill="%23fff" cx="882.9" cy="3" r="3"/><circle fill="%23fff" cx="902.9" cy="3" r="3"/><circle fill="%23fff" cx="922.9" cy="3" r="3"/><circle fill="%23fff" cx="942.9" cy="3" r="3"/><circle fill="%23fff" cx="962.9" cy="3" r="3"/><circle fill="%23fff" cx="982.9" cy="3" r="3"/><circle fill="%23fff" cx="1002.9" cy="3" r="3"/><circle fill="%23fff" cx="1022.9" cy="3" r="3"/><path fill="%23fff" d="M1301.1,13.7c0,3.3-2.2,8.3-8.2,8.3c-5.3,0-8.2-5-8.2-8.6V13h-4.8v0.4c0,6.6,4.1,13.6,13,13.6c8.9,0,13-6.9,13-13.3v-0.4 h-4.8V13.7z"/><circle fill="%23fff" cx="602.9" cy="3" r="3"/><circle fill="%23fff" cx="622.9" cy="3" r="3"/><circle fill="%23fff" cx="642.9" cy="3" r="3"/><circle fill="%23fff" cx="662.9" cy="3" r="3"/><circle fill="%23fff" cx="682.9" cy="3" r="3"/><circle fill="%23fff" cx="702.9" cy="3" r="3"/><path fill="%23fff" d="M724.6,0.5c-1.4-0.9-3.2-0.6-4.2,0.8c-0.9,1.4-0.6,3.2,0.8,4.2c1,0.7,2.3,0.7,3.4,0c0.5-0.3,0.9-0.8,1.1-1.3 c0.3-0.7,0.3-1.6,0-2.3C725.5,1.3,725.1,0.8,724.6,0.5z"/><circle fill="%23fff" cx="442.9" cy="3" r="3"/><circle fill="%23fff" cx="462.9" cy="3" r="3"/><circle fill="%23fff" cx="482.9" cy="3" r="3"/><circle fill="%23fff" cx="502.9" cy="3" r="3"/><circle fill="%23fff" cx="522.9" cy="3" r="3"/><circle fill="%23fff" cx="542.9" cy="3" r="3"/><circle fill="%23fff" cx="562.9" cy="3" r="3"/><circle fill="%23fff" cx="582.9" cy="3" r="3"/><circle fill="%23fff" cx="302.9" cy="3" r="3"/><circle fill="%23fff" cx="322.9" cy="3" r="3"/><circle fill="%23fff" cx="342.9" cy="3" r="3"/><circle fill="%23fff" cx="362.9" cy="3" r="3"/><circle fill="%23fff" cx="382.9" cy="3" r="3"/><circle fill="%23fff" cx="402.9" cy="3" r="3"/><path fill="%23fff" d="M424.6,0.5c-1.4-0.9-3.2-0.6-4.2,0.8c-0.9,1.4-0.6,3.2,0.8,4.2c1,0.7,2.3,0.7,3.4,0c0.5-0.3,0.9-0.8,1.1-1.3 c0.3-0.7,0.3-1.6,0-2.3C425.5,1.3,425.1,0.8,424.6,0.5z"/><circle fill="%23fff" cx="143.1" cy="3" r="3"/><circle fill="%23fff" cx="163.1" cy="3" r="3"/><circle fill="%23fff" cx="183.1" cy="3" r="3"/><circle fill="%23fff" cx="203.1" cy="3" r="3"/><circle fill="%23fff" cx="223.1" cy="3" r="3"/><circle fill="%23fff" cx="243.1" cy="3" r="3"/><circle fill="%23fff" cx="263.1" cy="3" r="3"/><circle fill="%23fff" cx="283.1" cy="3" r="3"/><circle fill="%23fff" cx="3.1" cy="3" r="3"/><circle fill="%23fff" cx="23.1" cy="3" r="3"/><circle fill="%23fff" cx="43.1" cy="3" r="3"/><circle fill="%23fff" cx="63.1" cy="3" r="3"/><circle fill="%23fff" cx="83.1" cy="3" r="3"/><circle fill="%23fff" cx="103.1" cy="3" r="3"/><path fill="%23fff" d="M124.8,0.5c-1.4-0.9-3.2-0.6-4.2,0.8c-0.9,1.4-0.6,3.2,0.8,4.2c1,0.7,2.3,0.7,3.3,0c0.5-0.3,0.9-0.8,1.1-1.3 c0.3-0.7,0.3-1.6,0-2.3C125.7,1.3,125.3,0.8,124.8,0.5z"/></svg>');
   height: 40px;
@@ -279,19 +119,6 @@ export default {
 @media (max-width: 768px) {
   .dots {
     margin-bottom: 0;
-  }
-}
-.logo {
-  fill: var(--color-neutral-xxxx-light);
-  width: 65px;
-  height: 60px;
-}
-.button {
-  margin-top: 13%;
-}
-@media (max-width: 768px) {
-  .button {
-    width: calc(50% + 16px);
   }
 }
 
@@ -305,11 +132,6 @@ export default {
     margin: 0%;
   }
 }
-
-.top-bar {
-  padding: 12px;
-}
-
 .main .button {
   margin: 12px;
   background-color: var(--color-primary);
@@ -342,7 +164,6 @@ export default {
     margin: 35px;
   }
 }
-
 .container {
   height: 100vh;
   padding-top: 60px;
@@ -364,23 +185,5 @@ export default {
 }
 .card {
   max-width: 950px;
-}
-.update {
-  display: flex;
-  justify-content: flex-end;
-  padding: 12px;
-}
-
-@media (max-width: 1200px) {
-  .card {
-    padding: 30px;
-    width: calc(100% - 50px);
-  }
-}
-@media (max-width: 768px) {
-  .card {
-    padding: 8px;
-    width: 100%;
-  }
 }
 </style>

@@ -1,24 +1,28 @@
 <template>
   <div id="app">
     <LoginPage v-if="!isLoggedIn" />
-    <Dashboard v-else />
+    <Dashboard v-else-if="!isAdmin" />
+    <AdminPage v-else />
   </div>
 </template>
 
 <script>
 import LoginPage from './components/LoginPage.vue'
 import Dashboard from './components/Dashboard.vue'
+import AdminPage from './components/AdminPage.vue'
 import { mapState } from 'vuex'
 
 export default {
   name: 'App',
   components: {
     LoginPage,
-    Dashboard
+    Dashboard,
+    AdminPage
   },
   computed: {
     ...mapState({
-      isLoggedIn: state => state.authentication.isLoggedIn
+      isLoggedIn: state => state.authentication.isLoggedIn,
+      isAdmin: state => state.authentication.isAdmin
     })
   },
   beforeCreate: function() {
