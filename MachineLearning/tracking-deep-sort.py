@@ -1,5 +1,4 @@
 from edgetpu.detection.engine import DetectionEngine
-import edgetpu
 
 from PIL import Image
 from timeit import time
@@ -12,16 +11,12 @@ import os
 import datetime
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "/home/mendel/project3/Project3-ML6-515024366790.json"
 
-
-
-from pyimagesearch.centroidtracker import CentroidTracker
 from collections import deque
-from deep_sort import preprocessing
+from deep_sort import preprocessing, generate_detections as gdet
 from deep_sort import nn_matching
 from deep_sort.detection import Detection
 from deep_sort.tracker import Tracker
-from tools import generate_detections as gdet
-from deep_sort.detection import Detection as ddet
+
 warnings.filterwarnings('ignore')
 
 
@@ -74,8 +69,6 @@ def main():
         fourcc = cv2.VideoWriter_fourcc(*'MJPG')
         out = cv2.VideoWriter('output.avi', fourcc, 15, (w, h))
         frame_index = -1
-    # Open video
-
 
     invert = True
 

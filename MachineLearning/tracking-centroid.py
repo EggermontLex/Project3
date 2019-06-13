@@ -9,7 +9,7 @@ import datetime
 
 
 
-from pyimagesearch.centroidtracker import CentroidTracker
+from centroidtracker import CentroidTracker
 from collections import deque
 warnings.filterwarnings('ignore')
 
@@ -21,22 +21,10 @@ project_id = "Project3-ML6"
 topic_name = "data_register"
 publisher = CloudManager(project_id,topic_name)
 
-
+#management flags
 flag_invert=True
 flag_video = False
 flag_fps = True
-
-
-#Function to read labels from text files.
-def ReadLabelFile(file_path):
-    with open(file_path, 'r', encoding="utf-8") as f:
-        lines = f.readlines()
-    ret = {}
-    for line in lines:
-        pair = line.strip().split(maxsplit=1)
-        ret[int(pair[0])] = pair[1].strip()
-    return ret
-
 
 def main():
 
