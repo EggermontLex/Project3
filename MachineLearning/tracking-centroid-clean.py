@@ -113,6 +113,7 @@ def binnen():
 
 def buiten():
     data = ("-1,%s" % datetime.datetime.now())
+    print(data)
     data = data.encode('utf-8')
     message_future = publisher.publish(topic_path, data=data)
     message_future.add_done_callback(callback)

@@ -10,7 +10,7 @@ import os
 import datetime
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "/home/mendel/project3/Project3-ML6-515024366790.json"
 data = ""
-f= open("cache.txt","w+")
+f= open("cache.txt","a")
 
 
 from pyimagesearch.centroidtracker import CentroidTracker
@@ -59,7 +59,6 @@ def main():
     #centroid tracker
     ct = CentroidTracker()
     cap = cv2.VideoCapture(1)
-
     writeVideo_flag = True
     if writeVideo_flag:
         w = int(cap.get(3))
@@ -73,7 +72,6 @@ def main():
     invert = True
 
     while True:
-        data = ""
         ret, frame = cap.read()
         t1 = time.time()
         if ret:
@@ -154,11 +152,12 @@ def callback(message_future):
     # When timeout is unspecified, the exception method waits indefinitely.
     if message_future.exception(timeout=1):
         print('Publishing message on {} threw an Exception {}.'.format(topic_name, message_future.exception()))
-        f.write(data + ",")
+        f.write(str(data) + ",")
     else:
         print("---------------------------------------")
         print("Confirmation: " + message_future.result())
-        lines = [send_message(line) for line in [line.rstrip(',') for line in open('cache.txt')]]
+        f.write(str(data) + ",")
+        #lines = [send_message(line) for line in [line.rstrip(',') for line in open('cache.txt')]]
 
 def send_message(data):
     message_future = publisher.publish(topic_path, data=data)
