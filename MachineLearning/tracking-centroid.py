@@ -5,7 +5,6 @@ from PIL import ImageDraw
 import numpy as np
 import cv2
 import warnings
-import os
 import datetime
 
 
@@ -49,7 +48,6 @@ def main():
 
     #Initialize engine.
     engine = DetectionEngine('model_tflite/mobilenet_ssd_v2_coco_quant_postprocess_edgetpu.tflite')
-    labels = ReadLabelFile('model_tflite/coco_labels.txt')
 
     #instantie aanmaken van de centroid tracker
     ct = CentroidTracker()
@@ -62,8 +60,6 @@ def main():
         h = int(cap.get(4))
         fourcc = cv2.VideoWriter_fourcc(*'MJPG')
         video = cv2.VideoWriter('output.avi', fourcc, 15, (w, h))
-        list_file = open('detection.txt', 'w')
-        frame_index = -1
 
 
     while True:
@@ -78,8 +74,9 @@ def main():
             draw = ImageDraw.Draw(img)
 
             # Run inference.
-            ans = engine.DetectWithImage(img, threshold=0.6, keep_aspect_ratio=True, relative_coord=False, top_k=10)
+            ans = engine.DetectWithImage(img, threshold=0.65, keep_aspect_ratio=True, relative_coord=False, top_k=10,resample=Image.BICUBIC)
             boxs =[]
+
             # Display result.
             if ans:
                 for obj in ans:

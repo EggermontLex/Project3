@@ -240,10 +240,7 @@ def track_iou(detections, sigma_l, sigma_h, sigma_iou, t_min):
     # finish all remaining active tracks
     tracks_finished += [track for track in tracks_active
                         if track['max_score'] >= sigma_h and len(track['bboxes']) >= t_min]
-
     return tracks_finished
-
-
 
 if __name__ == '__main__':
     main()

@@ -74,10 +74,3 @@ class CloudManager():
         except requests.ConnectionError:
             logging.info("No internet connectivity")
             return False
-
-
-
-
-
-
-
