@@ -6,6 +6,7 @@
       list="datalist"
       class="input"
       placeholder="Alle treinen"
+      :value="defaultValue"
       @input="$emit('input', $event.target.value)"
     />
     <datalist id="datalist">
@@ -24,6 +25,10 @@ export default {
     ids: {
       type: Array,
       default: () => []
+    },
+    defaultValue: {
+      type: String,
+      default: ''
     }
   }
 }

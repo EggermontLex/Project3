@@ -2,7 +2,12 @@
   <div :class="[{ new_background_color: isNew }, cardAdminRowClass]">
     <div :class="[{ new_line_color: isNew }, newLineClass]"></div>
     <p class="card_admin_row_item padding-left">{{ cameraId }}</p>
-    <Datalist label="" ids="trainIds" class="datalist card_admin_row_item" />
+    <Datalist
+      label=""
+      :ids="allTrainIds"
+      class="datalist card_admin_row_item"
+      :default-value="defaultValue"
+    />
   </div>
 </template>
 
@@ -18,6 +23,11 @@ export default {
       type: String,
       default: 'CameraID'
     },
+    defaultValue: {
+      type: String,
+      default: ''
+    },
+    allTrainIds: Array,
     isNew: {
       type: Boolean,
       default: false
@@ -25,7 +35,6 @@ export default {
   },
   data: function() {
     return {
-      trainIds: ['Trein1', 'Trein2'],
       newLineClass: 'new_line',
       cardAdminRowClass: 'card_admin_row'
     }

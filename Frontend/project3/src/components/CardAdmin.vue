@@ -1,15 +1,20 @@
 <template>
   <div class="card">
     <div class="titles">
-      <h1 class="title">Camera</h1>
+      <h1 class="title margin-left">Camera</h1>
       <h1 class="title margin-right">Trein</h1>
     </div>
     <div class="rows">
-      <CardAdminRow camera-id="Camera 1" is-new="true" />
-      <CardAdminRow camera-id="Camera 2" />
-      <CardAdminRow camera-id="Camera 3" />
-      <CardAdminRow camera-id="Camera 4" />
-      <CardAdminRow camera-id="Camera 5" />
+      <!--<CardAdminRow camera-id="Camera 1" :is-new="isNew" />
+      <CardAdminRow camera-id="Camera 2" />-->
+      <CardAdminRow
+        v-for="devise in devises"
+        :key="devise.id"
+        :camera-id="devise.name"
+        :is-new="devise.isNew"
+        :all-train-ids="allTrainIds"
+        :default-value="devise.train"
+      />
     </div>
   </div>
 </template>
@@ -20,6 +25,15 @@ export default {
   name: 'CardAdmin',
   components: {
     CardAdminRow
+  },
+  props: {
+    devises: Array,
+    allTrainIds: Array
+  },
+  data: function() {
+    return {
+      isNew: true
+    }
   }
 }
 </script>
@@ -52,6 +66,9 @@ export default {
 }
 .title {
   width: 50%;
+}
+.margin-left {
+  margin-left: 16px;
 }
 .margin-right {
   margin-right: 8px;

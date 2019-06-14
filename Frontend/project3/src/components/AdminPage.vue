@@ -44,7 +44,7 @@
       <Button class="button" text="Logout" @click.native="Logout" />
       <div class="container">
         <div class="cards">
-          <CardAdmin />
+          <CardAdmin :devises="devises" :all-train-ids="allTrainIds" />
         </div>
       </div>
     </div>
@@ -55,6 +55,7 @@
 import Button from './Button.vue'
 import Datalist from './Datalist.vue'
 import CardAdmin from './CardAdmin.vue'
+
 export default {
   name: 'AdminPage',
   components: {
@@ -65,8 +66,34 @@ export default {
   data: function() {
     return {
       allTrainIds: [],
-      isError: false
+      isError: false,
+      devises: []
     }
+  },
+  created: async function() {
+    this.devises = await fetch(
+      'https://europe-west1-project3-ml6.cloudfunctions.net/list_devices'
+    ).then(function(response) {
+      //console.log(response.json())
+      return response.json()
+    })
+    for (let devise = 0; devise < this.devises.length; devise++) {
+      this.allTrainIds.push(this.devises[devise].train)
+      this.devises[devise].isNew = false
+      if (this.devises[devise].train == '') {
+        this.devises[devise].isNew = true
+      }
+    }
+    let data = await this.$store.dispatch(
+      'firestore/getCollectionDocs',
+      'realtime'
+    )
+    for (let i = 0; i < data.docs.length; i++) {
+      //console.log('Data',)
+      this.allTrainIds.push(data.docs[i].id)
+    }
+    this.allTrainIds = [...new Set(this.allTrainIds)]
+    //console.log(this.allTrainIds)
   },
   methods: {
     showDashboard() {
