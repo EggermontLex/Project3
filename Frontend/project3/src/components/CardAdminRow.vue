@@ -47,7 +47,8 @@ export default {
   },
   methods: {
     async updateDevice(value) {
-      let data = { name: 'Coral-1', train: value }
+      let data = '{ "name": "' + this.cameraId + '", "train": "' + value + '"}'
+      console.log(data)
       await fetch(
         'https://europe-west1-project3-ml6.cloudfunctions.net/update_train',
         {
