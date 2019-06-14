@@ -6,6 +6,7 @@ from PIL import ImageDraw
 import numpy as np
 import cv2
 import warnings
+import os
 import datetime
 
 
@@ -18,6 +19,9 @@ from tools.cloud_manager import CloudManager
 
 
 #aanmaken cloud manager
+
+os.environ['device_id'] = "Coral-1" #in dit geval nog hardcoded
+
 project_id = "Project3-ML6"
 topic_name = "data_register"
 publisher = CloudManager(project_id,topic_name)
@@ -26,6 +30,8 @@ publisher = CloudManager(project_id,topic_name)
 
 def main(options):
     # management flags
+    device = str(os.environ['device_id'])
+    device = str(os.environ['device_id'])
     flag_invert = options.invert
     flag_video = options.video
     flag_fps = options.fps
@@ -98,16 +104,16 @@ def main(options):
                             #binnen() if invert else buiten()
                             if flag_invert:
                                 persons_in += 1
-                                publisher.publish_to_topic(data = ("+1,%s" % datetime.datetime.now()))
+                                publisher.publish_to_topic(data = ("+1,%s,%s" % (datetime.datetime.now(),device)))
                             else:
                                 persons_in -= 1
-                                publisher.publish_to_topic(data = ("-1,%s" % datetime.datetime.now()))
+                                publisher.publish_to_topic(data = ("-1,%s,%s" % (datetime.datetime.now(),device)))
                         elif line_trail[objectID][1][1] < int(line1) and line_trail[objectID][0][1] > int(line1):
                             if flag_invert:
-                                publisher.publish_to_topic(data = ("-1,%s" % datetime.datetime.now()))
+                                publisher.publish_to_topic(data = ("-1,%s,%s" % (datetime.datetime.now(),device)))
                                 persons_in -= 1
                             else:
-                                publisher.publish_to_topic(data = ("+1,%s" % datetime.datetime.now()))
+                                publisher.publish_to_topic(data = ("+1,%s,%s" % (datetime.datetime.now(),device)))
                                 persons_in += 1
                 except Exception as Ex: #deque not long eneough error, niet nodig om op te vangen
                     pass
