@@ -207,7 +207,7 @@ export default {
         ' ' +
         d.getDate() +
         '/' +
-        this.zeros(d.getMonth(), 2) +
+        this.zeros(d.getMonth() + 1, 2) +
         '/' +
         d.getFullYear()
       )

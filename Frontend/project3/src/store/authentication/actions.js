@@ -35,5 +35,8 @@ export const actions = {
         context.commit('setLoginState', false)
       }
     })
+  },
+  setAdminState(context, isAdmin) {
+    context.commit('setAdminState', isAdmin)
   }
 }

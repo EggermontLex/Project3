@@ -6,5 +6,8 @@ export const mutations = {
   },
   setErrorMsg(state, msg) {
     Vue.set(state, 'errorMsg', msg)
+  },
+  setAdminState(state, isAdmin) {
+    Vue.set(state, 'isAdmin', isAdmin)
   }
 }
