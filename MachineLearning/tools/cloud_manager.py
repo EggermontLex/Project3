@@ -20,24 +20,40 @@ class CloudManager():
         message = data.encode('utf-8')
         if self.check_internet():
             publish_message = self.publisher.publish(self.topic_path,data=message)
-            publish_message.add_done_callback(self.callback_status) #validate if it was sent succesfully
+            logging.info("Message Confirmation: %s" % publish_message.result())
+            if not publish_message.result() == None:
+                lines = self.get_all_local_storage()
+                if lines:
+                    self.sent_local_storage(lines)
+            #publish_message.add_done_callback(self.callback_status) #validate if it was sent succesfully
         else:
-            self.save_to_local_storrage(data)
+            self.save_to_local_storage(data)
 
+    """
+    Deze callback function gaf problemen, dus nu is het aan de hand van een simpele .result() zodanig dat er confirmatie is dat het gewerkt heeft.
+    Hierdoor is de afhandeling iets minder goed, echter de kans dat google cloud down is is zodanig klein dat dit de normale werking niet zou moeten beinvloeden.
+    """
     def callback_status(self, publish_message):
         if not publish_message.exception(timeout=5):
             logging.info("Message Confirmation: %s"%publish_message.result())
-            self.sent_local_storrage()
+            #self.sent_local_storrage()
         else:
             logging.info("Message sending failed...")
 
-    def save_to_local_storrage(self, data):
+    """
+    Deze
+    """
+    def save_to_local_storage(self, data):
         logging.info("Localy caching the following message: %s"%data)
         cache = open(self.cache_file, "a")
         cache.write("%s \n" % data.replace('"',""))
         cache.close()
 
-    def get_all_local_storrage(self):
+
+    """
+    Deze functie haat alle locale data op en overschrijft en cleart vervolgens de file
+    """
+    def get_all_local_storage(self):
         try:
             lines = [line.rstrip('\n') for line in open(self.cache_file)]
             open(self.cache_file, 'w').close()
@@ -47,9 +63,8 @@ class CloudManager():
         logging.info("Retrieved all local data: %s" % lines)
         return lines
 
-    def sent_local_storrage(self):
+    def sent_local_storage(self, lines):
         lines_failed = []
-        lines = self.get_all_local_storrage()
         if lines:
             for line in lines:
                 if self.check_internet():
@@ -59,9 +74,9 @@ class CloudManager():
         else:
             logging.info("No local cache")
         try:
-            cache = open(self.cache_file, "a")
+            cache = open(self.cache_file, "w")
         except:
-            cache = open(self.cache_file_local, "a")
+            cache = open(self.cache_file_local, "w")
         for line in lines_failed:
             cache.write("%s \n" % line)
 
