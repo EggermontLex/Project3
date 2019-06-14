@@ -3,11 +3,15 @@
     <div :class="[{ new_line_color: isNew }, newLineClass]"></div>
     <p class="card_admin_row_item padding-left">{{ cameraId }}</p>
     <Datalist
+      v-model="datalist"
       label=""
       :ids="allTrainIds"
       class="datalist card_admin_row_item"
       :default-value="defaultValue"
-    />
+      :is-admin="isAdmin"
+      :original-value="defaultValue"
+      @updateDevice="updateDevice"
+    /><!--@change="onTreinIdChange"-->
   </div>
 </template>
 
@@ -36,7 +40,25 @@ export default {
   data: function() {
     return {
       newLineClass: 'new_line',
-      cardAdminRowClass: 'card_admin_row'
+      cardAdminRowClass: 'card_admin_row',
+      isAdmin: true,
+      datalist: ''
+    }
+  },
+  methods: {
+    async updateDevice(value) {
+      let data = { name: 'Coral-1', train: value }
+      await fetch(
+        'https://europe-west1-project3-ml6.cloudfunctions.net/update_train',
+        {
+          method: 'POST', // *GET, POST, PUT, DELETE, etc.
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          referrer: 'no-referrer', // no-referrer, *client
+          body: data // body data type must match "Content-Type" header
+        }
+      )
     }
   }
 }
