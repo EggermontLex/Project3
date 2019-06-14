@@ -164,4 +164,64 @@ INFO:root:Internet connectivity
 INFO:root:Message Confirmation: 586672203132133
 INFO:root:Retrieved all local data: ['+1,2019-06-13 13:07:05.604307 ', '+1,2019-06-13 13:07:05.604307 ', '+1,2019-06-13 13:07:05.604307 ', '+1,2019-06-13 13:07:05.604307 ', '+1,2019-06-13 13:07:05.604307 ', '+1,2019-06-13 13:07:05.604307 ', '+1,2019-06-13 13:07:05.604307 ', '+1,2019-06-13 13:07:05.604307 ', '+1,2019-06-13 13:07:05.604307 ', '+1,2019-06-13 13:07:05.604307 ']
 INFO:root:Internet connectivity
-INFO:root:Sending attempt for data: +1,2019-06-13 13:07:05.604307
+INFO:root:Sending attempt for data: +1,2019-06-13 13:07:05.604307 
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +20,2019-06-13 13:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 586982990904116
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +20,2019-06-13 13:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 586985122617500
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +20,2019-06-13 13:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 586984273240144
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +20,2019-06-13 13:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 586984642657491
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +20,2019-06-13 13:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 586990285451053
+INFO:root:Retrieved all local data: ['"+2,2019-06-13 13:07:05.604307"']
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: "+2,2019-06-13 13:07:05.604307"
+INFO:root:Internet connectivity
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +20,2019-06-13 13:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 586988652104896
+INFO:root:Retrieved all local data: []
+INFO:root:No local cache
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +20,2019-06-13 13:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 586989050397020
+INFO:root:Retrieved all local data: []
+INFO:root:No local cache
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +20,2019-06-13 13:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 586988017948202
+INFO:root:Retrieved all local data: ['"+2,2019-06-13 13:07:05.604307"', '"+2,2019-06-13 13:07:05.604307"']
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: "+2,2019-06-13 13:07:05.604307"
+INFO:root:Internet connectivity
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: -20,2019-06-13 13:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 586988955406393
+INFO:root:Retrieved all local data: ['"+2,2019-06-13 13:07:05.604307"', '"+2,2019-06-13 13:07:05.604307"']
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: "+2,2019-06-13 13:07:05.604307"
+INFO:root:Internet connectivity
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: -20,2019-06-13 13:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 586990688762162
+INFO:root:Retrieved all local data: ['+2,2019-06-13 13:07:05.604307', '+2,2019-06-13 13:07:05.604307']
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: +2,2019-06-13 13:07:05.604307
+INFO:root:Internet connectivity
