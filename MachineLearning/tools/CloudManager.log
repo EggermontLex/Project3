@@ -4317,4 +4317,322 @@ INFO:root:Message Confirmation: 587032829339477
 INFO:root:Retrieved all local data: []
 INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
 INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_registerINFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
 INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: -1,2019-06-14 13:21:05.074059
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587121017778678
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 13:21:06.327690
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587121259840647
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 13:21:08.610557,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587121962870209
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 13:21:10.740794,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587125658038829
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 13:21:41.702322
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587126014899369
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 13:26:15.735224,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587122960314463
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 13:41:03.308635
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587132130254127
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 13:44:20.639648
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587132159757662
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 13:44:24.071576,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587129935902831
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 13:49:17.637201
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587135354083587
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 13:49:20.637166,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587134096987778
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 13:49:53.116877
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587134257758724
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 13:54:15.306634,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587134638923317
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 13:56:34.375342
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587137974163429
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 13:58:11.417083
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587140309190273
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 13:58:20.378768,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587140137079588
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 14:08:46.156939
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587143481701759
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 14:12:50.159055,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587142699826625
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 14:15:15.224350
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587147339942814
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 14:15:17.692233
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587145106894100
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 14:15:19.849742,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587142180984695
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 14:15:21.683910,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587144448135318
+INFO:root:Retrieved all local data: []
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: -1,2019-06-14 14:16:56.391035
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587144448453711
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 14:17:00.091407,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587142857911586
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 14:17:00.354588,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587143989363115
+INFO:root:Retrieved all local data: []
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: -1,2019-06-14 14:19:37.836624
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587145454653758
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 14:19:39.772903,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587141665559770
+INFO:root:Retrieved all local data: []
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +1,2019-06-14 14:21:12.992966,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587144448849990
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 14:33:00.708540
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587141666649148
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 14:33:06.174161
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587146097213950
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 14:33:08.838431,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587148404548346
+INFO:root:Retrieved all local data: []
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: -1,2019-06-14 14:35:18.602987,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587154429702457
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 14:35:20.674079,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587145876280621
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 14:38:18.872455,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587148233597418
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 14:39:35.727949,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587153804101957
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 14:39:37.872950,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587147497926725
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 14:40:33.364375,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587149189930937
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 14:41:10.228886,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587152755068203
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 14:41:27.408067,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587147552141876
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 14:41:30.028828,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587156241796068
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 14:43:46.974289,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587144722593576
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 14:44:09.203228,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587148144783790
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 14:44:17.129824,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587148129054583
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 14:44:56.266208,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587144654249336
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 14:45:00.736728,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587157982834055
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 14:48:50.503553,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587161510475525
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 14:48:54.109800,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587158590717369
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 14:49:12.741421,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587158500662326
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 14:49:13.567908,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587145367926186
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 14:49:14.363954,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587155295785005
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 14:54:39.445271,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587160403110341
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 14:54:41.802093,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587159371804895
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 14:58:01.044040,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587162091990312
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 14:58:03.874055,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587162843929151
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 14:58:15.506415,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587163948853701
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 14:58:18.099594,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587162975323784
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 15:05:58.804202,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587161992332050
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 15:06:01.704116,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587159862414502
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 15:06:10.312095,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587165047147720
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 15:06:27.781704,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587166628953014
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 15:06:32.879950,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587166030411348
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 15:09:06.104647,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587147575907503
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 15:09:06.484975,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587168890600233
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 15:09:06.705963,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587159862706411
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 15:09:07.004431,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587165836197525
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 15:09:07.230061,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587162128450286
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 15:09:16.845858,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587161923257053
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 15:09:17.090082,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587166030887047
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 15:09:17.314717,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587163808568718
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 15:09:17.566283,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587169710936212
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 15:09:17.791211,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587156813627066
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 15:09:18.053649,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587165047588230
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 15:09:22.104200,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587159862881897
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 15:09:40.504278,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587163157437495
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 15:09:43.404588,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587148147466855
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 15:09:50.042774,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587156813750874
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 15:09:58.643078,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587168890664114
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 15:10:08.004732,Coral-1
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587147576122177
+INFO:root:Retrieved all local data: []
