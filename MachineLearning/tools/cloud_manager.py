@@ -5,7 +5,7 @@ import os
 
 #environment variable in code aanmaken (linux zelf gaf problemen)
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "/home/mendel/project3/Project3-ML6-515024366790.json"
-logging.basicConfig(filename='CloudManager.log',level=logging.INFO)
+logging.basicConfig(filename='tools/CloudManager.log',level=logging.INFO)
 
 class CloudManager():
     def __init__(self, project_id, topic_name):

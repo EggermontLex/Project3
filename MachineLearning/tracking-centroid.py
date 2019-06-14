@@ -1,4 +1,5 @@
 from edgetpu.detection.engine import DetectionEngine
+import argparse
 from PIL import Image
 from timeit import time
 from PIL import ImageDraw
@@ -21,12 +22,13 @@ project_id = "Project3-ML6"
 topic_name = "data_register"
 publisher = CloudManager(project_id,topic_name)
 
-#management flags
-flag_invert=True
-flag_video = False
-flag_fps = True
 
-def main():
+
+def main(options):
+    # management flags
+    flag_invert = options.invert
+    flag_video = options.video
+    flag_fps = options.fps
 
     #declaratie gebruikte variabelen
     t1 =0.0
@@ -62,7 +64,7 @@ def main():
             draw = ImageDraw.Draw(img)
 
             # Run inference.
-            ans = engine.DetectWithImage(img, threshold=0.65, keep_aspect_ratio=True, relative_coord=False, top_k=10,resample=Image.BICUBIC)
+            ans = engine.DetectWithImage(img, threshold=0.65, keep_aspect_ratio=True, relative_coord=False, top_k=10,resample=Image.NEAREST) #BICUBIC
             boxs =[]
 
             # Display result.
@@ -96,18 +98,18 @@ def main():
                             #binnen() if invert else buiten()
                             if flag_invert:
                                 persons_in += 1
-                                publisher.publish_to_topic_new(data = ("+1,%s" % datetime.datetime.now()))
+                                publisher.publish_to_topic(data = ("+1,%s" % datetime.datetime.now()))
                             else:
                                 persons_in -= 1
-                                publisher.publish_to_topic_new(data = ("-1,%s" % datetime.datetime.now()))
+                                publisher.publish_to_topic(data = ("-1,%s" % datetime.datetime.now()))
                         elif line_trail[objectID][1][1] < int(line1) and line_trail[objectID][0][1] > int(line1):
                             if flag_invert:
-                                publisher.publish_to_topic_new(data = ("-1,%s" % datetime.datetime.now()))
+                                publisher.publish_to_topic(data = ("-1,%s" % datetime.datetime.now()))
                                 persons_in -= 1
                             else:
-                                publisher.publish_to_topic_new(data = ("+1,%s" % datetime.datetime.now()))
+                                publisher.publish_to_topic(data = ("+1,%s" % datetime.datetime.now()))
                                 persons_in += 1
-                except Exception as Ex:
+                except Exception as Ex: #deque not long eneough error, niet nodig om op te vangen
                     pass
 
             if flag_fps: print("fps : %d" % ((fps + (1. / (time.time() - t1))) / 2))
@@ -126,4 +128,10 @@ def main():
     cv2.destroyAllWindows()
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--invert', type=bool, default=True, help='binnen <-> buiten --> buiten <-> binnen')
+    parser.add_argument('--resample', type=str, default="NEAREST", help='what form of image detection you want, NEAREST or BICUBIC')
+    parser.add_argument('--fps', type=bool, default=False, help='Print fps counter')
+    parser.add_argument('--video', type=bool, default=False,help='Do you want to display and save video from the actions going on in the backgroud')
+    options = parser.parse_args()
+    main(options)

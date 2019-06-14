@@ -4061,3 +4061,260 @@ INFO:root:Retrieved all local data: ['-1,2019-06-13 13:07:05.604307', '-1,2019-0
 INFO:root:Internet connectivity
 INFO:root:Sending attempt for data: -1,2019-06-13 13:07:05.604307
 INFO:root:Internet connectivity
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +1,2019-06-14 08:56:17.711434
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587027085066044
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 08:56:23.941947
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587025523154180
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 08:56:30.842043
+INFO:root:No internet connectivity
+INFO:root:Localy caching the following message: +1,2019-06-14 08:56:30.842043
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: -1,2019-06-14 09:00:11.028495
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587019582795293
+INFO:root:Retrieved all local data: ['+1,2019-06-14 08:56:30.842043 ']
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: +1,2019-06-14 08:56:30.842043 
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587018172321571
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 09:00:19.260701
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587024446202986
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 09:00:22.160788
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587029449242594
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 09:00:48.293529
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +1,2019-06-14 09:06:33.912194
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587031211755509
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 09:06:39.673369
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587030979000101
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 09:06:43.108384
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587030599772457
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 09:06:49.475732
+INFO:root:No internet connectivity
+INFO:root:Localy caching the following message: +1,2019-06-14 09:06:49.475732
+INFO:root:Sending attempt for data: +1,2019-06-14 09:07:12.603258
+INFO:root:No internet connectivity
+INFO:root:Localy caching the following message: +1,2019-06-14 09:07:12.603258
+INFO:root:Sending attempt for data: -1,2019-06-14 09:07:17.103387
+INFO:root:No internet connectivity
+INFO:root:Localy caching the following message: -1,2019-06-14 09:07:17.103387
+INFO:root:Sending attempt for data: +1,2019-06-14 09:07:17.141841
+INFO:root:No internet connectivity
+INFO:root:Localy caching the following message: +1,2019-06-14 09:07:17.141841
+INFO:root:Sending attempt for data: -1,2019-06-14 09:07:17.207533
+INFO:root:No internet connectivity
+INFO:root:Localy caching the following message: -1,2019-06-14 09:07:17.207533
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +1,2019-06-14 09:08:25.232904
+INFO:root:No internet connectivity
+INFO:root:Localy caching the following message: +1,2019-06-14 09:08:25.232904
+INFO:root:Sending attempt for data: +1,2019-06-14 09:08:40.293382
+INFO:root:No internet connectivity
+INFO:root:Localy caching the following message: +1,2019-06-14 09:08:40.293382
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +1,2019-06-14 09:09:57.761514
+INFO:root:No internet connectivity
+INFO:root:Localy caching the following message: +1,2019-06-14 09:09:57.761514
+INFO:root:Sending attempt for data: -1,2019-06-14 09:11:14.921465
+INFO:root:No internet connectivity
+INFO:root:Localy caching the following message: -1,2019-06-14 09:11:14.921465
+INFO:root:Sending attempt for data: +1,2019-06-14 09:11:16.194203
+INFO:root:No internet connectivity
+INFO:root:Localy caching the following message: +1,2019-06-14 09:11:16.194203
+INFO:root:Sending attempt for data: +1,2019-06-14 09:11:21.653413
+INFO:root:No internet connectivity
+INFO:root:Localy caching the following message: +1,2019-06-14 09:11:21.653413
+INFO:root:Sending attempt for data: -1,2019-06-14 09:11:25.453459
+INFO:root:No internet connectivity
+INFO:root:Localy caching the following message: -1,2019-06-14 09:11:25.453459
+INFO:root:Sending attempt for data: +1,2019-06-14 09:11:25.595117
+INFO:root:No internet connectivity
+INFO:root:Localy caching the following message: +1,2019-06-14 09:11:25.595117
+INFO:root:Sending attempt for data: -1,2019-06-14 09:11:25.645561
+INFO:root:No internet connectivity
+INFO:root:Localy caching the following message: -1,2019-06-14 09:11:25.645561
+INFO:root:Sending attempt for data: -1,2019-06-14 09:11:44.961914
+INFO:root:No internet connectivity
+INFO:root:Localy caching the following message: -1,2019-06-14 09:11:44.961914
+INFO:root:Sending attempt for data: +1,2019-06-14 09:11:47.621456
+INFO:root:No internet connectivity
+INFO:root:Localy caching the following message: +1,2019-06-14 09:11:47.621456
+INFO:root:Sending attempt for data: -1,2019-06-14 09:12:04.033807
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587032882585600
+INFO:root:Retrieved all local data: ['+1,2019-06-14 09:06:49.475732 ', '+1,2019-06-14 09:07:12.603258 ', '-1,2019-06-14 09:07:17.103387 ', '+1,2019-06-14 09:07:17.141841 ', '-1,2019-06-14 09:07:17.207533 ', '+1,2019-06-14 09:08:25.232904 ', '+1,2019-06-14 09:08:40.293382 ', '+1,2019-06-14 09:09:57.761514 ', '-1,2019-06-14 09:11:14.921465 ', '+1,2019-06-14 09:11:16.194203 ', '+1,2019-06-14 09:11:21.653413 ', '-1,2019-06-14 09:11:25.453459 ', '+1,2019-06-14 09:11:25.595117 ', '-1,2019-06-14 09:11:25.645561 ', '-1,2019-06-14 09:11:44.961914 ', '+1,2019-06-14 09:11:47.621456 ']
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: +1,2019-06-14 09:06:49.475732 
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587020602290245
+INFO:root:Retrieved all local data: []
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: +1,2019-06-14 09:07:12.603258 
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587032964394934
+INFO:root:Retrieved all local data: []
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: -1,2019-06-14 09:07:17.103387 
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587033332346868
+INFO:root:Retrieved all local data: []
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: +1,2019-06-14 09:07:17.141841 
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587031936079568
+INFO:root:Retrieved all local data: []
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: -1,2019-06-14 09:07:17.207533 
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587030111130723
+INFO:root:Retrieved all local data: []
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: +1,2019-06-14 09:08:25.232904 
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587032345732774
+INFO:root:Retrieved all local data: []
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: +1,2019-06-14 09:08:40.293382 
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587033297125140
+INFO:root:Retrieved all local data: []
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: +1,2019-06-14 09:09:57.761514 
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587028695731040
+INFO:root:Retrieved all local data: []
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: -1,2019-06-14 09:11:14.921465 
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587030011283756
+INFO:root:Retrieved all local data: []
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: +1,2019-06-14 09:11:16.194203 
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587032740486826
+INFO:root:Retrieved all local data: []
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: +1,2019-06-14 09:11:21.653413 
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587032625309627
+INFO:root:Retrieved all local data: []
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: -1,2019-06-14 09:11:25.453459 
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587031269319410
+INFO:root:Retrieved all local data: []
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: +1,2019-06-14 09:11:25.595117 
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587024964645592
+INFO:root:Retrieved all local data: []
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: -1,2019-06-14 09:11:25.645561 
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587033366591361
+INFO:root:Retrieved all local data: []
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: -1,2019-06-14 09:11:44.961914 
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587031223673835
+INFO:root:Retrieved all local data: []
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: +1,2019-06-14 09:11:47.621456 
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587033669066671
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 09:12:13.923320
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587032804730259
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 09:12:15.263629
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587031760069559
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 09:12:27.221969
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587032964485210
+INFO:root:Retrieved all local data: []
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +1,2019-06-14 09:28:10.626192
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587035606291330
+INFO:root:Retrieved all local data: ['"+100,2019-06-13 13:07:05.604307"', '+100,2019-06-13 13:07:05.604307']
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: "+100,2019-06-13 13:07:05.604307"
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587036566094062
+INFO:root:Retrieved all local data: []
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: +100,2019-06-13 13:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587037780039938
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 09:29:29.812514
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587036313868234
+INFO:root:Retrieved all local data: ['"-100,2019-06-13 13:07:05.604307"']
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: "-100,2019-06-13 13:07:05.604307"
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587039129918161
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 09:30:20.981035
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587036725207313
+INFO:root:Retrieved all local data: []
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Sending attempt for data: +1,2019-06-14 09:35:21.122847
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587041376452967
+INFO:root:Retrieved all local data: ['"-100,2019-06-13 13:07:05.604307"']
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: "-100,2019-06-13 13:07:05.604307"
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587040129945353
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 09:36:18.089231
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587042097022962
+INFO:root:Retrieved all local data: ['-100,2019-06-13 13:07:05.604307']
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: -100,2019-06-13 13:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587037466736658
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 09:36:21.984692
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587042132343477
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: -1,2019-06-14 09:36:45.948798
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587040512717366
+INFO:root:Retrieved all local data: ['-600,2019-06-13 13:07:05.604307']
+INFO:root:Internet connectivity
+INFO:root:Sending attempt for data: -600,2019-06-13 13:07:05.604307
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587042007830700
+INFO:root:Retrieved all local data: []
+INFO:root:Sending attempt for data: +1,2019-06-14 09:36:48.454928
+INFO:root:Internet connectivity
+INFO:root:Message Confirmation: 587032829339477
+INFO:root:Retrieved all local data: []
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
+INFO:root:Initialized cloud manager with project-id: Project3-ML6 and topic-name: data_register
