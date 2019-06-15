@@ -1,9 +1,9 @@
 # Machine Learning
 In dit gedeelte zal er iets dieper ingegaan worden op de code die geschreven is en wat er nodig is voor dit gedeelte.
 
-##Inhoudstafel
+## Inhoudstafel
 
-##Python packages
+## Python packages
 **Edgetpu:** pre-installed computervision library van google zelf
 
 **Argparse**: `pip install argparse` deze library word gebruikt om parameters mee te geven aan python files
@@ -16,13 +16,16 @@ In dit gedeelte zal er iets dieper ingegaan worden op de code die geschreven is 
 
 **Google cloud**: `pip install google-cloud` een library van google zelf voor verscheiden zaken gerelateerd met google cloud
 
-##De code
+
+## De code
 
 Eerst overlopen we de code voor het uitlezen van de webcam, aangezien dat dit het hart is van ons project.
 
 #### Imports
+
+De volgend imports zijn nodig voor het kunnen uitvoeren van het programma:
 ```
-from edgetpu.detection.engine import DetectionEngine\n
+from edgetpu.detection.engine import DetectionEngine
 import argparse
 from PIL import Image
 from timeit import time
@@ -50,6 +53,8 @@ De onderstaande code geeft de mogelijkheid dat er andere parameters gebruikt wor
 
 `--video` je kan de video output hiermee inschakelen
 
+```
+if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--invert', type=bool, default=True, help='binnen <-> buiten --> buiten <-> binnen')
     parser.add_argument('--resample', type=str, default="NEAREST", help='what form of image detection you want, NEAREST or BICUBIC')
@@ -57,7 +62,7 @@ De onderstaande code geeft de mogelijkheid dat er andere parameters gebruikt wor
     parser.add_argument('--video', type=bool, default=False,help='Do you want to display and save video from the actions going on in the backgroud')
     options = parser.parse_args()
     main(options)
-
+```
 
 
 
