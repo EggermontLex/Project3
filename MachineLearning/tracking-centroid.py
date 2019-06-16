@@ -8,18 +8,13 @@ import cv2
 import warnings
 import os
 import datetime
-
-
-
 from tools.centroidtracker import CentroidTracker
 from collections import deque
-warnings.filterwarnings('ignore')
-
 from tools.cloud_manager import CloudManager
 
+warnings.filterwarnings('ignore')
 
 #aanmaken cloud manager
-
 os.environ['device_id'] = "Coral-1" #in dit geval nog hardcoded
 
 project_id = "Project3-ML6"
@@ -70,7 +65,7 @@ def main(options):
             draw = ImageDraw.Draw(img)
 
             # Run inference.
-            ans = engine.DetectWithImage(img, threshold=0.65, keep_aspect_ratio=True, relative_coord=False, top_k=10,resample=Image.NEAREST) #BICUBIC
+            ans = engine.DetectWithImage(img, threshold=options.threshold, keep_aspect_ratio=True, relative_coord=False, top_k=10,resample=Image.NEAREST) #BICUBIC
             boxs =[]
 
             # Display result.
@@ -101,7 +96,6 @@ def main(options):
                     diff = abs(line_trail[objectID][0][0] - line_trail[objectID][1][0])
                     if diff < 60:
                         if line_trail[objectID][0][1] < int(line1) and line_trail[objectID][1][1] > int(line1):
-                            #binnen() if invert else buiten()
                             if flag_invert:
                                 persons_in += 1
                                 publisher.publish_to_topic(data = ("+1,%s,%s" % (datetime.datetime.now(),device)))
@@ -122,8 +116,6 @@ def main(options):
             if flag_video:
                 cv2.putText(img, "Binnen: " + str(persons_in), (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255),lineType=cv2.LINE_AA)
                 cv2.putText(img, "fps: " + str(int(fps)), (260, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255),lineType=cv2.LINE_AA)
-
-            if flag_video:
                 video.write(img)
                 cv2.imshow('preview', img)
 
@@ -139,5 +131,6 @@ if __name__ == '__main__':
     parser.add_argument('--resample', type=str, default="NEAREST", help='what form of image detection you want, NEAREST or BICUBIC')
     parser.add_argument('--fps', type=bool, default=False, help='Print fps counter')
     parser.add_argument('--video', type=bool, default=False,help='Do you want to display and save video from the actions going on in the backgroud')
+    parser.add_argument('--threshold', type=int, default=0.65,help='minimum allowed value for the threshold')
     options = parser.parse_args()
     main(options)
