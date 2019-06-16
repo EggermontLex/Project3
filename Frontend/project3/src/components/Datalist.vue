@@ -8,6 +8,7 @@
       placeholder="Alle treinen"
       :value="defaultValue"
       @input="$emit('input', $event.target.value)"
+      @blur="onBlur($event.target.value)"
     />
     <datalist id="datalist">
       <option v-for="id in ids" :key="id" :value="id" />
@@ -29,6 +30,23 @@ export default {
     defaultValue: {
       type: String,
       default: ''
+    },
+    isAdmin: {
+      type: Boolean,
+      default: false
+    },
+    originalValue: {
+      type: String,
+      default: ''
+    }
+  },
+  methods: {
+    onBlur(newValue) {
+      if (this.isAdmin) {
+        if (newValue != this.originalValue) {
+          this.$emit('updateDevice', newValue)
+        }
+      }
     }
   }
 }
