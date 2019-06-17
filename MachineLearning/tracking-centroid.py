@@ -116,11 +116,12 @@ def main(options):
                             publish.start()
                             publish = None
                 except Exception as Ex: #deque not long eneough error, niet nodig om op te vangen
-                    print("%s" %Ex)
+                    print("Hier is uw error kut: %s" %Ex)
 
-            if flag_fps: print("fps : %d" % (((1. / (time.time() - t1)))))
-            if flag_video:
+            if flag_fps or flag_video:
                 fps = (1. / (time.time() - t1))
+            if flag_fps: print("fps : %d" % fps)
+            if flag_video:
                 cv2.putText(img, "Binnen: " + str(persons_in), (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255),lineType=cv2.LINE_AA)
                 cv2.putText(img, "fps: " + str(int(fps)), (260, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255),lineType=cv2.LINE_AA)
                 video.write(img)
