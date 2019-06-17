@@ -8,3 +8,18 @@ Here we'll go deeper on the backend part of the project and the specific functio
 **firebase admin** ```firebase-admin>=2.17.0``` library that you need to communicate with google firebase.
 
 **google cloud pubsub** ```google-cloud-pubsub>=0.41.0``` library that you need send and recieve data from google pubsub.
+
+```create_device.py``` runs on the device itself so the following packages you'll have to install or build yourself.
+
+**Argparse** ```pip install argparse``` this library is used to add arguments to python files.
+
+**google API python client** ```pip install google-api-python-client``` library that makes it easier to work with your service accounts.
+
+## The code
+
+### firestore_push.py
+
+
+
+
+
