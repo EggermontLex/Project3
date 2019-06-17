@@ -11,6 +11,7 @@ import datetime
 from tools.centroidtracker import CentroidTracker
 from collections import deque
 from tools.cloud_manager import CloudManager
+import threading
 
 warnings.filterwarnings('ignore')
 
@@ -30,12 +31,14 @@ def main(options):
     flag_invert = options.invert
     flag_video = options.video
     flag_fps = options.fps
+    if flag_video: flag_fps = True
 
     #declaratie gebruikte variabelen
     t1 =0.0
     fps = 0.0
     persons_in = 0
     line_trail = dict()
+    publish = None
 
     #Initialize engine.
     engine = DetectionEngine('model_tflite/mobilenet_ssd_v2_coco_quant_postprocess_edgetpu.tflite')
@@ -98,17 +101,18 @@ def main(options):
                         if line_trail[objectID][0][1] < int(line1) and line_trail[objectID][1][1] > int(line1):
                             if flag_invert:
                                 persons_in += 1
-                                publisher.publish_to_topic(data = ("+1,%s,%s" % (datetime.datetime.now(),device)))
+                                publish = threading.Thread(target=(lambda: publisher.publish_to_topic(data = ("+1,%s,%s" % (datetime.datetime.now(),device)))))
                             else:
                                 persons_in -= 1
-                                publisher.publish_to_topic(data = ("-1,%s,%s" % (datetime.datetime.now(),device)))
+                                publish = threading.Thread(target=(lambda: publisher.publish_to_topic(data = ("-1,%s,%s" % (datetime.datetime.now(),device)))))
                         elif line_trail[objectID][1][1] < int(line1) and line_trail[objectID][0][1] > int(line1):
                             if flag_invert:
-                                publisher.publish_to_topic(data = ("-1,%s,%s" % (datetime.datetime.now(),device)))
+                                publish = threading.Thread(target=(lambda: publisher.publish_to_topic(data = ("-1,%s,%s" % (datetime.datetime.now(),device)))))
                                 persons_in -= 1
                             else:
-                                publisher.publish_to_topic(data = ("+1,%s,%s" % (datetime.datetime.now(),device)))
+                                publish = threading.Thread(target=(lambda: publisher.publish_to_topic(data = ("+1,%s,%s" % (datetime.datetime.now(),device)))))
                                 persons_in += 1
+                        if not publish: publish.start()
                 except Exception as Ex: #deque not long eneough error, niet nodig om op te vangen
                     pass
 
