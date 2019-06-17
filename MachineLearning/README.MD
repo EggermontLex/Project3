@@ -22,6 +22,7 @@ In this README we will have a closer look on how this code works, this will be d
 ## De code
 First things first, we will need to start by analyzing the code inside the `tracking-centroid.py` since this is the heart of our project, next we will have a closer look in certain 'tools' we used, these tools are the self written class `CloudManager` and the imported class `CentroidTracking`
 
+### `tracking-centroid.py`
 #### Imports
 Like every python program ever, we first need to import our essential libraries, without these it would not be possible to run our code.
 ```
