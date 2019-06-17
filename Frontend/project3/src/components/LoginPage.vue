@@ -27,7 +27,7 @@
       <Input
         v-model="password"
         label="Wachtwoord"
-        text-placeholder="Password"
+        text-placeholder="Wachtwoord"
         type="password"
         :class="{ border_color: errorMsg }"
       />

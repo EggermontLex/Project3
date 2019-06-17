@@ -28,26 +28,23 @@
       </div>
 
       <div class="side_bar_input">
-        <div v-if="isError" class="error_message">
-          <p class="error_message_text">Oeps! Er is iets verkeerd gegaan.</p>
-        </div>
         <Datalist v-model="datalist" label="Trein" :ids="allTrainIds" />
         <div>
           <p class="subtitle">Van</p>
           <div class="date_time">
             <Input
-              v-model="fromDatum"
+              v-model="fromDate"
               class="date_time_item"
               label="Datum:"
               type="date"
-              :text-value="fromDatum"
+              :text-value="fromDate"
             />
             <Input
-              v-model="fromTijd"
+              v-model="fromTime"
               class="date_time_item"
               label="Tijd:"
               type="time"
-              :text-value="fromTijd"
+              :text-value="fromTime"
             />
           </div>
         </div>
@@ -55,24 +52,23 @@
           <p class="subtitle">Tot</p>
           <div class="date_time">
             <Input
-              v-model="intilDatum"
+              v-model="untilDate"
               class="date_time_item"
               label="Datum:"
               type="date"
-              :text-value="intilDatum"
+              :text-value="untilDate"
             />
 
             <Input
-              v-model="intilTijd"
+              v-model="untilTime"
               class="date_time_item"
               label="Tijd:"
               type="time"
-              :text-value="intilTijd"
+              :text-value="untilTime"
             />
           </div>
         </div>
         <Button class="button" text="Zoek" @click.native="search" />
-        <!--@click.native="getLoginData"/>-->
       </div>
 
       <div class="side_bar_dots">
@@ -85,9 +81,9 @@
       <div class="container">
         <div class="cards">
           <Card
-            v-for="trainid in trainIds"
-            :key="trainid"
-            :train-id="trainid"
+            v-for="trainId in trainIds"
+            :key="trainId"
+            :train-id="trainId"
             :random-id="randomId"
             :d-start="dStart"
             :d-end="dEnd"
@@ -121,11 +117,10 @@ export default {
       randomId: 0,
       dStart: d,
       dEnd: new Date(),
-      isError: false,
-      fromDatum: '',
-      fromTijd: '',
-      intilDatum: '',
-      intilTijd: '',
+      fromDate: '',
+      fromTime: '',
+      untilDate: '',
+      untilTime: '',
       datalist: ''
     }
   },
@@ -133,37 +128,33 @@ export default {
     let today = new Date()
     let h = this.zeros(today.getHours(), 2)
     let m = this.zeros(today.getMinutes(), 2)
-    //let s = this.zeros(today.getSeconds(), 2)
 
-    this.intilDatum = this.formatDate(today)
-    this.fromDatum = this.formatDate(today)
+    this.untilDate = this.formatDate(today)
+    this.fromDate = this.formatDate(today)
 
-    let time = h + ':' + m //+ ':' + s
-    this.intilTijd = time
+    let time = h + ':' + m
+    this.untilTime = time
 
     time = h - 1
     if (time < 0) {
       time = '23'
-      //console.log(today.setDate(today.getDate() - 1))
       let yesterday = today
       yesterday.setDate(yesterday.getDate() - 1)
-      this.fromDatum = this.formatDate(yesterday)
+      this.fromDate = this.formatDate(yesterday)
     }
     time = this.zeros(time, 2)
-    time += ':' + m //+ ':' + s
+    time += ':' + m
 
-    this.fromTijd = time
+    this.fromTime = time
 
     let data = await this.$store.dispatch(
       'firestore/getCollectionDocs',
       'realtime'
     )
     for (let i = 0; i < data.docs.length; i++) {
-      //console.log('Data',)
       this.allTrainIds.push(data.docs[i].id)
       this.trainIds = this.allTrainIds
     }
-    //console.log(this.trainIds)
   },
   methods: {
     zeros(num, size) {
@@ -173,7 +164,7 @@ export default {
     },
     formatDate(datum) {
       let dd = String(datum.getDate()).padStart(2, '0')
-      let mm = String(datum.getMonth() + 1).padStart(2, '0') //January is 0!
+      let mm = String(datum.getMonth() + 1).padStart(2, '0') //January is 0! reason + 1
       let yyyy = datum.getFullYear()
       return yyyy + '-' + mm + '-' + dd
     },
@@ -183,8 +174,8 @@ export default {
     search: function() {
       this.$store.dispatch('firestore/setFilteredState', true)
       this.randomId = this.randomId + 1
-      this.dStart = new Date(this.fromDatum + ' ' + this.fromTijd)
-      this.dEnd = new Date(this.intilDatum + ' ' + this.intilTijd)
+      this.dStart = new Date(this.fromDate + ' ' + this.fromTime)
+      this.dEnd = new Date(this.untilDate + ' ' + this.untilTime)
       if (this.datalist != '') {
         this.trainIds = [this.datalist]
       } else {
@@ -248,17 +239,6 @@ export default {
 }
 .side_bar_input {
   margin: 1em 0;
-}
-
-.error_message {
-  background-color: var(--color-neutral-xxxx-light);
-  padding: 8px;
-  margin-bottom: 16px;
-  box-shadow: var(box-shadow);
-  text-align: center;
-}
-.error_message_text {
-  color: var(--color-error-message);
 }
 .border_color {
   border-color: var(--color-error-message);

@@ -11,7 +11,7 @@
       :is-admin="isAdmin"
       :original-value="defaultValue"
       @updateDevice="updateDevice"
-    /><!--@change="onTreinIdChange"-->
+    />
   </div>
 </template>
 

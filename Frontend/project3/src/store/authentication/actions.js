@@ -8,30 +8,21 @@ export const actions = {
       .signInWithEmailAndPassword(credentials.email, credentials.password)
       .then(
         user => {
-          console.log(user)
           context.commit('setErrorMsg', '')
         },
         error => {
-          console.log(error)
           context.commit('setErrorMsg', error.message)
         }
       )
   },
   logout() {
-    firebase
-      .auth()
-      .signOut()
-      .catch(error => {
-        console.log(error)
-      })
+    firebase.auth().signOut()
   },
   fetchCreds(context) {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log('Logged in')
         context.commit('setLoginState', true)
       } else {
-        console.log('Signed out')
         context.commit('setLoginState', false)
       }
     })

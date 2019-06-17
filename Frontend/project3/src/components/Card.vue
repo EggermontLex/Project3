@@ -58,7 +58,7 @@ export default {
       time: '00:00:00',
       series: [
         {
-          name: 'People',
+          name: 'Personen',
           data: []
         }
       ],
@@ -117,10 +117,8 @@ export default {
       { collection: 'realtime', document: this.$props.trainId }
     )
     documentReference.onSnapshot(doc => {
-      //console.log("Current data: ", doc.data());
       this.value = doc.data().current_value
-      let d = doc.data().last_updated.toDate()
-      this.time = this.displayTime(d)
+      this.time = this.displayTime(doc.data().last_updated.toDate())
       if (!this.isFiltered) {
         this.data.push({
           x: moment.unix(doc.data().last_updated.seconds).toString(),
@@ -139,13 +137,6 @@ export default {
         data: this.data
       }
     ])
-    /*_.forEach(data.docs, (n, key) => {
-      console.log(n)
-      result[0].data.push({
-        x: moment.unix(n.data().timestamp.seconds),
-        y: n.data().value
-      })
-    })*/
   },
   methods: {
     async getHistoryData() {
@@ -174,9 +165,7 @@ export default {
       let months = end.diff(start, 'months')
       let weeks = end.diff(start, 'weeks')
       let days = end.diff(start, 'days')
-      //let hours = end.diff(start, 'hours')
       let minutes = end.diff(start, 'minutes')
-      //let seconds = end.diff(start, 'seconds')
       if (years < 1) {
         if (months < 1) {
           if (weeks < 1) {

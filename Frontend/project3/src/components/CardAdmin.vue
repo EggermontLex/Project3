@@ -8,12 +8,12 @@
       <!--<CardAdminRow camera-id="Camera 1" :is-new="isNew" />
       <CardAdminRow camera-id="Camera 2" />-->
       <CardAdminRow
-        v-for="devise in devises"
-        :key="devise.id"
-        :camera-id="devise.name"
-        :is-new="devise.isNew"
+        v-for="device in devices"
+        :key="device.id"
+        :camera-id="device.name"
+        :is-new="device.isNew"
         :all-train-ids="allTrainIds"
-        :default-value="devise.train"
+        :default-value="device.train"
       />
     </div>
   </div>
@@ -27,8 +27,14 @@ export default {
     CardAdminRow
   },
   props: {
-    devises: Array,
-    allTrainIds: Array
+    devices: {
+      type: Array,
+      default: () => []
+    },
+    allTrainIds: {
+      type: Array,
+      default: () => []
+    }
   },
   data: function() {
     return {

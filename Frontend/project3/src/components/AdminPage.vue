@@ -17,7 +17,7 @@
       <Button class="button" text="Logout" @click.native="Logout" />
       <div class="container">
         <div class="cards">
-          <CardAdmin :devises="devises" :all-train-ids="allTrainIds" />
+          <CardAdmin :devices="devices" :all-train-ids="allTrainIds" />
         </div>
       </div>
     </div>
@@ -38,21 +38,20 @@ export default {
     return {
       allTrainIds: [],
       isError: false,
-      devises: []
+      devices: []
     }
   },
   created: async function() {
-    this.devises = await fetch(
+    this.devices = await fetch(
       'https://europe-west1-project3-ml6.cloudfunctions.net/list_devices'
     ).then(function(response) {
-      //console.log(response.json())
       return response.json()
     })
-    for (let devise = 0; devise < this.devises.length; devise++) {
-      this.allTrainIds.push(this.devises[devise].train)
-      this.devises[devise].isNew = false
-      if (this.devises[devise].train == '') {
-        this.devises[devise].isNew = true
+    for (let device = 0; device < this.devices.length; device++) {
+      this.allTrainIds.push(this.devices[device].train)
+      this.devices[device].isNew = false
+      if (this.devices[device].train == '') {
+        this.devices[device].isNew = true
       }
     }
     let data = await this.$store.dispatch(
@@ -60,11 +59,9 @@ export default {
       'realtime'
     )
     for (let i = 0; i < data.docs.length; i++) {
-      //console.log('Data',)
       this.allTrainIds.push(data.docs[i].id)
     }
     this.allTrainIds = [...new Set(this.allTrainIds)]
-    //console.log(this.allTrainIds)
   },
   methods: {
     Logout() {
