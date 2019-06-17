@@ -17,7 +17,7 @@
           width="24"
           height="24"
           viewBox="0 0 24 24"
-          class="logo"
+          class="logo logo_settings"
           @click="showAdminPage"
         >
           <path fill="none" d="M0 0h24v24H0V0z" />
@@ -240,6 +240,11 @@ export default {
     align-items: flex-start;
     flex-direction: column;
   }
+}
+
+.logo_settings {
+  width: 40px !important;
+  height: 40px !important;
 }
 .side_bar_input {
   margin: 1em 0;
