@@ -1,46 +1,19 @@
 <template>
   <div class="page">
-    <div class="side_bar">
-      <div class="side_bar_logo">
-        <svg class="logo" viewBox="0 0 512 512" width="100%" height="100%">
-          <path
-            d="M256 403.3c-115 0-208.7-66.2-208.7-147.3S141 108.7 256 108.7 464.7 174.9 464.7 256 371 403.3 256 403.3m0-311.9C116.6 91.4 4 164.6 4 256s112.6 164.6 252 164.6 252-74 252-164.6S395.4 91.4 256 91.4"
-            xmlns="http://www.w3.org/2000/svg"
-          ></path>
-          <path
-            d="M267 342.6h-27.6c-8.7 0-13.4-3.9-13.4-11v-63c0-3.9 1.6-5.5 5.5-5.5H267c22.3 0 40.5 17.9 40.9 40.2.3 21.5-16.9 39.1-38.4 39.4-.8 0-1.6 0-2.5-.1M226.1 182c0-7.1 4.7-11 13.4-11h18.1c18.7-.8 34.6 13.7 35.4 32.4v1.5c-.3 19.3-16.1 34.8-35.4 34.6h-26c-3.9 0-5.5-1.6-5.5-5.5v-52zm111 70.1c-5.5-2.4-5.5-3.2 0-6.3 14.1-8.7 22.5-24.3 22-40.9 0-30.7-40.9-61.4-106.3-61.4-37.8-.2-74.5 12-104.7 34.6-5.5 4.7-4.7 7.1-3.1 8.7l9.5 11c3.1 3.2 4.7 2.4 6.3.8 7.1-5.5 7.9-2.4 7.9 3.9v108.7c0 6.3-.8 9.5-7.9 3.9-1.6-1.6-3.1-2.4-6.3.8l-10.2 11.8c-1.6 2.4-3.1 4.7 3.2 8.7 31.6 21.6 68.8 33.4 107.1 33.9 73.2 0 118.9-30.7 118.9-71.7.6-27.6-22.2-41-36.4-46.5"
-            xmlns="http://www.w3.org/2000/svg"
-          ></path>
-        </svg>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          class="logo"
-          @click="showDashboard"
-        >
-          <path fill="none" d="M0 0h24v24H0V0z" />
-          <path
-            d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z"
-          />
-        </svg>
-      </div>
-
-      <div class="side_bar_input">
-        <div v-if="isError" class="error_message">
-          <p class="error_message_text">Oeps! Er is iets verkeerd gegaan.</p>
-        </div>
-        <Datalist label="Trein" :ids="allTrainIds" />
-        <Button class="button" text="Zoek" />
-      </div>
-
-      <!--@click.native="getLoginData"/>-->
-      <div class="side_bar_dots">
-        <div class="dots"></div>
-      </div>
-    </div>
     <div class="main">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        class="logo"
+        @click="showDashboard"
+      >
+        <path fill="none" d="M0 0h24v24H0V0z" />
+        <path
+          d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z"
+        />
+      </svg>
       <Button class="button" text="Logout" @click.native="Logout" />
       <div class="container">
         <div class="cards">
@@ -53,14 +26,12 @@
 
 <script>
 import Button from './Button.vue'
-import Datalist from './Datalist.vue'
 import CardAdmin from './CardAdmin.vue'
 
 export default {
   name: 'AdminPage',
   components: {
     Button,
-    Datalist,
     CardAdmin
   },
   data: function() {
@@ -160,9 +131,10 @@ export default {
   color: var(--color-error-message);
 }
 .logo {
-  fill: var(--color-neutral-xxxx-light);
+  fill: var(--color-primary);
   width: 65px;
   height: 60px;
+  margin: 12px;
 }
 .button {
   margin-top: 13%;
@@ -180,10 +152,6 @@ export default {
   }
 }
 
-.main {
-  width: calc(100% - 420px);
-  margin-left: 420px;
-}
 @media (max-width: 768px) {
   .main {
     width: 100vw;
@@ -204,23 +172,6 @@ export default {
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
   color: var(--color-neutral-xxxx-light);
   background-color: var(--color-primary-x-dark);
-}
-@media (max-width: 768px) {
-  .main .button {
-    margin: 50px;
-    background-color: var(--color-neutral-xxxx-light);
-    color: var(--color-primary);
-  }
-  .main .button:hover,
-  .main.button:active {
-    box-shadow: var(--box-shadow_hover);
-    color: var(--color-primary-xx-dark);
-  }
-}
-@media (max-width: 576px) {
-  .main .button {
-    margin: 35px;
-  }
 }
 .container {
   height: 100vh;

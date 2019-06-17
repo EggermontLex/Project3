@@ -58,7 +58,8 @@ export default {
       time: '00:00:00',
       series: [
         {
-          name: 'People'
+          name: 'People',
+          data: []
         }
       ],
       chartOptions: {
@@ -149,15 +150,15 @@ export default {
   methods: {
     async getHistoryData() {
       let historyData = []
+      let groupBy = this.getGroupParameters(this.dStart, this.dEnd)
       let data = await this.$store.dispatch('firestore/getTrainHistory', {
         trainId: this.$props.trainId,
         startTime: this.dStart,
         endTime: this.dEnd
       })
       let groupedResults = _.groupBy(data.docs, result =>
-        moment.unix(result.data().timestamp.seconds).startOf('minute')
+        moment.unix(result.data().timestamp.seconds).startOf(groupBy)
       )
-      console.log(groupedResults)
       _.forEach(groupedResults, (n, key) =>
         historyData.push({
           x: key,
@@ -173,10 +174,9 @@ export default {
       let months = end.diff(start, 'months')
       let weeks = end.diff(start, 'weeks')
       let days = end.diff(start, 'days')
-      let hours = end.diff(start, 'hours')
+      //let hours = end.diff(start, 'hours')
       let minutes = end.diff(start, 'minutes')
-      let seconds = end.diff(start, 'seconds')
-      console.log(years, months, weeks, days, hours, minutes, seconds)
+      //let seconds = end.diff(start, 'seconds')
       if (years < 1) {
         if (months < 1) {
           if (weeks < 1) {

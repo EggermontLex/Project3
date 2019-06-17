@@ -31,7 +31,10 @@ export default {
       type: String,
       default: ''
     },
-    allTrainIds: Array,
+    allTrainIds: {
+      type: Array,
+      default: () => []
+    },
     isNew: {
       type: Boolean,
       default: false
@@ -47,17 +50,13 @@ export default {
   },
   methods: {
     async updateDevice(value) {
-      let data = '{ "name": "' + this.cameraId + '", "train": "' + value + '"}'
-      console.log(data)
+      let data = { name: this.cameraId, train: value }
       await fetch(
         'https://europe-west1-project3-ml6.cloudfunctions.net/update_train',
         {
           method: 'POST', // *GET, POST, PUT, DELETE, etc.
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          referrer: 'no-referrer', // no-referrer, *client
-          body: data // body data type must match "Content-Type" header
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
         }
       )
     }
