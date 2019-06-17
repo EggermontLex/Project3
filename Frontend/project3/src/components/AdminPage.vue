@@ -67,6 +67,10 @@ export default {
     //console.log(this.allTrainIds)
   },
   methods: {
+    Logout() {
+      this.$store.dispatch('authentication/logout')
+      this.$store.dispatch('authentication/setAdminState', false)
+    },
     showDashboard() {
       this.$store.dispatch('authentication/setAdminState', false)
     }
