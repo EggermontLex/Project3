@@ -112,14 +112,15 @@ def main(options):
                             else:
                                 publish = threading.Thread(target=(lambda: publisher.publish_to_topic(data = ("+1,%s,%s" % (datetime.datetime.now(),device)))))
                                 persons_in += 1
-                        if not publish:
+                        if publish:
                             publish.start()
                             publish = None
                 except Exception as Ex: #deque not long eneough error, niet nodig om op te vangen
-                    pass
+                    print("%s" %Ex)
 
-            if flag_fps: print("fps : %d" % ((fps + (1. / (time.time() - t1))) / 2))
+            if flag_fps: print("fps : %d" % (((1. / (time.time() - t1)))))
             if flag_video:
+                fps = (1. / (time.time() - t1))
                 cv2.putText(img, "Binnen: " + str(persons_in), (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255),lineType=cv2.LINE_AA)
                 cv2.putText(img, "fps: " + str(int(fps)), (260, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255),lineType=cv2.LINE_AA)
                 video.write(img)
