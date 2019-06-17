@@ -112,7 +112,9 @@ def main(options):
                             else:
                                 publish = threading.Thread(target=(lambda: publisher.publish_to_topic(data = ("+1,%s,%s" % (datetime.datetime.now(),device)))))
                                 persons_in += 1
-                        if not publish: publish.start()
+                        if not publish:
+                            publish.start()
+                            publish = None
                 except Exception as Ex: #deque not long eneough error, niet nodig om op te vangen
                     pass
 
