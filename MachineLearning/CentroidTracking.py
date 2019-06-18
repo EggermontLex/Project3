@@ -16,8 +16,6 @@ import threading
 warnings.filterwarnings('ignore')
 
 #aanmaken cloud manager
-os.environ['device_id'] = "Coral-1" #in dit geval nog hardcoded
-
 project_id = "Project3-ML6"
 topic_name = "data_register"
 publisher = CloudManager(project_id,topic_name)
@@ -42,10 +40,8 @@ def main(options):
     line_trail = dict()
     publish = None
 
-    #Initialize engine.
     engine = DetectionEngine('model_tflite/mobilenet_ssd_v2_coco_quant_postprocess_edgetpu.tflite')
 
-    #instantie aanmaken van de centroid tracker
     ct = CentroidTracker()
 
     #capture videocamera
@@ -70,15 +66,14 @@ def main(options):
             draw = ImageDraw.Draw(img)
 
             # Run inference.
-            ans = engine.DetectWithImage(img, threshold=options.threshold, keep_aspect_ratio=True, relative_coord=False, top_k=10,resample=Image.NEAREST) #BICUBIC
+            detections = engine.DetectWithImage(img, threshold=options.threshold, keep_aspect_ratio=True, relative_coord=False, top_k=10,resample=Image.NEAREST) #BICUBIC
             boxs =[]
 
             # Display result.
-            if ans:
-                for obj in ans:
-                    box = obj.bounding_box.flatten().tolist()
-                    if flag_video: draw.rectangle(box, outline='red')
-                    boxs.append(box)
+            for obj in detections:
+                box = obj.bounding_box.flatten().tolist()
+                if flag_video: draw.rectangle(box, outline='red')
+                boxs.append(box)
 
             objects = ct.update(boxs)
 
@@ -107,13 +102,14 @@ def main(options):
                             else:
                                 persons_in -= 1
                                 publish = threading.Thread(target=(lambda: publisher.publish_to_topic(data = ("-1,%s,%s" % (datetime.datetime.now(),device)))))
+
                         elif line_trail[objectID][1][1] < int(line1) and line_trail[objectID][0][1] > int(line1):
                             if flag_invert:
-                                publish = threading.Thread(target=(lambda: publisher.publish_to_topic(data = ("-1,%s,%s" % (datetime.datetime.now(),device)))))
                                 persons_in -= 1
+                                publish = threading.Thread(target=(lambda: publisher.publish_to_topic(data = ("-1,%s,%s" % (datetime.datetime.now(),device)))))
                             else:
-                                publish = threading.Thread(target=(lambda: publisher.publish_to_topic(data = ("+1,%s,%s" % (datetime.datetime.now(),device)))))
                                 persons_in += 1
+                                publish = threading.Thread(target=(lambda: publisher.publish_to_topic(data = ("+1,%s,%s" % (datetime.datetime.now(),device)))))
                         if publish:
                             publish.start()
                             publish = None
@@ -125,10 +121,10 @@ def main(options):
                 fps = (1. / (time.time() - t1))
             if flag_fps: print("fps : %d" % fps)
             if flag_video:
-                cv2.putText(img, "Binnen: " + str(persons_in), (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255),lineType=cv2.LINE_AA)
-                cv2.putText(img, "fps: " + str(int(fps)), (260, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255),lineType=cv2.LINE_AA)
+                cv2.putText(img, "Binnen: %s" % persons_in, (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255),lineType=cv2.LINE_AA)
+                cv2.putText(img, "fps: %d" % fps, (260, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255),lineType=cv2.LINE_AA)
                 video.write(img)
-                cv2.imshow('preview', img)
+                cv2.imshow('Output', img)
 
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break

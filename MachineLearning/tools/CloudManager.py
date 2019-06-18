@@ -3,7 +3,7 @@ from google.cloud import pubsub_v1
 import logging
 import os
 
-#environment variable in code aanmaken (linux zelf gaf problemen)
+#The following variable should be either replaced with your own key or you should consider creating the environment variable yourselve.
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "/home/mendel/project3/Project3-ML6-515024366790.json"
 logging.basicConfig(filename='tools/CloudManager.log',level=logging.INFO)
 
@@ -15,6 +15,10 @@ class CloudManager():
         self.publisher = pubsub_v1.PublisherClient()
         self.topic_path = self.publisher.topic_path(project_id, topic_name)
 
+
+    """
+    The following function is there to send the data to the cloud, this function will be the only one that is used outside of the class.
+    """
     def publish_to_topic(self,data:str):
         logging.info("Sending attempt for data: %s"% data)
         message = data.encode('utf-8')
@@ -30,8 +34,9 @@ class CloudManager():
             self.save_to_local_storage(data)
 
     """
-    Deze callback function gaf problemen, dus nu is het aan de hand van een simpele .result() zodanig dat er confirmatie is dat het gewerkt heeft.
-    Hierdoor is de afhandeling iets minder goed, echter de kans dat google cloud down is is zodanig klein dat dit de normale werking niet zou moeten beinvloeden.
+    This callback function is unused, since it did create some problems, now we simply use the .result() as verification if it got send succesfully.
+    This causes the error handeling to be less effecient, however the change that google cloud is unavailable is so low that this should not 
+    drasticly interfere the propper functioning of our program.
     """
     def callback_status(self, publish_message):
         if not publish_message.exception(timeout=5):
@@ -41,7 +46,7 @@ class CloudManager():
             logging.info("Message sending failed...")
 
     """ 
-    Deze functie schrijft alle data weg naar locale storage
+    This function will write the `data` to the local cache file 
     """
     def save_to_local_storage(self, data):
         logging.info("Localy caching the following message: %s"%data)
@@ -51,7 +56,7 @@ class CloudManager():
 
 
     """
-    Deze functie haat alle locale data op en overschrijft en cleart vervolgens de file
+    This function will read the local data from the CloudManager.cache and clear the entire file.
     """
     def get_all_local_storage(self):
         try:
@@ -62,7 +67,9 @@ class CloudManager():
             open(self.cache_file_local, 'w').close()
         logging.info("Retrieved all local data: %s" % lines)
         return lines
-
+    """
+    This function will retreave all the messages in the CloudManager.cache and send them to the cloud one by one
+    """
     def sent_local_storage(self, lines):
         lines_failed = []
         if lines:
@@ -79,7 +86,9 @@ class CloudManager():
             cache = open(self.cache_file_local, "w")
         for line in lines_failed:
             cache.write("%s \n" % line)
-
+    """
+    This function will check if there is internet connectivity
+    """
     def check_internet(self):
         url = 'http://www.google.com/'
         timeout = 5
