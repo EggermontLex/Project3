@@ -46,7 +46,7 @@ def get_metadata(device_id):
 
 The ```get_metadata()``` function is needed to get the metadata of the device from google cloud Iot Core.
 
-### firestore_push.py
+***firestore_push.py***
 
 Sends the data that is being received in the cloud pubsub topic to the firestore database.
 
@@ -94,4 +94,12 @@ def push_data(event, request):
         db.collection(u'history').document(str(uuid.uuid4())).set(data_history)
 ```
 
-The ```push_data()``` function processes the received pubsub functions. It looks if its necessary to make a new document in the firestore database or if it can push the data to an already existing one. Collection history and realtime are being updated.
+The ```push_data()``` function processes the received pubsub messages. It looks if its necessary to make a new document in the firestore database or if it can push the data to an already existing one. Collection history and realtime are being updated.
+
+***list_devices.py***
+
+This python file speaks for itself, It returns a list of devices with their metadata when it is called in the cloud over HTTP.
+
+***update_train.py***
+
+
