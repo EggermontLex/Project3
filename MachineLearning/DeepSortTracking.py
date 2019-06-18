@@ -12,7 +12,8 @@ import datetime
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "/home/mendel/project3/Project3-ML6-515024366790.json"
 
 from collections import deque
-from deep_sort import preprocessing, generate_detections as gdet
+from deep_sort import preprocessing
+from deep_sort import generate_detections as gdet
 from deep_sort import nn_matching
 from deep_sort.detection import Detection
 from deep_sort.tracker import Tracker
@@ -67,7 +68,7 @@ def main():
         w = int(cap.get(3))
         h = int(cap.get(4))
         fourcc = cv2.VideoWriter_fourcc(*'MJPG')
-        out = cv2.VideoWriter('output.avi', fourcc, 15, (w, h))
+        out = cv2.VideoWriter('Output.avi', fourcc, 30, (w, h))
         frame_index = -1
 
     invert = True

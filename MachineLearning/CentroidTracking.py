@@ -27,7 +27,9 @@ publisher = CloudManager(project_id,topic_name)
 def main(options):
     # management flags
     device = str(os.environ['device_id'])
-    device = str(os.environ['device_id'])
+    if not device:
+        print("Warning: There is no device specified %s"% device)
+        device = "Coral-1"
     flag_invert = options.invert
     flag_video = options.video
     flag_fps = options.fps
@@ -53,7 +55,7 @@ def main(options):
         w = int(cap.get(3))
         h = int(cap.get(4))
         fourcc = cv2.VideoWriter_fourcc(*'MJPG')
-        video = cv2.VideoWriter('output.avi', fourcc, 15, (w, h))
+        video = cv2.VideoWriter('Output.avi', fourcc, 30, (w, h))
 
 
     while True:
@@ -116,7 +118,8 @@ def main(options):
                             publish.start()
                             publish = None
                 except Exception as Ex: #deque not long eneough error, niet nodig om op te vangen
-                    print("Hier is uw error kut: %s" %Ex)
+                    if not "deque" in Ex:
+                        print("Exception: %s" %Ex)
 
             if flag_fps or flag_video:
                 fps = (1. / (time.time() - t1))
@@ -127,8 +130,8 @@ def main(options):
                 video.write(img)
                 cv2.imshow('preview', img)
 
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
     # When everything done, release the capture
     cap.release()
     cv2.destroyAllWindows()
