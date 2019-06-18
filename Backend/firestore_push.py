@@ -9,17 +9,17 @@ cred = credentials.ApplicationDefault()
 initialize_app(cred, {'projectId': "project3-ml6"})
 db = firestore.client()
 
-
 def push_data(event, request):
     pubsub_message = b64decode(event['data']).decode('utf-8')
     lst_message = pubsub_message.split(",")
     device_id = lst_message[2]
     metadata = get_metadata(device_id)
 
+
     doc_ref = db.collection(u'realtime').document(metadata)
     doc = doc_ref.get().to_dict()
 
-    if not doc == None:
+    if doc == None:
         data ={
             u'current_value': 0,
             u'last_updated': datetime.datetime.strptime(lst_message[1], '%Y-%m-%d %H:%M:%S.%f')}
@@ -64,7 +64,7 @@ def get_client(service_account_json):
 
 
 def get_metadata(device_id):
-    client = get_client('Project3-ML6-8f539587a27f.json')
+    client = get_client('Project3-ML6-420c2216d454.json')
     registry_path = 'projects/{}/locations/{}/registries/{}'.format('''project3-ml6''', '''europe-west1''',
                                                                     '''project3core''')
     devices = client.projects().locations().registries().devices()
