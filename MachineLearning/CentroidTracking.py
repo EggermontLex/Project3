@@ -114,7 +114,7 @@ def main(options):
                             publish.start()
                             publish = None
                 except Exception as Ex: #deque not long eneough error, niet nodig om op te vangen
-                    if not "deque" in Ex:
+                    if not "deque" in "%s" %Ex:
                         print("Exception: %s" %Ex)
 
             if flag_fps or flag_video:
