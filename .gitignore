@@ -3,7 +3,9 @@
 __pycache__/
 yolo.h5
 detection.txt
-.mp4
-.avi
-.log
+*.mp4
+*.avi
+*.log
+*.cache
+*.log
 Project3-ML6-420c2216d454.json
