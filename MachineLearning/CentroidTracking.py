@@ -8,9 +8,9 @@ import cv2
 import warnings
 import os
 import datetime
-from tools.centroidtracker import CentroidTracker
+from tools.CentroidTracker import CentroidTracker
 from collections import deque
-from tools.cloud_manager import CloudManager
+from tools.CloudManager import CloudManager
 import threading
 
 warnings.filterwarnings('ignore')

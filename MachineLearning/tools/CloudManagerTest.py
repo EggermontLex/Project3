@@ -1,5 +1,5 @@
 try:
-    from tools.cloud_manager import CloudManager
+    from tools.CloudManager import CloudManager
 except:
     from cloud_manager import CloudManager
 

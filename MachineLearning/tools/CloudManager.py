@@ -40,8 +40,8 @@ class CloudManager():
         else:
             logging.info("Message sending failed...")
 
-    """
-    Deze
+    """ 
+    Deze functie schrijft alle data weg naar locale storage
     """
     def save_to_local_storage(self, data):
         logging.info("Localy caching the following message: %s"%data)
