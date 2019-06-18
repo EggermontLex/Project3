@@ -103,3 +103,14 @@ These python files kinda speak for themself. ```list_devices.py``` returns a lis
 ***create_device.py***
  
 This python file is run when a new device is being configured, it will create a device on Iot Core with the correct RSA key and metadata.
+
+```
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--deviceId', type=str, required=True)
+    parser.add_argument('--filename', type=str, required=True)
+    options = parser.parse_args()
+    create_device(options)
+```
+
+The python file requires 2 arguments 
