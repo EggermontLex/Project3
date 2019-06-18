@@ -19,7 +19,7 @@ In this README we will have a closer look on how this code works, this will be d
 **OpenCV**: sadly you have to build this library from source, you can find how you do this online.
 
 
-## De code
+## The code
 First things first, we will need to start by analyzing the code in the `CentroidTracking.py` since this is the heart of our project, next we will have a closer look in certain 'tools' we used, these tools are the self written class `CloudManager` and the imported class `CentroidTracking`
 
 ### `CentroidTracking.py`
@@ -65,7 +65,7 @@ if __name__ == '__main__':
     options = parser.parse_args()
     main(options)
 ```
-### Variabelen aanmaken
+### Creating variables
 In order to handle the values of people comming in and going out, we have to establish a connection with the cloud. The code beneath initialises the `CloudManager`, as mentioned before, this is a self written class that will communicate with the cloud and has a basic implementation of **offline caching**
 
 Keep in mind that you will have to change the `project_id` and `topic_name` to the once you use for your project, since this example uses the once we used for our project.
@@ -179,6 +179,7 @@ if flag_video:
 ```
 
 When you quit the code there will always have to be a `cap.release()` just so the webcam is available to other services again
+
 ### CloudManager
 
 The CloudManager class is located in the tools folder, this class is quite important for the cloud communication. For example, if our project doesn't have internt connectivity, this class will automaticly store it in the local cache. Once there is a request which was succesfully handeld, the cached data will automaticly be uploaded. For further information you can have a look in the `CloudManager.py` class itself, since I tried to document quite well.
