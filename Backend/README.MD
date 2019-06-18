@@ -96,10 +96,9 @@ def push_data(event, request):
 
 The ```push_data()``` function processes the received pubsub messages. It looks if its necessary to make a new document in the firestore database or if it can push the data to an already existing one. Collection history and realtime are being updated.
 
-***list_devices.py***
+***list_devices.py and update_train***
 
-This python file speaks for itself, It returns a list of devices with their metadata when it is called in the cloud over HTTP.
+These python files kinda speak for themself. ```list_devices.py``` returns a list of devices with their metadata when it is called in the cloud over HTTP. ```update_train.py``` allows you to change the metadata of a device.
 
-***update_train.py***
-
-
+***create_device.py***
+ 
