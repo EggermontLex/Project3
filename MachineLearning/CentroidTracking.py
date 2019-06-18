@@ -24,7 +24,7 @@ publisher = CloudManager(project_id,topic_name)
 
 def main(options):
     # management flags
-    device = str(os.environ['device_id'])
+    device = str(os.environ['DEVICE_ID'])
     if not device:
         print("Warning: There is no device specified %s"% device)
         device = "Coral-1"

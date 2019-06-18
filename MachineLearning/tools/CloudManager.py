@@ -3,8 +3,6 @@ from google.cloud import pubsub_v1
 import logging
 import os
 
-#The following variable should be either replaced with your own key or you should consider creating the environment variable yourselve.
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "/home/mendel/project3/Project3-ML6-515024366790.json"
 logging.basicConfig(filename='tools/CloudManager.log',level=logging.INFO)
 
 class CloudManager():
