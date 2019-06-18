@@ -102,3 +102,4 @@ These python files kinda speak for themself. ```list_devices.py``` returns a lis
 
 ***create_device.py***
  
+This python file is run when a new device is being configured, it will create a device on Iot Core with the correct RSA key and metadata.
