@@ -26,7 +26,7 @@ In this README we will have a closer look on how this code works, this will be d
 
 
 
-**Google cloud**: `pip install google-cloud` another library created by google itself, this library is used to communicate with google cloud. In this case we only need it to communicate with the publisher of google pubsub.
+**Google cloud**: `pip install google-cloud` another library created by google, this library is used to communicate with google cloud. In this case we only need it to communicate with the publisher of google pubsub.
 
 
 
