@@ -113,4 +113,28 @@ if __name__ == '__main__':
     create_device(options)
 ```
 
-The python file requires 2 arguments 
+The python file requires 2 arguments the `--deviceId` is the name you give the device on google cloud Iot core, `--filename` is the openssl public key.
+
+```
+def create_device(options):
+    client = get_client(str(os.environ['GOOGLE_APPLICATION_CREDENTIALS']))
+    with io.open(options.filename) as f:
+        certificate = f.read()
+
+    device_template = {
+        'id': options.deviceId,
+        'credentials': [{
+            'publicKey': {
+                'format': 'RSA_X509_PEM',
+                'key': certificate
+            }
+        }]
+    }
+
+    devices = client.projects().locations().registries().devices()
+    devices.create(parent=registry_path, body=device_template).execute()
+    time.sleep()
+    client.projects().locations().registries().devices().patch(name=options.deviceId, updateMask='metadata', body={"metadata": {"Train": None}}).execute()
+```
+The function above is responsible for creating the device and the metedatafield with it.
+
