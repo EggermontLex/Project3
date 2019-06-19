@@ -175,7 +175,6 @@ export default {
   background-color: var(--color-primary-x-dark);
 }
 .container {
-  height: 100vh;
   padding-top: 60px;
   display: flex;
   justify-content: space-between;
