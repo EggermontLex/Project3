@@ -48,14 +48,15 @@ fi
 
 # Set environment variables
 export GOOGLE_APPLICATION_CREDENTIALS=/home/mendel/Project3-ML6-420c2216d454.json
-export DEVICE_ID=$hostname
+export DEVICE_ID=$HOSTNAME
+export RSA_CERT=/home/mendel/rsa_cert.pem
 
 # Run create device
 python3 /home/mendel/Project3/Backend/create_device.py
 
 # Setup service
-cp Project3/project3.service /etc/systemd/system/
-systemctl enable Project3
+cp /home/mendel/Project3/project3.service /etc/systemd/system/
+systemctl enable project3
 
 # Reboot
 reboot

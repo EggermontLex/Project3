@@ -1,1 +1,1 @@
-google-cloud
+google-cloud-pubsub

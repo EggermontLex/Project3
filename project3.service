@@ -6,7 +6,6 @@ After=network-online.target
 User=mendel
 Environment=GOOGLE_APPLICATION_CREDENTIALS=/home/mendel/Project3-ML6-420c2216d454.json
 Environment=DEVICE_ID=%H
-Environment=RSA_CERT=/home/mendel/rsa_cert.pem
 Restart=on-failure
 WorkingDirectory=/home/mendel/Project3/MachineLearning/
 ExecStart=/usr/bin/python3 CentroidTracking.py
