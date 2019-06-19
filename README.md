@@ -6,6 +6,7 @@ MCT Project 3 for ML6, the essence of this project is to keep track of the amoun
 There are some seperate README.MD's that will clearify which steps you will have to take to configurate the project to your needs.
 
 For the machine learning click [here](https://github.com/EggermontLex/Project3/tree/master/MachineLearning)
+
 For the cloud backend click [here](https://github.com/EggermontLex/Project3/tree/master/Backend)
 
 ## Built With
