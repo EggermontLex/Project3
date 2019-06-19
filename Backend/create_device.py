@@ -1,27 +1,32 @@
 from google.oauth2 import service_account
 from googleapiclient import discovery
 import os
-import time
-import argparse
+import io
 
 registry_path = 'projects/{}/locations/{}/registries/{}'.format('''project3-ml6''', '''europe-west1''',
                                                                 '''project3core''')
 
 
-def create_device(options):
+def create_device():
     client = get_client(str(os.environ['GOOGLE_APPLICATION_CREDENTIALS']))
 
-    # Note: You can have multiple credentials associated with a device.
+    with io.open(str(os.environ['RSA_CERT'])) as f:
+        certificate = f.read()
 
     device_template = {
-        'id': options.deviceId,
+        'id': str(os.environ['DEVICE_ID']),
+        'credentials': [{
+            'publicKey': {
+                'format': 'RSA_X509_PEM',
+                'key': certificate
+            }
+        }]
     }
 
     devices = client.projects().locations().registries().devices()
     devices.create(parent=registry_path, body=device_template).execute()
-    time.sleep(3)
-    client.projects().locations().registries().devices().patch(name=options.deviceId, updateMask='metadata', body={"metadata": {"Train": None}}).\
-        execute()
+    device_name = '{}/devices/{}'.format(registry_path, str(os.environ['DEVICE_ID']))
+    client.projects().locations().registries().devices().patch(name=device_name, updateMask='metadata', body={"metadata": {"Train": ""}}).execute()
 
 
 def get_client(service_account_json):
@@ -37,7 +42,4 @@ def get_client(service_account_json):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--deviceId', type=str, required=True)
-    options = parser.parse_args()
-    create_device(options)
+    create_device()
