@@ -267,42 +267,41 @@ The converted list of detection's will be passed along to the Centroid Tracker w
 Next we will loop over all the objects one by one and handle if they left or entered the building by passing the separation line.
 
 ```
-
 for (objectID, centroid) in objects.items():
-                #line_order[objectID] = deque(maxlen=2)
-                if objectID not in line_trail.keys():
-                    line_trail[objectID] = deque(maxlen=2)
-                if flag_video:
-                    text = "ID {}".format(objectID)
-                    cv2.putText(img, text, (centroid[0] - 10, centroid[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255),4)
-                    cv2.circle(img, (centroid[0], centroid[1]), 4, (0, 255, 0), -1)
-                    cv2.line(img, (0, centroid[2]), (width, centroid[2]), (255, 0, 0), 2)
-                center = (centroid[1], centroid[2])
-                line_trail[objectID].appendleft(center)
-                try:
-                    diff = abs(line_trail[objectID][0][0] - line_trail[objectID][1][0])
-                    if diff < 60:
-                        if line_trail[objectID][0][1] < int(line1) and line_trail[objectID][1][1] > int(line1):
-                            if flag_invert:
-                                persons_in += 1
-                                publish = threading.Thread(target=(lambda: publisher.publish_to_topic(data = ("+1,%s,%s" % (datetime.datetime.now(),device)))))
-                            else:
-                                persons_in -= 1
-                                publish = threading.Thread(target=(lambda: publisher.publish_to_topic(data = ("-1,%s,%s" % (datetime.datetime.now(),device)))))
+  #line_order[objectID] = deque(maxlen=2)
+  if objectID not in line_trail.keys():
+    line_trail[objectID] = deque(maxlen=2)
+    if flag_video:
+      text = "ID {}".format(objectID)
+      cv2.putText(img, text, (centroid[0] - 10, centroid[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255),4)
+      cv2.circle(img, (centroid[0], centroid[1]), 4, (0, 255, 0), -1)
+      cv2.line(img, (0, centroid[2]), (width, centroid[2]), (255, 0, 0), 2)
+      center = (centroid[1], centroid[2])
+      line_trail[objectID].appendleft(center)
+      try:
+        diff = abs(line_trail[objectID][0][0] - line_trail[objectID][1][0])
+        if diff < 60:
+          if line_trail[objectID][0][1] < int(line1) and line_trail[objectID][1][1] > int(line1):
+            if flag_invert:
+              persons_in += 1
+                publish = threading.Thread(target=(lambda: publisher.publish_to_topic(data = ("+1,%s,%s" % (datetime.datetime.now(),device)))))
+            else:
+              persons_in -= 1
+                publish = threading.Thread(target=(lambda: publisher.publish_to_topic(data = ("-1,%s,%s" % (datetime.datetime.now(),device)))))
 
-                        elif line_trail[objectID][1][1] < int(line1) and line_trail[objectID][0][1] > int(line1):
-                            if flag_invert:
-                                persons_in -= 1
-                                publish = threading.Thread(target=(lambda: publisher.publish_to_topic(data = ("-1,%s,%s" % (datetime.datetime.now(),device)))))
-                            else:
-                                persons_in += 1
-                                publish = threading.Thread(target=(lambda: publisher.publish_to_topic(data = ("+1,%s,%s" % (datetime.datetime.now(),device)))))
-                        if publish:
-                            publish.start()
-                            publish = None
-                except Exception as Ex: #deque not long eneough error, niet nodig om op te vangen
-                    if not "deque" in "%s" %Ex:
-                        print("Exception: %s" %Ex)
+          elif line_trail[objectID][1][1] < int(line1) and line_trail[objectID][0][1] > int(line1):
+            if flag_invert:
+              persons_in -= 1
+              publish = threading.Thread(target=(lambda: publisher.publish_to_topic(data = ("-1,%s,%s" % (datetime.datetime.now(),device)))))
+            else:
+              persons_in += 1
+              publish = threading.Thread(target=(lambda: publisher.publish_to_topic(data = ("+1,%s,%s" % (datetime.datetime.now(),device)))))
+        if publish:
+          publish.start()
+          publish = None
+      except Exception as Ex: #deque not long eneough error, niet nodig om op te vangen
+        if not "deque" in "%s" %Ex:
+          print("Exception: %s" %Ex
 ```
 
 The variable `line_trail` contains the previous location of the centroid of the previous object location, this is saved so we can check if the object has crossed the line, again there is a `--video` flag which in this case will show the object id in the centre of the object bounding box and a line that clarifies the top of the bounding box. Also I added in a error correction, where I simply maximize the difference between two points `diff = abs(line_trail[objectID][0][0] - line_trail[objectID][1][0])` so it doesnt misfires its object tracking when it misfires on an other object that might be at the other side of the box. After we have checked that, there is one more check we have to do, which is to verify if the previous centroid was at the other side of the line. If this was the case, The code just checks which direction the object went and sends the confirmation to the `CloudManager` as followed `publisher.publish_to_topic(data = ("+1,%s,%s" % (datetime.datetime.now(),device)))`
