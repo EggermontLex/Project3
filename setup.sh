@@ -20,8 +20,8 @@ mount /dev/mmcblk1p1 /mnt/sd
 cd /mnt/sd
 wget -O opencv.zip https://github.com/opencv/opencv/archive/4.1.0.zip
 unzip opencv.zip
-cd opencv-4.1.0
-mkdir build && cd build
+cd /mnt/sd/opencv-4.1.0
+mkdir /mnt/sd/opencv-4.1.0/build && cd /mnt/sd/opencv-4.1.0/build
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
  -D CMAKE_INSTALL_PREFIX=/usr/local \
  -D OPENCV_ENABLE_NONFREE=ON \
