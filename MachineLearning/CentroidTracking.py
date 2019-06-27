@@ -24,7 +24,7 @@ publisher = CloudManager(project_id,topic_name)
 
 def main(options):
     # management flags
-    device = str(os.environ['DEVICE_ID'])
+    device = str(os.environ['device_id'])
     if not device:
         print("Warning: There is no device specified %s"% device)
         device = "Coral-1"
@@ -72,7 +72,7 @@ def main(options):
             # Display result.
             for obj in detections:
                 box = obj.bounding_box.flatten().tolist()
-                if flag_video: draw.rectangle(box, outline='red')
+                draw.rectangle(box, outline='red')
                 boxs.append(box)
 
             objects = ct.update(boxs)
@@ -85,11 +85,10 @@ def main(options):
                 #line_order[objectID] = deque(maxlen=2)
                 if objectID not in line_trail.keys():
                     line_trail[objectID] = deque(maxlen=2)
-                if flag_video:
-                    text = "ID {}".format(objectID)
-                    cv2.putText(img, text, (centroid[0] - 10, centroid[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255),4)
-                    cv2.circle(img, (centroid[0], centroid[1]), 4, (0, 255, 0), -1)
-                    cv2.line(img, (0, centroid[2]), (width, centroid[2]), (255, 0, 0), 2)
+                text = "ID {}".format(objectID)
+                cv2.putText(img, text, (centroid[0] - 10, centroid[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255),4)
+                cv2.circle(img, (centroid[0], centroid[1]), 4, (0, 255, 0), -1)
+                cv2.line(img, (0, centroid[2]), (width, centroid[2]), (255, 0, 0), 2)
                 center = (centroid[1], centroid[2])
                 line_trail[objectID].appendleft(center)
                 try:
@@ -121,13 +120,13 @@ def main(options):
                 fps = (1. / (time.time() - t1))
             if flag_fps: print("fps : %d" % fps)
             if flag_video:
-                cv2.putText(img, "Binnen: %s" % persons_in, (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255),lineType=cv2.LINE_AA)
-                cv2.putText(img, "fps: %d" % fps, (260, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255),lineType=cv2.LINE_AA)
                 video.write(img)
-                cv2.imshow('Output', img)
+            cv2.putText(img, "Binnen: %s" % persons_in, (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255),lineType=cv2.LINE_AA)
+            cv2.putText(img, "fps: %d" % fps, (260, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255),lineType=cv2.LINE_AA)
+            cv2.imshow('Output', img)
 
-                if cv2.waitKey(1) & 0xFF == ord('q'):
-                    break
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
     # When everything done, release the capture
     cap.release()
     cv2.destroyAllWindows()
