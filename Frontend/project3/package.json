@@ -11,7 +11,7 @@
     "apexcharts": "^3.8.2",
     "core-js": "^2.6.5",
     "firebase": "^6.3.0",
-    "lodash": "^4.17.14",
+    "lodash": "^4.17.21",
     "moment": "^2.24.0",
     "vue": "^2.6.10",
     "vue-apexcharts": "^1.4.0",
